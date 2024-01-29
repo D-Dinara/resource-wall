@@ -44,4 +44,16 @@ VALUES(5, 3, 'https://www.coursera.org/specializations/front-end-development-usi
 VALUES(2, 3, 'https://www.classcentral.com/course/full-stack-react-18915?ref=browsee.io', 'Full Stack React', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/react.jpg');
 
 
+-- SQL Category
+INSERT INTO resources(creator_id, category_id, url, title, description, rating, thumbnail_url)
+VALUES(4, 4, 'https://www.postgresql.org/', 'Postgres Docs', 'Interactive coding challenges for all levels, with instant feedback and progress tracking.', 5, '../../assets/resource-thumbs/no-bad-days.jpg'),
+VALUES(7, 4, 'https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/', 'SQL Joins', 'Comprehensive coding tutorials covering languages, frameworks, and tools, with practical examples and exercises.', 5, '../../assets/resource-thumbs/gitlab.jpg'),
+VALUES(2, 4, 'https://en.wikipedia.org/wiki/Database_design', 'Wikipedia: Databse Design', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 4, '../../assets/resource-thumbs/javascript.jpg'),
+-- should have no image
+VALUES(6, 4, 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/', 'PostgreSQL Data types', 'Platform providing coding courses, projects, and assessments, with a focus on real-world applications and industry relevance.', 5),
+VALUES(3, 4, 'https://www.tutorialspoint.com/sql/sql-insert-query.htm', 'SQL Insert Into', 'Community-driven platform for coding enthusiasts, featuring tutorials, forums, and collaborative coding projects.', 4, '../../assets/resource-thumbs/working-hard.jpg'),
+VALUES(8, 4, 'https://node-postgres.com/', 'Welcome to Node Postgres', 'Video-based coding tutorials covering a wide range of topics, from beginner to advanced levels.', 4, '../../assets/resource-thumbs/100-days.jpg'),
+-- should have no image
+VALUES(1, 4, 'https://www.khanacademy.org/computing/computer-programming/sql/more-advanced-sql-queries/pc/challenge-karaoke-song-selector', 'Karaoke Song Selector Tutorial', 'Personalized coding learning paths tailored to individual goals and skill levels, with adaptive quizzes and assessments.', 5);
+
 

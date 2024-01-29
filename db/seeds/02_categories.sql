@@ -5,4 +5,3 @@ VALUES ('Javascript'),
        ('SQL'),
        ('Express'),
        ('Ruby');
---  '../../assets/resource-thumbs'
