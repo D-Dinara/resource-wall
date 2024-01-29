@@ -66,3 +66,17 @@ VALUES(3, 4, 'https://expressjs.com/', 'Express.js Docs', 'Community-driven plat
 VALUES(8, 4, 'https://en.wikipedia.org/wiki/Create,_read,_update_and_delete', 'Wikipedia: CRUD', 'Video-based coding tutorials covering a wide range of topics, from beginner to advanced levels.', 4, '../../assets/resource-thumbs/100-days.jpg'),
 -- should have no image
 VALUES(1, 4, 'https://github.com/expressjs/method-override', 'Express.js Method Override', 'Personalized coding learning paths tailored to individual goals and skill levels, with adaptive quizzes and assessments.', 5);
+
+-- Ruby Category
+INSERT INTO resources(creator_id, category_id, url, title, description, rating, thumbnail_url)
+-- should have no image
+VALUES(4, 6, 'https://www.ruby-lang.org/en/', 'Ruby Homepage', 'Interactive coding challenges for all levels, with instant feedback and progress tracking.', 3),
+VALUES(7, 6, 'https://www.codecademy.com/learn/learn-ruby', 'Codecademy: Learn Ruby', 'Comprehensive coding tutorials covering languages, frameworks, and tools, with practical examples and exercises.', 5, '../../assets/resource-thumbs/gitlab.jpg'),
+VALUES(2, 6, 'https://www.railstutorial.org/', 'Rails Tutorial', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 2, '../../assets/resource-thumbs/comfort-zone.jpg'),
+-- should have no image
+VALUES(6, 6, 'https://try.ruby-lang.org/', 'Try Ruby', 'Platform providing coding courses, projects, and assessments, with a focus on real-world applications and industry relevance.', 2),
+VALUES(3, 6, 'https://www.rubykoans.com/', 'Ruby Koans', 'Community-driven platform for coding enthusiasts, featuring tutorials, forums, and collaborative coding projects.', 4, '../../assets/resource-thumbs/working-hard.jpg'),
+VALUES(8, 6, 'https://www.pluralsight.com/courses/code-school-rails-for-zombies', 'Rails for Zombies', 'Video-based coding tutorials covering a wide range of topics, from beginner to advanced levels.', 1, '../../assets/resource-thumbs/design.jpg'),
+-- should have no image
+VALUES(1, 6, 'https://rubygarage.org/blog/how-to-learn-ruby-on-rails', 'How to Learn Ruby on Rails', 'Personalized coding learning paths tailored to individual goals and skill levels, with adaptive quizzes and assessments.', 5),
+VALUES(5, 6, 'https://github.com/fpsvogel/learn-ruby', 'Github: Learn Ruby', 'Coding challenges and competitions to sharpen skills and showcase talent, with opportunities for recognition and rewards.', 2, '../../assets/resource-thumbs/100-days.jpg');
