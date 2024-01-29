@@ -15,6 +15,7 @@ VALUES(2, 1, 'https://webdesign.tutsplus.com/top-15-best-practices-for-writing-s
 VALUES(7, 1, 'https://www.digitalocean.com/community/tutorials/for-loops-for-of-loops-and-for-in-loops-in-javascript', 'For Loops', 'Interactive coding playground for experimenting with code snippets, APIs, and libraries in a sandbox environment.', 1, '../../assets/resource-thumbs/javascript.jpg');
 
 -- CSS Category
+INSERT INTO resources(creator_id, category_id, url, title, description, rating, thumbnail_url)
 VALUES(4, 2, 'https://coolors.co/', 'Colour Palette Generator', 'Interactive coding challenges for all levels, with instant feedback and progress tracking.', 5, '../../assets/resource-thumbs/books.jpg'),
 VALUES(7, 2, 'https://unsplash.com/', 'Stock Image Resource', 'Comprehensive coding tutorials covering languages, frameworks, and tools, with practical examples and exercises.', 5, '../../assets/resource-thumbs/no-bad-days.jpg'),
 VALUES(2, 2, 'https://www.toptal.com/designers/subtlepatterns/', 'Design Patterns', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 3, '../../assets/resource-thumbs/comfort-zone.jpg'),
@@ -27,5 +28,20 @@ VALUES(1, 2, 'https://developer.mozilla.org/en-US/docs/Web/CSS/animation', 'MDN:
 VALUES(5, 2, 'https://web-design-weekly.com/viewport-units-vw-vh-vmin-vmax/', 'Viewport Units', 'Coding challenges and competitions to sharpen skills and showcase talent, with opportunities for recognition and rewards.', 2, '../../assets/resource-thumbs/gitlab.jpg'),
 VALUES(2, 2, 'https://css-tricks.com/making-css-animations-feel-natural/', 'Natural CSS Animations', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/design.jpg'),
 VALUES(7, 2, 'https://web.dev/learn/design/ui-patterns/', 'UI Patterns', 'Interactive coding playground for experimenting with code snippets, APIs, and libraries in a sandbox environment.', 1, '../../assets/resource-thumbs/books.jpg');
+
+-- React Category
+INSERT INTO resources(creator_id, category_id, url, title, description, rating, thumbnail_url)
+VALUES(4, 3, 'https://legacy.reactjs.org/community/courses.html', 'Learn React', 'Interactive coding challenges for all levels, with instant feedback and progress tracking.', 5, '../../assets/resource-thumbs/react.jpg'),
+VALUES(7, 3, 'https://www.udemy.com/course/react-the-complete-guide-incl-redux/', 'Udemy Complete Guide to React', 'Comprehensive coding tutorials covering languages, frameworks, and tools, with practical examples and exercises.', 5, '../../assets/resource-thumbs/no-bad-days.jpg'),
+VALUES(2, 3, 'https://www.codecademy.com/learn/react-101', 'Codecademy Learn React', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 3, '../../assets/resource-thumbs/comfort-zone.jpg'),
+-- should have no image
+VALUES(6, 3, 'https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps', 'MDN: Progressive Web Apps', 'Platform providing coding courses, projects, and assessments, with a focus on real-world applications and industry relevance.', 5),
+VALUES(3, 3, 'https://www.taniarascia.com/crud-app-in-react-with-hooks/', 'CRUD App with React', 'Community-driven platform for coding enthusiasts, featuring tutorials, forums, and collaborative coding projects.', 4, '../../assets/resource-thumbs/react.jpg'),
+VALUES(8, 3, 'https://www.youtube.com/watch?v=T3NHNuD60h4', 'Contact Form Tutorial Video', 'Video-based coding tutorials covering a wide range of topics, from beginner to advanced levels.', 3, '../../assets/resource-thumbs/100-days.jpg'),
+-- should have no image
+VALUES(1, 3, 'https://www.codinn.dev/', 'React Portfolio Projects', 'Personalized coding learning paths tailored to individual goals and skill levels, with adaptive quizzes and assessments.', 5),
+VALUES(5, 3, 'https://www.coursera.org/specializations/front-end-development-using-react-specialization?ref=browsee.io', 'Coursera: React on the Frontend', 'Coding challenges and competitions to sharpen skills and showcase talent, with opportunities for recognition and rewards.', 3, '../../assets/resource-thumbs/gitlab.jpg'),
+VALUES(2, 3, 'https://www.classcentral.com/course/full-stack-react-18915?ref=browsee.io', 'Full Stack React', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/react.jpg');
+
 
 
