@@ -8,5 +8,5 @@ CREATE TABLE "resources" (
   "title" VARCHAR(255) NOT NULL,
   "description" TEXT NOT NULL,
   "rating" SMALLINT NOT NULL DEFAULT 0,
-  "thumbnail_url" VARCHAR(255) DEFAULT '../../assets/no-image.png'
+  "thumbnail_url" VARCHAR(255) NOT NULL DEFAULT '../../assets/no-image.png'
 );
