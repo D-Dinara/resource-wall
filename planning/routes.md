@@ -12,10 +12,7 @@
 |POST/PUT    | /resources/:id        |Update a resource
 |POST/DELETE | /resources/:id/delete |Delete a resource (remove from the db)
 |GET         | /comments             |Display comments
-|GET         | /comments/:id/edit    |Display a comment edit form ???
 |POST        | /comments             |Create a new comment (add to the db)
-|POST/PUT    | /comments/:id         |Edit a comment
-|POST/DELETE | /comments/:id/delete  |Delete a comment (remove from the db)
 |POST        | /likes                |Like a resource (add to the db)
 |POST/DELETE | /likes/:id/delete     |Delete like (remove like from the db)
 
