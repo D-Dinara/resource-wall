@@ -6,10 +6,13 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('users');
-}); 
+router.get('/:id', (req, res) => {
+  const templateVars = {
+    id: req.params.id
+  };
+  res.render('users', templateVars);
+});
 
 module.exports = router;
