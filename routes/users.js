@@ -6,10 +6,30 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
+const { getUsersById } = require('../db/queries/users');
 
-router.get('/', (req, res) => {
-  res.render('users');
-}); 
+router.get('/:id', (req, res) => {
+  const userId = req.params.id;
+  // let userResources = getCurrentUserResources(userId)
+  //   .then(results => {
+  //     // userResources = results;
+  //     return results;
+  //   })
+  //   .catch(error => console.log("userResources error", error));
+
+  getUsersById(userId)
+    .then(results => {
+      const user = results[0];
+      if (!user) {
+        return res.send({ error: "no user with that id" });
+      }
+      const templateVars = {
+        user: user,
+        resources: results
+      };
+      return res.render('users', templateVars);
+    });
+});
 
 module.exports = router;

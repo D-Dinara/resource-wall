@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Users</title>
+  <title>User Profile</title>
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
@@ -14,13 +14,33 @@
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/users.js"></script>
+  <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <h1>Users</h1>
-  <button id="fetch-users">Fetch Users via AJAX</button>
-  <ul id="users"></ul>
+  <!-- Header partial here -->
+  <div id="user-profile" class="user-profile">
+    <img src="https://placekitten.com/200/200" alt="user's avatar" />
+    <span>
+      <%= user.username %>
+    </span>
+    <button>Edit Profile</button>
+  </div>
+  <div id="user-resources" class="user-resources">
+    <h1>My Saved Resources</h1>
+    <select name="category" id="user-category-select">
+      <option default>an option</option>
+      <option>a second option</option>
+    </select>
+    <div id="user-resources_display" class="user-resources_display">
+      <% for (let resource of resources) { %>
+        <a href="<%= resource.url %>">
+          <img src="<%= resource.thumbnail_url %>" />
+        </a>
+        <% } %>
+    </div>
+  </div>
+  <!-- Footer partial here -->
 </body>
 
 </html>
