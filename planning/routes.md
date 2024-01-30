@@ -17,7 +17,7 @@
 |POST/PUT    | /comments/:id         |Edit a comment
 |POST/DELETE | /comments/:id/delete  |Delete a comment (remove from the db)
 |POST        | /likes                |Like a resource (add to the db)
-|POST/DELETE | /comments/:id/delete  |Delete like (remove like from the db)
+|POST/DELETE | /likes/:id/delete     |Delete like (remove like from the db)
 
 
 ## from lecture:
