@@ -35,7 +35,7 @@
     <div id="user-resources_display" class="user-resources_display">
       <% for (let resource of resources) { %>
         <a href="<%= resource.url %>">
-          <%= resource.title %>
+          <img src="<%= resource.thumbnail_url %>" />
         </a>
         <% } %>
     </div>
