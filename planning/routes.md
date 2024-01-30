@@ -6,15 +6,13 @@
 |POST        | /users/:id            |Edit user's profile 
 |GET         | /resources            |Show all resources 
 |GET         | /resources/:id        |Display a resource 
-|GET         | /resources/:id/edit   |Display a resource edit form
-|GET         | /resources/new        |Display a form to create a new resource
 |POST        | /resources            |Create a new resource (add to the db)
-|POST/PUT    | /resources/:id        |Update a resource
-|POST/DELETE | /resources/:id/delete |Delete a resource (remove from the db)
+|PUT         | /resources/:id        |Update a resource
+|DELETE      | /resources/:id/delete |Delete a resource (remove from the db)
 |GET         | /comments             |Display comments
 |POST        | /comments             |Create a new comment (add to the db)
 |POST        | /likes                |Like a resource (add to the db)
-|POST/DELETE | /likes/:id/delete     |Delete like (remove like from the db)
+|DELETE      | /likes/:id/delete     |Delete like (remove like from the db)
 
 
 ## from lecture:
