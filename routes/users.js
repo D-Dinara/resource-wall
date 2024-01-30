@@ -7,12 +7,22 @@
 
 const express = require('express');
 const router = express.Router();
+const { getUsersById } = require('../db/queries/users');
 
 router.get('/:id', (req, res) => {
-  const templateVars = {
-    id: req.params.id
-  };
-  res.render('users', templateVars);
+  const userId = req.params.id;
+  getUsersById(userId)
+    .then(results => {
+      const user = results[0];
+      if (!user) {
+        return res.send({ error: "no user with that id" });
+      }
+      const templateVars = {
+        id: userId,
+        username: user.username
+      };
+      return res.render('users', templateVars);
+    });
 });
 
 module.exports = router;
