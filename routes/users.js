@@ -11,6 +11,13 @@ const { getUsersById } = require('../db/queries/users');
 
 router.get('/:id', (req, res) => {
   const userId = req.params.id;
+  // let userResources = getCurrentUserResources(userId)
+  //   .then(results => {
+  //     // userResources = results;
+  //     return results;
+  //   })
+  //   .catch(error => console.log("userResources error", error));
+
   getUsersById(userId)
     .then(results => {
       const user = results[0];
@@ -18,8 +25,8 @@ router.get('/:id', (req, res) => {
         return res.send({ error: "no user with that id" });
       }
       const templateVars = {
-        id: userId,
-        username: user.username
+        user: user,
+        resources: results
       };
       return res.render('users', templateVars);
     });

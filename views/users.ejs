@@ -22,7 +22,7 @@
   <div id="user-profile" class="user-profile">
     <img src="https://placekitten.com/200/200" alt="user's avatar" />
     <span>
-      <%= username %>
+      <%= user.username %>
     </span>
     <button>Edit Profile</button>
   </div>
@@ -33,10 +33,11 @@
       <option>a second option</option>
     </select>
     <div id="user-resources_display" class="user-resources_display">
-      <img src="https://placekitten.com/300/300" alt="a resource" />
-      <img src="https://placekitten.com/300/300" alt="a resource" />
-      <img src="https://placekitten.com/300/300" alt="a resource" />
-      <img src="https://placekitten.com/300/300" alt="a resource" />
+      <% for (let resource of resources) { %>
+        <a href="<%= resource.url %>">
+          <%= resource.title %>
+        </a>
+        <% } %>
     </div>
   </div>
   <!-- Footer partial here -->
