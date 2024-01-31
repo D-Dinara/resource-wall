@@ -1,0 +1,26 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 90%;
+}
+
+#resources {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.resource {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+
+  img {
+    width: 200px;
+  }
+}
+
+

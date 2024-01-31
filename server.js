@@ -31,6 +31,8 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const { getResources } = require('./db/queries/getResources');
+const db = require('./db/connection');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -45,7 +47,14 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  getResources()
+    .then(data => {
+      const templateVars = {
+        resources: data
+      };
+      res.render('index', templateVars);
+    });
+
 });
 
 app.listen(PORT, () => {
