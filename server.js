@@ -31,6 +31,7 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const { getResources } = require('./db/queries/getResources');
 // const profileRoutes = require('./routes/profile');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
