@@ -46,7 +46,14 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  getResources(req.query)
+    .then(data => {
+      const templateVars = {
+        resources: data
+      };
+      res.render('index', templateVars);
+    })
+    .catch(err => console.error('Error fetching resources', err));
 });
 
 app.listen(PORT, () => {
