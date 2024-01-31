@@ -1,0 +1,29 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 90%;
+}
+
+#resources {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.resource {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin: 20px;
+  width: 250px;
+  border: 1px solid black;
+
+  img {
+    width: 250px;
+    height: 250px;
+  }
+}
