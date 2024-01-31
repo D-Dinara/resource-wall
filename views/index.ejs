@@ -18,7 +18,17 @@
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
-</body>
+  <%- include('partials/_header') %>
+  <main>
+    <h1>Resource Wall</h1>
+    <div id="resources">
+      <% for (let resource of resources) { %>
+        <div class="resource">
+          <h3><%= resource.title%></h3>
+          <img src= "<%= resource.thumbnail_url %>" alt="Resource thumbnail image"/>
+        </div>
+      <% } %>
+    </div>
+  </main>ody>
 
 </html>
