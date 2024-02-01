@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/utility.css" />
   <link rel="stylesheet" href="/styles/edit-user-modal.css" />
+  <link rel="stylesheet" href="/styles/profile-page.css" />
+
 
 
   <script src="/vendor/jquery-3.0.0.js"></script>
@@ -21,7 +23,7 @@
   <script defer src="/scripts/users.js"></script>
 </head>
 
-<body class="temp-page-class">
+<body>
   <%- include('partials/_header') %>
     <div id="user-profile" class="user-profile">
       <img src="https://placekitten.com/200/200" alt="user's avatar" />
@@ -65,15 +67,20 @@
         </div>
       </div>
     </div>
-    <div id="user-resources" class="user-resources">
+    <div id="user-resources" class="user-resources flex">
       <h1>My Saved Resources</h1>
       <select name="category" id="user-category-select">
-        <option default>an option</option>
-        <option>a second option</option>
+        <option value="0">Select All</option>
+        <option value="1">Javascript</option>
+        <option value="2">CSS</option>
+        <option value="3">React</option>
+        <option value="4">SQL</option>
+        <option value="5">Express</option>
+        <option value="6">Ruby</option>
       </select>
-      <div id="user-resources_display" class="user-resources_display">
+      <div id="user-resources_display" class="user-resources_display flex">
         <% for (let resource of resources) { %>
-          <a href="<%= resource.url %>">
+          <a href="<%= resource.url %>" class="user-resource category_id-<%=resource.category_id%>">
             <img src="<%= resource.thumbnail_url %>" />
           </a>
           <% } %>

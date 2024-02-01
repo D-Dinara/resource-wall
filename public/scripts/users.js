@@ -35,4 +35,22 @@ $(document).ready(() => {
       .then(() => window.location.reload())
       .catch(error => console.log("Form submit error", error));
   });
+
+  $('#user-category-select').on('change', function (e) {
+    const categoryId = $(e.target).val();
+    const allResources = $('#user-resources_display').find('.user-resource');
+    if (categoryId === "0") {
+      $.each(allResources, function () {
+        $(this).show();
+      })
+    } else {
+      $.each(allResources, function () {
+        if (!$(this).hasClass(`category_id-${categoryId}`)) {
+          $(this).hide();
+        } else {
+          $(this).show();
+        }
+      });
+    }
+  });
 });
