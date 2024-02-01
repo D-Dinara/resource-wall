@@ -29,8 +29,9 @@
         <%= user.username %>
       </span>
       <button id="edit">Edit Profile</button>
-      <div id="<%= user.id %>" class="modal_edit flex hidden">
-        <div class="modal_edit--inner flex">
+      <div id="<%= user.id %>" class="modal modal_edit flex hidden">
+        <div class="modal_inner modal_edit--inner flex">
+          <button id="modal_close">X</button>
           <div class="user_image">
             <img src="https://placekitten.com/200/200" alt="user's avatar" />
           </div>

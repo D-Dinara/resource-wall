@@ -8,6 +8,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 
   &--inner{
+    position: relative;
     background-color: white;
     width: 50%;
     height: auto;
@@ -31,6 +32,14 @@
       border-radius: 3px;
       border: 1px grey solid;
     }
+  }
+
+  #modal_close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
   }
 
   .form_button--container{
