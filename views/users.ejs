@@ -29,13 +29,18 @@
   <div id="user-resources" class="user-resources">
     <h1>My Saved Resources</h1>
     <select name="category" id="user-category-select">
-      <option default>an option</option>
-      <option>a second option</option>
+      <option default>Show All</option>
+      <option>Javascript</option>
+      <option>CSS</option>
+      <option>React</option>
+      <option>SQL</option>
+      <option>Express</option>
+      <option>Ruby</option>
     </select>
     <div id="user-resources_display" class="user-resources_display">
       <% for (let resource of resources) { %>
-        <a href="<%= resource.url %>">
-          <img src="<%= resource.thumbnail_url %>" />
+        <a href="#<%= resource.id %>">
+          <img style="max-width:300px" src="<%= resource.thumbnail_url %>" />
         </a>
         <% } %>
     </div>
