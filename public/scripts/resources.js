@@ -8,6 +8,7 @@ $(() => {
     </div>
     `);
     $("#myModal .modal-content").html($resourceModal);
+    $("#myModal").fadeIn();
   };
 
   // Show modal when a resource is clicked
@@ -19,11 +20,7 @@ $(() => {
       url: "/resources/" + resourceId,
       method: "GET",
       success: function(data) {
-        console.log(data);
         renderResouceModal(data);
-
-        // Show the modal
-        $("#myModal").fadeIn();
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);
