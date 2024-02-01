@@ -17,6 +17,7 @@ router.get('/:id', (req, res) => {
       if (!user) {
         return res.send({ error: "no user with that id" });
       }
+      console.log("all results", results);
       const templateVars = {
         user: user,
         resources: results

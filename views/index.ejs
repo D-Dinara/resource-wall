@@ -27,11 +27,16 @@
     <div id="resources">
       <% for (let resource of resources) { %>
         <div class="resource">
-          <h3><%= resource.title%></h3>
-          <img src= "<%= resource.thumbnail_url %>" alt="Resource thumbnail image"/>
+          <h3><%= resource.title %></h3>
+          <div class="image-container">
+            <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
+            <p class="description"><%= resource.description %></p>
+          </div>
         </div>
       <% } %>
+      
     </div>
-  </main>ody>
+  </main>
+  </body>
 
 </html>
