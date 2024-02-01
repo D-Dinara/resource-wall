@@ -28,8 +28,33 @@
         <%= user.username %>
       </span>
       <button id="edit">Edit Profile</button>
-      <div id="<%= user.id %>" class="modal hidden">
-        <p>A modal!</p>
+      <div id="<%= user.id %>" class="modal hidden flex">
+        <div class="user_image">
+          <img src="https://placekitten.com/200/200" alt="user's avatar" />
+        </div>
+        <div class="user_form">
+          <form id="user_form-edit" method="" action="">
+            <div>
+              <label for="username">Username</label>
+              <input id="username" value="<%= user.username %>" type="text">
+            </div>
+            <div>
+              <label for="first_name">First Name</label>
+              <input id="first_name" value="<%= user.first_name %>" type="text">
+            </div>
+            <div>
+              <label for="last_name">Last Name</label>
+              <input id="last_name" value="<%= user.last_name %>" type="text">
+            </div>
+            <div>
+              <label for="user_email">Email</label>
+              <input id="user_email" value="<%= user.email %>" type="email">
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <div id="user-resources" class="user-resources">
