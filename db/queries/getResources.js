@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 const getResources = (options) => {
-  let query = `SELECT *
+  let query = `SELECT resources.id AS id, title, description, thumbnail_url, topic
   FROM resources
   JOIN categories
   ON categories.id = category_id `;
