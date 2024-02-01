@@ -12,5 +12,15 @@ $(document).ready(() => {
   });
 
   // user AJAX request to edit DB user when user_form-edit is submitted
+  const editUserProfile = (formData) => {
+    console.log("submitted form", formData);
+    $.ajax("/users", { method: "PUT" })
+      .then(response => console.log("edit response", response))
+      .catch(error => console.log("editUserProfile error", error));
+  };
 
+  $('#user_form-edit').on('submit', function (e) {
+    e.preventDefault();
+    editUserProfile(e.target);
+  });
 });
