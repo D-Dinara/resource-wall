@@ -10,10 +10,12 @@ const getUsers = () => {
 const getUsersById = (id) => {
   const values = [id];
   const queryText = `
-    Select *
-    FROM users
-    JOIN resources ON users.id = creator_id
-    WHERE users.id = $1
+  SELECT DISTINCT *
+  FROM likes
+  FULL OUTER JOIN resources ON resources.id = resource_id
+  JOIN users ON users.id = creator_id
+  WHERE users.id = $1 OR owner_id = $1 OR creator_id = $1
+  ORDER BY resources.title
   `;
   return db.query(queryText, values)
     .then(results => {
