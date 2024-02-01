@@ -17,7 +17,6 @@ $(document).ready(() => {
   });
   // AJAX request to edit DB user when user_form-edit is submitted
   $('#user_form-edit').on('submit', function (e) {
-    console.log("form submitted!");
     e.preventDefault();
     const formData = {
       username: $("#username").val(),
@@ -25,13 +24,13 @@ $(document).ready(() => {
       firstName: $('#first_name').val(),
       lastName: $('#last_name').val()
     };
-    const userId = $(e.target).find('#user_id').val(); //.value();
+    const userId = $(e.target).find('#user_id').val();
 
     $.ajax(`/users/${userId}`, {
       data: formData,
       method: "PUT"
     })
-      .then(response => console.log("edit response", response))
+      .then(response => response)
       .then(() => window.location.reload())
       .catch(error => console.log("Form submit error", error));
   });
