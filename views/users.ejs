@@ -33,7 +33,11 @@
           <img src="https://placekitten.com/200/200" alt="user's avatar" />
         </div>
         <div class="user_form">
-          <form id="user_form-edit" method="" action="">
+          <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
+            <div class="hidden">
+              <label for="user_id"></label>
+              <input id="user_id" type="number" value="1" disabled>
+            </div>
             <div>
               <label for="username">Username</label>
               <input id="username" value="<%= user.username %>" type="text">
