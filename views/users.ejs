@@ -12,9 +12,12 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/utility.css" />
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <script defer src="/scripts/users.js"></script>
 </head>
 
 <body>
@@ -24,7 +27,10 @@
       <span>
         <%= user.username %>
       </span>
-      <button>Edit Profile</button>
+      <button id="edit">Edit Profile</button>
+      <div id="<%= user.id %>" class="modal hidden">
+        <p>A modal!</p>
+      </div>
     </div>
     <div id="user-resources" class="user-resources">
       <h1>My Saved Resources</h1>
