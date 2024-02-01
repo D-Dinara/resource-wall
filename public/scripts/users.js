@@ -11,16 +11,22 @@ $(document).ready(() => {
     $(this).siblings('.modal').removeClass('hidden');
   });
 
-  // user AJAX request to edit DB user when user_form-edit is submitted
-  const editUserProfile = (formData) => {
-    console.log("submitted form", formData);
-    $.ajax("/users", { method: "PUT" })
-      .then(response => console.log("edit response", response))
-      .catch(error => console.log("editUserProfile error", error));
-  };
-
+  // AJAX request to edit DB user when user_form-edit is submitted
   $('#user_form-edit').on('submit', function (e) {
     e.preventDefault();
-    editUserProfile(e.target);
+    const formData = {
+      username: $("#username").val(),
+      email: $("#user_email").val(),
+      firstName: $('#first_name').val(),
+      lastName: $('#last_name').val()
+    };
+    const userId = $(e.target).find('#user_id').val(); //.value();
+
+    $.ajax(`/users/${userId}`, {
+      data: formData,
+      method: "PUT"
+    })
+      .then(response => console.log("edit response", response))
+      .catch(error => console.log("Form submit error", error));
   });
 });
