@@ -8,8 +8,15 @@ const getResources = (options) => {
   const values = [];
 
   if (options.searchTerm) {
-    values.push(`%${options.searchTerm}%`);
-    query += `WHERE title ILIKE $${values.length}`;
+    const searchTerms = options.searchTerm.split(" ");
+    query += `WHERE `;
+    searchTerms.forEach((term, index) => {
+      values.push(`%${term}%`);
+      if (index > 0) {
+        query += `AND `;
+      }
+      query += `(title ILIKE $${values.length} OR description ILIKE $${values.length}) `;
+    });
   }
 
   if (options.category) {
