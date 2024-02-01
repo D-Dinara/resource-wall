@@ -12,13 +12,26 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/homepage.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
-</body>
+  <%- include('partials/_header') %>
+  <main>
+    <h1>Resource Wall</h1>
+    <div id="resources">
+      <% for (let resource of resources) { %>
+        <div class="resource">
+          <h3><%= resource.title%></h3>
+          <img src= "<%= resource.thumbnail_url %>" alt="Resource thumbnail image"/>
+        </div>
+      <% } %>
+    </div>
+  </main>ody>
 
 </html>
