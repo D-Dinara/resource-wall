@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/utility.css" />
+  <link rel="stylesheet" href="/styles/edit-user-modal.css" />
 
 
   <script src="/vendor/jquery-3.0.0.js"></script>
@@ -20,7 +21,7 @@
   <script defer src="/scripts/users.js"></script>
 </head>
 
-<body>
+<body class="temp-page-class">
   <%- include('partials/_header') %>
     <div id="user-profile" class="user-profile">
       <img src="https://placekitten.com/200/200" alt="user's avatar" />
@@ -28,36 +29,38 @@
         <%= user.username %>
       </span>
       <button id="edit">Edit Profile</button>
-      <div id="<%= user.id %>" class="modal hidden flex">
-        <div class="user_image">
-          <img src="https://placekitten.com/200/200" alt="user's avatar" />
-        </div>
-        <div class="user_form">
-          <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
-            <div class="hidden">
-              <label for="user_id"></label>
-              <input id="user_id" type="number" value="1" disabled>
-            </div>
-            <div>
-              <label for="username">Username</label>
-              <input id="username" value="<%= user.username %>" type="text">
-            </div>
-            <div>
-              <label for="first_name">First Name</label>
-              <input id="first_name" value="<%= user.first_name %>" type="text">
-            </div>
-            <div>
-              <label for="last_name">Last Name</label>
-              <input id="last_name" value="<%= user.last_name %>" type="text">
-            </div>
-            <div>
-              <label for="user_email">Email</label>
-              <input id="user_email" value="<%= user.email %>" type="email">
-            </div>
-            <div>
-              <button type="submit">Submit</button>
-            </div>
-          </form>
+      <div id="<%= user.id %>" class="modal_edit flex hidden">
+        <div class="modal_edit--inner flex">
+          <div class="user_image">
+            <img src="https://placekitten.com/200/200" alt="user's avatar" />
+          </div>
+          <div class="user_form">
+            <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
+              <div class="hidden">
+                <label for="user_id"></label>
+                <input id="user_id" type="number" value="1" disabled>
+              </div>
+              <div>
+                <label for="username">Username</label>
+                <input id="username" value="<%= user.username %>" type="text">
+              </div>
+              <div>
+                <label for="first_name">First Name</label>
+                <input id="first_name" value="<%= user.first_name %>" type="text">
+              </div>
+              <div>
+                <label for="last_name">Last Name</label>
+                <input id="last_name" value="<%= user.last_name %>" type="text">
+              </div>
+              <div>
+                <label for="user_email">Email</label>
+                <input id="user_email" value="<%= user.email %>" type="email">
+              </div>
+              <div class="form_button--container">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

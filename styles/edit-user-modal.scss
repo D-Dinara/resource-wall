@@ -1,0 +1,53 @@
+.modal_edit{
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &--inner{
+    background-color: white;
+    width: 50%;
+    height: auto;
+    padding: 50px;
+    border-radius: 30px;
+    justify-content: space-evenly;
+
+    img{
+      border-radius: 50%;
+    }
+
+    label, input{
+      display: block;
+      margin: 5px 0;
+    }
+    label{
+      font-size: 14px;
+    }
+    input{
+      padding: 3px 5px;
+      border-radius: 3px;
+      border: 1px grey solid;
+    }
+  }
+
+  .form_button--container{
+    width: 100%;
+    text-align: right;
+
+    button{
+      border: 2px solid grey;
+      background: transparent;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+  }
+
+  input, button{
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
