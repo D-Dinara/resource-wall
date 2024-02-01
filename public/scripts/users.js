@@ -9,14 +9,15 @@ $(document).ready(() => {
     e.preventDefault();
     $(this).parent().parent().addClass('hidden');
   });
+
   $('.modal').on('click', function (e) {
-    e.preventDefault();
     if (e.target === e.currentTarget) {
       $(this).addClass('hidden');
     }
   });
   // AJAX request to edit DB user when user_form-edit is submitted
   $('#user_form-edit').on('submit', function (e) {
+    console.log("form submitted!");
     e.preventDefault();
     const formData = {
       username: $("#username").val(),
