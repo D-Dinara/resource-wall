@@ -18,29 +18,29 @@
 </head>
 
 <body>
-  <!-- Header partial here -->
-  <div id="user-profile" class="user-profile">
-    <img src="https://placekitten.com/200/200" alt="user's avatar" />
-    <span>
-      <%= user.username %>
-    </span>
-    <button>Edit Profile</button>
-  </div>
-  <div id="user-resources" class="user-resources">
-    <h1>My Saved Resources</h1>
-    <select name="category" id="user-category-select">
-      <option default>an option</option>
-      <option>a second option</option>
-    </select>
-    <div id="user-resources_display" class="user-resources_display">
-      <% for (let resource of resources) { %>
-        <a href="<%= resource.url %>">
-          <img src="<%= resource.thumbnail_url %>" />
-        </a>
-        <% } %>
+  <%- include('partials/_header') %>
+    <div id="user-profile" class="user-profile">
+      <img src="https://placekitten.com/200/200" alt="user's avatar" />
+      <span>
+        <%= user.username %>
+      </span>
+      <button>Edit Profile</button>
     </div>
-  </div>
-  <!-- Footer partial here -->
+    <div id="user-resources" class="user-resources">
+      <h1>My Saved Resources</h1>
+      <select name="category" id="user-category-select">
+        <option default>an option</option>
+        <option>a second option</option>
+      </select>
+      <div id="user-resources_display" class="user-resources_display">
+        <% for (let resource of resources) { %>
+          <a href="<%= resource.url %>">
+            <img src="<%= resource.thumbnail_url %>" />
+          </a>
+          <% } %>
+      </div>
+    </div>
+    <!-- Footer partial here -->
 </body>
 
 </html>
