@@ -2,10 +2,12 @@ const db = require('../connection');
 
 const getResourceById = (id) => {
   let query = `
-  SELECT title, description, thumbnail_url, resources.id AS id, comments.id as commentId, text
+  SELECT title, description, thumbnail_url, resources.id AS id, comments.id as commentId, text, username
   FROM resources
   JOIN comments
   ON resources.id = resource_id
+  JOIN users
+  ON users.id = commentor_id
   WHERE resources.id = $1 `;
   const values = [id];
 

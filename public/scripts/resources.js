@@ -3,7 +3,7 @@ $(() => {
     $(".comments-container").empty();
     comments.forEach(comment => {
       const $comment = $(`
-    <p class="comment">${comment}</p>
+    <p class="comment">${comment.commentor}: ${comment.text}</p>
     `);
       $(".comments-container").append($comment);
     });
@@ -29,7 +29,10 @@ $(() => {
       method: "GET",
       success: function(data) {
         data.forEach(resource => {
-          comments.push(resource.text);
+          comments.push({
+            text: resource.text,
+            commentor: resource.username
+          });
         });
         renderResouceModal(data[0], comments);
       },
