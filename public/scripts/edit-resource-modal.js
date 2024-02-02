@@ -1,6 +1,6 @@
 $(document).ready(() => {
   const submitFormRequest = (id, formData) => {
-    return $.ajax(`/resources/${id}`, {
+    $.ajax(`/resources/${id}`, {
       data: formData,
       method: "PUT"
     })
@@ -53,7 +53,7 @@ $(document).ready(() => {
       const formData = {
         title: $("#title").val(),
         description: $("#description").val(),
-        url: $('url').val(),
+        url: $('#url').val(),
       };
       const resourceId = $(e.target).find('#resource_id').val();
       submitFormRequest(resourceId, formData);
