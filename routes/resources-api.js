@@ -6,7 +6,6 @@ router.get('/:id', (req, res) => {
   const resourceId = req.params.id;
   getResourceById(resourceId)
     .then(data => {
-      console.log(data);
       res.json(data);
     })
     .catch(err => {
