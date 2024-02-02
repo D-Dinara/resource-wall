@@ -23,6 +23,8 @@
   <script defer src="/scripts/users.js"></script>
   <script defer src="/scripts/delete-resources.js"></script>
   <script defer src="/scripts/unlike-resources.js"></script>
+  <script defer src="/scripts/edit-resource-modal.js"></script>
+
 </head>
 
 <body>
@@ -81,6 +83,9 @@
         <option value="6">Ruby</option>
       </select>
       <div id="user-resources_display" class="user-resources_display flex">
+        <div id="resource_modal-container" class="modal modal_resource flex">
+          <!-- Append edit or view resource modals here -->
+        </div>
         <% for (let resource of resources) { %>
           <% let owned=resource.creator_id===user.user_id ? true : false %>
             <div class="resource-item category_id-<%=resource.category_id%>">
