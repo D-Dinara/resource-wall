@@ -1,6 +1,7 @@
 .hidden{
-  display: none;
-  visibility: hidden;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .flex{
