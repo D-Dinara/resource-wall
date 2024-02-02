@@ -1,7 +1,6 @@
 $(document).ready(() => {
   const populateEditModal = (resource) => {
     const useResource = resource[0];
-    console.log(useResource);
     $('#resource_modal-container').append(`
       <div class="modal_container--inner flex">
         <button id="modal_close">X</button>
