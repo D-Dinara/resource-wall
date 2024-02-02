@@ -1,4 +1,14 @@
 $(document).ready(() => {
+  const submitFormRequest = (id, formData) => {
+    return $.ajax(`/resources/${id}`, {
+      data: formData,
+      method: "PUT"
+    })
+      .then(response => response)
+      .then(() => window.location.reload())
+      .catch(error => console.log("Form submit error", error));
+  };
+
   const populateEditModal = (resource) => {
     $('#resource_modal-container').removeClass('hidden');
     const useResource = resource[0];
@@ -37,6 +47,17 @@ $(document).ready(() => {
         </div>
       </div>
     `);
+
+    $('#modal_form-edit').on('submit', function (e) {
+      e.preventDefault();
+      const formData = {
+        title: $("#title").val(),
+        description: $("#description").val(),
+        url: $('url').val(),
+      };
+      const resourceId = $(e.target).find('#resource_id').val();
+      submitFormRequest(resourceId, formData);
+    });
   };
 
   $('.btn_edit').on('click', function (e) {
@@ -48,4 +69,5 @@ $(document).ready(() => {
       .then(result => populateEditModal(result))
       .catch(error => console.log("edit resource error", error));
   });
+
 });
