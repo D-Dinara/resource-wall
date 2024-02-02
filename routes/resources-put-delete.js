@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { deleteResourceById } = require('../db/queries/deleteResourceById');
+const { editResourceById } = require('../db/queries/editResourceById');
 
 router.delete('/:id', (req, res) => {
   const resourceId = req.params.id;
@@ -13,6 +14,12 @@ router.delete('/:id', (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
+});
+
+router.put('/:id', (req, res) => {
+  const resourceId = req.params.id;
+  editResourceById(resourceId, req.body);
+  res.status(201).send();
 });
 
 module.exports = router;

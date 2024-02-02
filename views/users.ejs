@@ -23,6 +23,8 @@
   <script defer src="/scripts/users.js"></script>
   <script defer src="/scripts/delete-resources.js"></script>
   <script defer src="/scripts/unlike-resources.js"></script>
+  <script defer src="/scripts/edit-resource-modal.js"></script>
+
 </head>
 
 <body>
@@ -33,8 +35,8 @@
         <%= user.username %>
       </span>
       <button id="edit">Edit Profile</button>
-      <div id="<%= user.user_id %>" class="modal modal_edit flex hidden">
-        <div class="modal_inner modal_edit--inner flex">
+      <div id="<%= user.user_id %>" class="modal modal_profile flex hidden">
+        <div class="modal_inner modal_profile--inner flex">
           <button id="modal_close">X</button>
           <div class="user_image">
             <img src="https://placekitten.com/200/200" alt="user's avatar" />
@@ -81,6 +83,9 @@
         <option value="6">Ruby</option>
       </select>
       <div id="user-resources_display" class="user-resources_display flex">
+        <div id="resource_modal-container" class="modal modal_profile flex hidden">
+          <!-- Append edit or view resource modals here -->
+        </div>
         <% for (let resource of resources) { %>
           <% let owned=resource.creator_id===user.user_id ? true : false %>
             <div class="resource-item category_id-<%=resource.category_id%>">
