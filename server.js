@@ -34,6 +34,8 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const resourcesApiRoutes = require('./routes/resources-api');
 const commentsApiRoutes = require('./routes/comments-api');
+const resourcesPutDelete = require('./routes/resources-put-delete');
+const likesRoutes = require('./routes/likes-api');
 const { getResources } = require('./db/queries/getResources');
 const { findUserById } = require('./db/queries/findUserById');
 // const profileRoutes = require('./routes/profile');
@@ -46,6 +48,9 @@ app.use('/users', usersRoutes);
 app.use('/resources', resourcesApiRoutes);
 app.use('/comments', commentsApiRoutes);
 // app.use('/profile', profileRoutes);
+app.use('/resources', resourcesPutDelete);
+app.use('/likes', likesRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
