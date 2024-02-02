@@ -1,4 +1,5 @@
 $(() => {
+
   const renderResouceModal = function(resource, comments) {
     $(".comments-container").empty();
     comments.forEach(comment => {
@@ -13,6 +14,13 @@ $(() => {
     <div class="image-container">
       <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
       <p class="description">${resource.description}</p>
+      <form id="comment-form" method="POST" action="/comments/${resource.id}">
+        <label for="comment-text">Leave a comment</label>
+        <textarea name="commentText" id="comment-text"></textarea>
+        <div>
+          <button type="submit">Add comment</button>
+        </div>
+      </form>
     </div>
     `);
     $("#myModal .modal-content").html($resourceModal);
@@ -40,7 +48,26 @@ $(() => {
         console.error("Error fetching resource details:", error);
       }
     });
+
+    $("#comment-form").on("submit", function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+      console.log("resource id ", resourceId);
+      // Serialize the form data
+      const commentText = $(this).serialize();
+
+      $.ajax({
+        url: "/comments/" + resourceId,
+        method: "POST",
+        data: commentText
+      })
+        .then(function() {
+        })
+
+    });
   });
+
+
 
   // Close modal when the close button is clicked
   $(".close").click(function() {
