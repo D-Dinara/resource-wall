@@ -83,33 +83,30 @@
       <div id="user-resources_display" class="user-resources_display flex">
         <% for (let resource of resources) { %>
           <% let owned=resource.creator_id===user.user_id ? true : false %>
-            <!--
-              If the resource is owned, the id should be for the resources table
-              Otherwise, it should be for the likes table
-            -->
-            <% if (owned) { %>
-              <div id="<%= resource.resources_id %>" <% } else { %>
-                <div id="<%=resource.likes_id%>" <% } %>
-                  class="resource-item category_id-<%=resource.category_id%>">
-                    <h3>
-                      <%= resource.title %>
-                    </h3>
-                    <a href="<%= resource.url %>">
-                      <img src="<%= resource.thumbnail_url %>" />
-                    </a>
-                    <div class="resource-buttons">
-                      <% if (owned) { %>
-                        <button id="btn_delete">Delete</button>
-                        <button id="btn_edit">Edit</button>
-                        <% } else { %>
-                          <button id="btn_unlike">Unlike</button>
-                          <% } %>
-                    </div>
-                </div>
-                <% } %>
+            <div class="resource-item category_id-<%=resource.category_id%>">
+              <h3>
+                <%= resource.title %>
+              </h3>
+              <a href="<%= resource.url %>">
+                <img src="<%= resource.thumbnail_url %>" />
+              </a>
+              <div class="resource-buttons">
+                <!--
+                  If the resource is owned, the id should be for the resources table
+                  Otherwise, it should be for the likes table
+                -->
+                <% if (owned) { %>
+                  <button id="delete_<%= resource.resource_id %>" class="btn_delete">Delete</button>
+                  <button id="edit_<%= resource.resource_id %>" class="btn_edit">Edit</button>
+                  <% } else { %>
+                    <button id="unlike_<%= resource.likes_id %>" class="btn_unlike">Unlike</button>
+                    <% } %>
               </div>
+            </div>
+            <% } %>
       </div>
-      <!-- Footer partial here -->
+    </div>
+    <!-- Footer partial here -->
 </body>
 
 </html>
