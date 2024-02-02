@@ -49,22 +49,22 @@ $(() => {
       }
     });
 
-    $("#comment-form").on("submit", function(event) {
-      // Prevent the default form submission
-      event.preventDefault();
-      console.log("resource id ", resourceId);
-      // Serialize the form data
-      const commentText = $(this).serialize();
+    // $("#comment-form").on("submit", function(event) {
+    //   // Prevent the default form submission
+    //   event.preventDefault();
+    //   console.log("resource id ", resourceId);
+    //   // Serialize the form data
+    //   const commentText = $(this).serialize();
 
-      $.ajax({
-        url: "/comments/" + resourceId,
-        method: "POST",
-        data: commentText
-      })
-        .then(function() {
-        })
+    //   $.ajax({
+    //     url: "/comments/" + resourceId,
+    //     method: "POST",
+    //     data: commentText
+    //   })
+    //     .then(function() {
+    //     })
 
-    });
+    // });
   });
 
 
