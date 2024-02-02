@@ -53,6 +53,4 @@ $(document).ready(() => {
       .then(() => window.location.reload())
       .catch(error => console.log("Form submit error", error));
   });
-
-  // AJAX DELETE request to remove a different user's create resource from the logged-in user's profile page. This does NOT remove the resource from the DB, only the like connection
 });
