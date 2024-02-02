@@ -6,7 +6,6 @@ router.delete('/:id', (req, res) => {
   const resourceId = req.params.id;
   deleteResourceById(resourceId)
     .then(data => {
-      // console.log("data after delete", data);
       res.json(data);
     })
     .catch(err => {

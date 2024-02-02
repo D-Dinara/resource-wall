@@ -1,7 +1,6 @@
 const db = require('../connection');
 
 const deleteResourceById = (id) => {
-  console.log("inside deleteResourceById");
   let query = `
   DELETE FROM resources
   WHERE id = $1 `;
