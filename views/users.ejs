@@ -24,6 +24,7 @@
   <script defer src="/scripts/delete-resources.js"></script>
   <script defer src="/scripts/unlike-resources.js"></script>
   <script defer src="/scripts/edit-resource-modal.js"></script>
+  <script defer src="/scripts/profile-view-resource-modal.js"></script>
 
 </head>
 
@@ -88,27 +89,26 @@
         </div>
         <% for (let resource of resources) { %>
           <% let owned=resource.creator_id===user.user_id ? true : false %>
-            <div class="resource-item category_id-<%=resource.category_id%>">
-              <h3>
-                <%= resource.title %>
-              </h3>
-              <a href="<%= resource.url %>">
+            <% let resourceId=resource.resource_id%>
+              <div id="<%= resourceId %>" class="resource-item category_id-<%=resource.category_id%>">
+                <h3>
+                  <%= resource.title %>
+                </h3>
                 <img src="<%= resource.thumbnail_url %>" />
-              </a>
-              <div class="resource-buttons">
-                <!--
+                <div class="resource-buttons">
+                  <!--
                   If the resource is owned, the id should be for the resources table
                   Otherwise, it should be for the likes table
                 -->
-                <% if (owned) { %>
-                  <button id="delete_<%= resource.resource_id %>" class="btn_delete">Delete</button>
-                  <button id="edit_<%= resource.resource_id %>" class="btn_edit">Edit</button>
-                  <% } else { %>
-                    <button id="unlike_<%= resource.likes_id %>" class="btn_unlike">Unlike</button>
-                    <% } %>
+                  <% if (owned) { %>
+                    <button id="delete_<%= resourceId %>" class="btn_delete">Delete</button>
+                    <button id="edit_<%= resourceId %>" class="btn_edit">Edit</button>
+                    <% } else { %>
+                      <button id="unlike_<%= resource.likes_id %>" class="btn_unlike">Unlike</button>
+                      <% } %>
+                </div>
               </div>
-            </div>
-            <% } %>
+              <% } %>
       </div>
     </div>
     <!-- Footer partial here -->
