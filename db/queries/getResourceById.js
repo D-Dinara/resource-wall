@@ -13,7 +13,6 @@ const getResourceById = (id) => {
 
   return db.query(query, values)
     .then(data => {
-      console.log(data.rows);
       return data.rows;
     })
     .catch(err => console.error('Error executing query', err));

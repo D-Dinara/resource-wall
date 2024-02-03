@@ -1,6 +1,7 @@
 const express = require('express');
 const { addComment } = require('../db/queries/addComment');
 const cookieSession = require('cookie-session');
+const { findUserById } = require('../db/queries/findUserById');
 const router  = express.Router();
 router.use(cookieSession({
   name: 'session',
@@ -16,9 +17,13 @@ router.post('/:resourceId', (req, res) => {
     resourceId: resourceId,
     text: commentText,
   };
-  addComment(newComment)
-    .then(data => {
-      res.json(data);
+
+  Promise.all([
+    findUserById(userId),
+    addComment(newComment)
+  ])
+    .then(([user, newComment]) => {
+      res.json([user, newComment]);
     })
     .catch(err => {
       res
