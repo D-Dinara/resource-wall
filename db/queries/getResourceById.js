@@ -4,9 +4,9 @@ const getResourceById = (id) => {
   let query = `
   SELECT title, description, thumbnail_url, resources.id AS id, comments.id as commentId, text, username, url, rating
   FROM resources
-  JOIN comments
+  LEFT JOIN comments
   ON resources.id = resource_id
-  JOIN users
+  LEFT JOIN users
   ON users.id = commentor_id
   WHERE resources.id = $1`;
   const values = [id];

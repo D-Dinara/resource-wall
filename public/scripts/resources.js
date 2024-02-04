@@ -1,5 +1,5 @@
 $(() => {
-  const renderResouceModal = function(resource, comments) {
+  const renderResourceModal = function(resource, comments) {
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
       <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
@@ -32,11 +32,14 @@ $(() => {
 
     // Render comments in the modal
     comments.forEach(comment => {
-      const $comment = $(`
-        <p class="comment">${comment.commentor}: ${comment.text}</p>
-      `);
-      $(".comments-container").append($comment);
+      if (comment.commentor && comment.text) {
+        const $comment = $(`
+          <p class="comment">${comment.commentor}: ${comment.text}</p>
+        `);
+        $(".comments-container").append($comment);
+      }
     });
+
 
     $("#myModal").fadeIn();
   };
@@ -55,7 +58,7 @@ $(() => {
           commentor: comment.username
         }));
 
-        renderResouceModal(resource, comments);
+        renderResourceModal(resource, comments);
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);
