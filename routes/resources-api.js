@@ -3,6 +3,8 @@ const router  = express.Router();
 const cookieSession = require('cookie-session');
 const { getResourceById } = require('../db/queries/getResourceById');
 const { rateResourceById } = require('../db/queries/rateResourceById');
+const { addResource } = require('../db/queries/addResource');
+const { getCategoryByTopic } = require('../db/queries/getCategoryByTopic');
 router.use(cookieSession({
   name: 'session',
   keys: ["somelongsecretkey987654321"],
@@ -13,6 +15,26 @@ router.get('/:id', (req, res) => {
   getResourceById(resourceId)
     .then(data => {
       res.json(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+router.post('/', (req, res) => {
+  const userId = req.session.user_id;
+  if (!userId) {
+    return res.status(403).send("You need to be logged in to perform this action\n");
+  }
+  getCategoryByTopic(req.body.newResourceCategory)
+    .then(data => {
+      addResource(req.body, userId, data.category_id)
+        .then(data => {
+          console.log(data)
+          res.json(data);
+        })
     })
     .catch(err => {
       res

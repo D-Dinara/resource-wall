@@ -1,5 +1,5 @@
 $(() => {
-  const renderResouceModal = function(resource, comments) {
+  const renderResourceModal = function(resource, comments) {
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
       <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
@@ -55,7 +55,7 @@ $(() => {
           commentor: comment.username
         }));
 
-        renderResouceModal(resource, comments);
+        renderResourceModal(resource, comments);
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);
