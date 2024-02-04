@@ -7,6 +7,6 @@ CREATE TABLE "resources" (
   "url" VARCHAR(255) NOT NULL,
   "title" VARCHAR(255) NOT NULL,
   "description" TEXT NOT NULL,
-  "rating" SMALLINT NOT NULL DEFAULT 0,
+  "rating" DECIMAL(3, 2) NOT NULL DEFAULT 0,
   "thumbnail_url" VARCHAR(255) NOT NULL DEFAULT '../../assets/no-image.png'
 );

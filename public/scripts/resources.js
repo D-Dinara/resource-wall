@@ -1,11 +1,21 @@
 $(() => {
-
   const renderResouceModal = function(resource, comments) {
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
-
+      <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
+      <form id="rating-form" method="POST" action="/resources/${resource.id}">
+        <select name="rateOption" id="rateOption">
+          <option value="1.00">1</option>
+          <option value="2.00">2</option>
+          <option value="3.00">3</option>
+          <option value="4.00">4</option>
+          <option value="5.00">5</option>
+        </select>
+        <button type="submit" id="rate-btn">Rate</button>
+      </form>
       <div class="image-container">
         <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
+        <a href=${resource.url}>Resource URL</a>
         <p class="description">${resource.description}</p>
         <div class="comments-container"></div>
         <form id="comment-form" method="POST" action="/comments/${resource.id}">
@@ -34,7 +44,6 @@ $(() => {
   // Show modal when a resource is clicked
   $(".resource").on("click", function() {
     const resourceId = $(this).attr("id");
-
     // Fetch resource details and comments
     $.ajax({
       url: "/resources/" + resourceId,
@@ -54,12 +63,26 @@ $(() => {
     });
   });
 
+  // Handle form submission for rating
+  $("#myModal").on("submit", "#rating-form", function(event) {
+    event.preventDefault();
+    const rateOption = $(this).serialize();
+    $.ajax({
+      url: $(this).attr("action"),
+      method: "POST",
+      data: rateOption
+    })
+      .then(function(updatedResource) {
+        // Update the displayed rating
+        $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
+      })
+  });
+
+
   // Handle form submission for adding comments
   $("#myModal").on("submit", "#comment-form", function(event) {
     event.preventDefault();
-
     const commentText = $(this).serialize();
-
     $.ajax({
       url: "/comments/" + $(this).attr("action").split("/").pop(),
       method: "POST",
