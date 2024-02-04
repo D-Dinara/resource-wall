@@ -5,9 +5,10 @@ const rateResourceById = (id, rating) => {
   let query = `
     UPDATE resources
     SET rating = $2
-    WHERE resources.id = $1`;
+    WHERE resources.id = $1
+    RETURNING * `;
   return db.query(query, values)
-    .then(data => data.rows)
+    .then(data => data.rows[0])
     .catch(error => console.log("rating update error", error));
 };
 

@@ -10,6 +10,9 @@ router.use(cookieSession({
 
 router.post('/:resourceId', (req, res) => {
   const userId = req.session.user_id;
+  if (!userId) {
+    return res.status(403).send("You need to be logged in to perform this action\n");
+  }
   const resourceId = req.params.resourceId;
   const commentText = req.body.commentText;
   const newComment = {

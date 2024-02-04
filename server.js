@@ -83,6 +83,11 @@ app.get('/login/:id', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
