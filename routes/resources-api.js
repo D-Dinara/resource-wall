@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
     return res.status(403).send("You need to be logged in to perform this action\n");

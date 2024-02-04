@@ -69,7 +69,7 @@ $(() => {
     const rateOption = $(this).serialize();
     $.ajax({
       url: $(this).attr("action"),
-      method: "POST",
+      method: "PATCH",
       data: rateOption
     })
       .then(function(updatedResource) {
