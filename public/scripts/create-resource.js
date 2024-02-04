@@ -18,7 +18,7 @@ $(() => {
         </div>
         <div>
         <label for="newResourceCategory">Select a category</label>
-        <select name="newResourceCategory" id="resource-categories">
+        <select name="newResourceCategory" id="newResourceCategory">
           <option value="Javascript">Javascript</option>
           <option value="CSS">CSS</option>
           <option value="React">React</option>
@@ -50,7 +50,7 @@ $(() => {
       </div>
     </div>`);
     $("#resources").prepend($resource);
-  }
+  };
 
   // Show modal when a resource is clicked
   $("#create-btn").on("click", function() {

@@ -32,11 +32,14 @@ $(() => {
 
     // Render comments in the modal
     comments.forEach(comment => {
-      const $comment = $(`
-        <p class="comment">${comment.commentor}: ${comment.text}</p>
-      `);
-      $(".comments-container").append($comment);
+      if (comment.commentor && comment.text) {
+        const $comment = $(`
+          <p class="comment">${comment.commentor}: ${comment.text}</p>
+        `);
+        $(".comments-container").append($comment);
+      }
     });
+
 
     $("#myModal").fadeIn();
   };

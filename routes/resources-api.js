@@ -32,9 +32,8 @@ router.post('/', (req, res) => {
     .then(data => {
       addResource(req.body, userId, data.category_id)
         .then(data => {
-          console.log(data)
           res.json(data);
-        })
+        });
     })
     .catch(err => {
       res
