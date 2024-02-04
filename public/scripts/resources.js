@@ -3,9 +3,20 @@ $(() => {
   const renderResouceModal = function(resource, comments) {
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
-
+      <p>Rating: ${resource.rating} / 5.00</p>
+      <form id="rating-form" method="POST" action="/resources/${resource.id}">
+        <select name="rateOption" id="rateOption">
+          <option value="1.00">1</option>
+          <option value="2.00">2</option>
+          <option value="3.00">3</option>
+          <option value="4.00">4</option>
+          <option value="5.00">5</option>
+        </select>
+        <button type="submit" id="rate-btn">Rate</button>
+      </form>
       <div class="image-container">
         <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
+        <a href=${resource.url}>Resource URL</a>
         <p class="description">${resource.description}</p>
         <div class="comments-container"></div>
         <form id="comment-form" method="POST" action="/comments/${resource.id}">
