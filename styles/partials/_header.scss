@@ -1,0 +1,50 @@
+@use '../variables.scss' as *;
+
+header{
+  .nav{
+    &bar{
+      width: 100%;
+      padding: 10px;
+    }
+
+    &-container{
+      width: 100%;
+      list-style: none;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+
+    &-item{
+      margin: 0 10px;
+    }
+
+    &-link,
+    &-btn {
+      margin: 0 10px;
+    }
+
+    &-search{
+      width: 50%;
+
+      &-form{
+        width: 100%;
+        align-items: center;
+        border: 2px solid $alt;
+        border-radius: 10px;
+
+        input{
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-radius: 10px;
+        }
+      }
+
+      .btn-search{
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
+  }
+}
