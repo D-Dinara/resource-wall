@@ -82,6 +82,7 @@ $(() => {
       .then(function(updatedResource) {
         // Update the displayed rating
         $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
+        
       })
   });
 
@@ -93,7 +94,7 @@ $(() => {
       method: "POST",
     })
       .then(function() {
-       
+
       })
   });
 

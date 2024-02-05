@@ -7,15 +7,20 @@ router.use(cookieSession({
 }));
 const { deleteLikesById } = require('../db/queries/deleteLikesById');
 const { addLike } = require('../db/queries/addLike');
+const { getLikesByUserId } = require('../db/queries/getLikesByUserId');
 
 router.post('/:resourceId', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
     return res.status(403).send("You need to be logged in to perform this action\n");
   }
-
   const resourceId = req.params.resourceId;
-
+  // getLikesByUserId(userId,resourceId)
+  //   .then(data => {
+  //     if (data) {
+  //       return res.status(403).send("The resource is already liked\n");
+  //     }
+  //   })
   addLike(userId, resourceId)
     .then(data => {
       console.log(data)
