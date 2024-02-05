@@ -1,4 +1,6 @@
 // See: https://sass-lang.com/
+@use './variables.scss' as *;
+
 body,
 html {
   margin: 0;
