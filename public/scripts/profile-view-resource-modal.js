@@ -31,7 +31,6 @@ $(document).ready(() => {
     $.ajax(`/resources/${resourceId}`, { method: "GET" })
       // then create a form to edit it
       .then(result => {
-        console.log("ajax result", result);
         populateViewModal(result);
       })
       .catch(error => console.log("edit resource error", error));
