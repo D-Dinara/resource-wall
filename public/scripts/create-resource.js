@@ -45,7 +45,7 @@ $(() => {
     <div class="resource" id="${resource.id}">
       <h3>${resource.title}</h3>
       <div class="image-container">
-        <img src=${resource.thumbnail_url} alt="Resource thumbnail image" class="thumbnail" />
+        <img src=${resource.thumbnail_url} alt="Resource thumbnail image" class="thumbnail" width="200px"/>
         <p class="description">${resource.description}</p>
       </div>
     </div>`);

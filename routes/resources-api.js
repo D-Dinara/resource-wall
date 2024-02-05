@@ -59,7 +59,7 @@ router.patch('/:id', (req, res) => {
     getResourceById(resourceId)
       .then(data => {
         const currentRating = parseFloat(data[0].rating);
-        const avgRating = (currentRating + userRating) / 2;
+        const avgRating = currentRating === 0 ? userRating : (currentRating + userRating) / 2;
         rateResourceById(resourceId, avgRating)
           .then(data => {
             res.json(data);
