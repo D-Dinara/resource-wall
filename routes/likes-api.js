@@ -5,7 +5,6 @@ router.use(cookieSession({
   name: 'session',
   keys: ["somelongsecretkey987654321"],
 }));
-const { deleteLikesById } = require('../db/queries/deleteLikesById');
 const { addLike } = require('../db/queries/addLike');
 const { getLikesByUserId } = require('../db/queries/getLikesByUserId');
 const { deleteLikesByUserId } = require('../db/queries/deleteLikesByUserId');

@@ -1,7 +1,6 @@
 const db = require('../connection');
 
 const deleteLikesByUserId = (userId, resourceId) => {
-  console.log("inside deleteLikesByUserId");
   let query = `
   DELETE FROM likes
   WHERE owner_id = $1 AND resource_id = $2
