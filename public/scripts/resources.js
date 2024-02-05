@@ -15,6 +15,9 @@ $(() => {
         </select>
         <button ${disabled} type="submit" id="rate-btn">Rate</button>
       </form>
+      <form id="likes-form" method="POST" action="/likes/${resource.id}">
+        <button ${disabled} type="submit" id="like-btn">Like</button>
+      </form>
       <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
       <a href=${resource.url}>Resource URL</a>
       <p class="description">${resource.description}</p>
@@ -79,6 +82,18 @@ $(() => {
       .then(function(updatedResource) {
         // Update the displayed rating
         $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
+      })
+  });
+
+  // Handle form submission for likes
+  $("#myModal").on("submit", "#likes-form", function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr("action"),
+      method: "POST",
+    })
+      .then(function() {
+       
       })
   });
 
