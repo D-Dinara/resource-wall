@@ -1,5 +1,5 @@
 $(() => {
-  const renderResourceModal = function(resource, comments, isLoggedin, isLiked, isRated) {
+  const renderResourceModal = function(resource, comments, isLoggedin, isLiked, isRated, avgRating) {
     const disabled = isLoggedin ? null : "disabled";
     const likeBtnText = isLiked ? "Unlike" : "Like";
     const disableIfRated = isRated ? "disabled" : null;
@@ -7,7 +7,7 @@ $(() => {
 
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
-      <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
+      <p id="rating-display">Rating: ${avgRating} / 5.00</p>
       <form id="rating-form" method="POST" action="/ratings/${resource.id}">
         <select ${disabled} ${disableIfRated} name="rateOption" id="rateOption">
           <option value="1">1</option>
@@ -66,7 +66,9 @@ $(() => {
         const isLiked = responseData.isLiked;
         const isRated = responseData.isRated;
         const isLoggedin = responseData.userId;
-        renderResourceModal(resource[0], comments, isLoggedin, isLiked, isRated);
+        const ratingObj = responseData.rating;
+        const avgRating = ratingObj.avgrating ? parseFloat(ratingObj.avgrating).toFixed(2) : "0.00";
+        renderResourceModal(resource[0], comments, isLoggedin, isLiked, isRated, avgRating);
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);

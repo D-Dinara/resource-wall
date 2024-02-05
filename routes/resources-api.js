@@ -7,6 +7,7 @@ const { addResource } = require('../db/queries/addResource');
 const { getCategoryByTopic } = require('../db/queries/getCategoryByTopic');
 const { getLikesByUserId } = require('../db/queries/getLikesByUserId');
 const { getRatingByUserId } = require('../db/queries/getRatingByUserId');
+const { getAvgRatingById } = require('../db/queries/getAvgRatingById');
 router.use(cookieSession({
   name: 'session',
   keys: ["somelongsecretkey987654321"],
@@ -18,9 +19,10 @@ router.get('/:id', (req, res) => {
   Promise.all([
     getResourceById(resourceId),
     getLikesByUserId(userId, resourceId),
-    getRatingByUserId(userId, resourceId)
+    getRatingByUserId(userId, resourceId),
+    getAvgRatingById(resourceId)
   ])
-    .then(([resource, likes, ratings]) => {
+    .then(([resource, likes, ratings, rating]) => {
       const isLiked = likes.length !== 0 ? true : false;
       const isRated = ratings.length !== 0 ? true : false;
       const responseData = {
@@ -28,6 +30,7 @@ router.get('/:id', (req, res) => {
         userId: userId,
         isLiked: isLiked,
         isRated: isRated,
+        rating: rating
       };
 
       res.json(responseData);
