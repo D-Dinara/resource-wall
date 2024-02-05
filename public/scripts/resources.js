@@ -13,19 +13,17 @@ $(() => {
         </select>
         <button type="submit" id="rate-btn">Rate</button>
       </form>
-      <div class="image-container">
-        <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
-        <a href=${resource.url}>Resource URL</a>
-        <p class="description">${resource.description}</p>
-        <div class="comments-container"></div>
-        <form id="comment-form" method="POST" action="/comments/${resource.id}">
-          <label for="comment-text">Leave a comment</label>
-          <textarea name="commentText" id="comment-text"></textarea>
-          <div>
-            <button type="submit">Add comment</button>
-          </div>
-        </form>
-      </div>
+      <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
+      <a href=${resource.url}>Resource URL</a>
+      <p class="description">${resource.description}</p>
+      <div class="comments-container"></div>
+      <form id="comment-form" method="POST" action="/comments/${resource.id}">
+        <label for="comment-text">Leave a comment</label>
+        <textarea name="commentText" id="comment-text"></textarea>
+        <div>
+          <button type="submit">Add comment</button>
+        </div>
+      </form>
     `);
 
     $("#myModal .modal-content").html($resourceModal);
@@ -45,8 +43,9 @@ $(() => {
   };
 
   // Show modal when a resource is clicked
-  $(".resource").on("click", function() {
+  $(document).on("click", ".resource", function() {
     const resourceId = $(this).attr("id");
+    console.log(resourceId);
     // Fetch resource details and comments
     $.ajax({
       url: "/resources/" + resourceId,

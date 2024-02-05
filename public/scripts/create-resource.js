@@ -52,13 +52,12 @@ $(() => {
     $("#resources").prepend($resource);
   };
 
-  // Show modal when a resource is clicked
   $("#create-btn").on("click", function() {
     renderCreateResouceModal();
   });
 
 
-  // Handle form submission for adding comments
+  // Handle form submission
   $("#myModal").on("submit", "#create-resource-form", function(event) {
     event.preventDefault();
     const resourceData = $(this).serialize();
@@ -69,6 +68,7 @@ $(() => {
     })
       .then(function(data) {
         renderResource(data);
+        $("#myModal").fadeOut();
       });
   });
 
