@@ -7,20 +7,24 @@
 
 const express = require('express');
 const router = express.Router();
-const { getUsersById, editUser } = require('../db/queries/users');
+const { getResourcesByUserId, editUser } = require('../db/queries/users');
+const { findUserById } = require('../db/queries/findUserById');
 
 router.get('/:id', (req, res) => {
   const userId = req.params.id;
-  getUsersById(userId)
+  Promise.all([
+    findUserById(userId),
+    getResourcesByUserId(userId)
+  ])
     .then(results => {
       const user = results[0];
-      if (!user) {
+      const resources = results[1];
+      if (!user.id) {
         return res.send({ error: "no user with that id" });
       }
-      console.log("all results", results);
       const templateVars = {
         user: user,
-        resources: results
+        resources: resources
       };
       return res.render('users', templateVars);
     });

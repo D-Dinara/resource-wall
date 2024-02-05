@@ -7,16 +7,15 @@ const getUsers = () => {
     });
 };
 
-const getUsersById = (id) => {
+const getResourcesByUserId = (id) => {
   const values = [id];
   const queryText = `
-  SELECT users.id as user_id, username, first_name, last_name, email,
-  resources.id as resources_id, creator_id, category_id, url, title, description, rating, thumbnail_url,
+  SELECT resources.id as resources_id, creator_id, category_id, url, title, description, rating, thumbnail_url,
   likes.id as likes_id, owner_id, resource_id
   FROM likes
   FULL OUTER JOIN resources ON resources.id = resource_id
   JOIN users ON users.id = creator_id
-  WHERE users.id = $1 OR owner_id = $1 OR creator_id = $1
+  WHERE owner_id = $1 OR creator_id = $1
   ORDER BY resources.title
   `;
   return db.query(queryText, values)
@@ -41,4 +40,4 @@ const editUser = (id, formData) => {
     .catch(error => console.log("editUser error", error));
 };
 
-module.exports = { getUsers, getUsersById, editUser };
+module.exports = { getUsers, getResourcesByUserId, editUser };
