@@ -36,17 +36,17 @@
         <%= user.username %>
       </span>
       <button id="edit">Edit Profile</button>
-      <div id="<%= user.user_id %>" class="modal modal_profile flex hidden">
+      <div id="<%= user.id %>" class="modal modal_profile flex hidden">
         <div class="modal_inner modal_profile--inner flex">
           <button id="modal_close">X</button>
           <div class="user_image">
             <img src="https://placekitten.com/200/200" alt="user's avatar" />
           </div>
           <div class="user_form">
-            <form id="user_form-edit" method="PUT" action="/users/<%= user.user_id %>">
+            <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
               <div class="hidden">
                 <label for="user_id"></label>
-                <input id="user_id" type="number" value="<%= user.user_id %>" disabled>
+                <input id="user_id" type="number" value="<%= user.id %>" disabled>
               </div>
               <div>
                 <label for="username">Username</label>

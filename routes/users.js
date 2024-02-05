@@ -4,10 +4,8 @@ const { getResourcesByUserId, editUser } = require('../db/queries/users');
 const { findUserById } = require('../db/queries/findUserById');
 
 router.get('/:id?', (req, res) => {
-  const userId = req.params.id;
-  const session = req.session;
-  console.log(userId, session["user_id"]);
-  if (userId === session.user_id) {
+  const userId = req.session.user_id;
+  if (userId) {
     Promise.all([
       findUserById(userId),
       getResourcesByUserId(userId)
@@ -27,7 +25,8 @@ router.get('/:id?', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  const userId = req.params.id;
+  console.log("inside user put request");
+  const userId = req.session.user_id;
 
   editUser(userId, req.body);
   res.status(201).send();
