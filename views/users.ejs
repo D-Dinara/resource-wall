@@ -88,7 +88,7 @@
           <!-- Append edit or view resource modals here -->
         </div>
         <% for (let resource of resources) { %>
-          <% let owned=resource.creator_id===user.user_id ? true : false %>
+          <% let owned=resource.creator_id===user.id ? true : false %>
             <% let resourceId=resource.resource_id%>
               <div id="<%= resourceId %>" class="resource-item category_id-<%=resource.category_id%>">
                 <h3>
