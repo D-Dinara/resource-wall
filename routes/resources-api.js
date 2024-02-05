@@ -5,6 +5,7 @@ const { getResourceById } = require('../db/queries/getResourceById');
 const { rateResourceById } = require('../db/queries/rateResourceById');
 const { addResource } = require('../db/queries/addResource');
 const { getCategoryByTopic } = require('../db/queries/getCategoryByTopic');
+const { getLikesByUserId } = require('../db/queries/getLikesByUserId');
 router.use(cookieSession({
   name: 'session',
   keys: ["somelongsecretkey987654321"],
@@ -13,11 +14,16 @@ router.use(cookieSession({
 router.get('/:id', (req, res) => {
   const resourceId = req.params.id;
   const userId = req.session.user_id;
-  getResourceById(resourceId)
-    .then(data => {
+  Promise.all([
+    getResourceById(resourceId),
+    getLikesByUserId(userId, resourceId)
+  ])
+    .then(([resource, likes]) => {
+      const isLiked = likes.length !== 0 ? true : false;
       const responseData = {
-        resource: data,
+        resource: resource,
         userId: userId,
+        isLiked: isLiked
       };
 
       res.json(responseData);

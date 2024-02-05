@@ -1,6 +1,7 @@
 $(() => {
-  const renderResourceModal = function(resource, comments, isLoggedin) {
+  const renderResourceModal = function(resource, comments, isLoggedin, isLiked) {
     const disabled = isLoggedin ? null : "disabled";
+    const likeBtnText = isLiked ? "Unlike" : "Like";
 
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
@@ -16,7 +17,7 @@ $(() => {
         <button ${disabled} type="submit" id="rate-btn">Rate</button>
       </form>
       <form id="likes-form" method="POST" action="/likes/${resource.id}">
-        <button ${disabled} type="submit" id="like-btn">Like</button>
+        <button ${disabled} type="submit" id="like-btn">${likeBtnText}</button>
       </form>
       <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
       <a href=${resource.url}>Resource URL</a>
@@ -60,9 +61,9 @@ $(() => {
           text: comment.text,
           commentor: comment.username
         }));
-
+        const isLiked = responseData.isLiked;
         const isLoggedin = responseData.userId;
-        renderResourceModal(resource[0], comments, isLoggedin);
+        renderResourceModal(resource[0], comments, isLoggedin, isLiked);
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);
@@ -82,20 +83,31 @@ $(() => {
       .then(function(updatedResource) {
         // Update the displayed rating
         $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
-        
+
       })
   });
 
   // Handle form submission for likes
   $("#myModal").on("submit", "#likes-form", function(event) {
     event.preventDefault();
+    const $likeBtn = $(this).find("#like-btn");
+    const isAlreadyLiked = $likeBtn.text() === "Unlike";
     $.ajax({
       url: $(this).attr("action"),
-      method: "POST",
+      method: isAlreadyLiked ? "DELETE" : "POST",
     })
       .then(function() {
-
+        if (isAlreadyLiked) {
+          console.log("Unliked");
+          $likeBtn.text("Like");
+        } else {
+          console.log("Liked");
+          $likeBtn.text("Unlike");
+        }
       })
+      .catch(function(error) {
+        console.error("Error:", error);
+      });
   });
 
 
@@ -104,7 +116,7 @@ $(() => {
     event.preventDefault();
     const commentText = $(this).serialize();
     $.ajax({
-      url: "/comments/" + $(this).attr("action").split("/").pop(),
+      url: $(this).attr("action"),
       method: "POST",
       data: commentText
     })

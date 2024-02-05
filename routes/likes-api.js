@@ -8,6 +8,7 @@ router.use(cookieSession({
 const { deleteLikesById } = require('../db/queries/deleteLikesById');
 const { addLike } = require('../db/queries/addLike');
 const { getLikesByUserId } = require('../db/queries/getLikesByUserId');
+const { deleteLikesByUserId } = require('../db/queries/deleteLikesByUserId');
 
 router.post('/:resourceId', (req, res) => {
   const userId = req.session.user_id;
@@ -15,16 +16,19 @@ router.post('/:resourceId', (req, res) => {
     return res.status(403).send("You need to be logged in to perform this action\n");
   }
   const resourceId = req.params.resourceId;
-  // getLikesByUserId(userId,resourceId)
-  //   .then(data => {
-  //     if (data) {
-  //       return res.status(403).send("The resource is already liked\n");
-  //     }
-  //   })
-  addLike(userId, resourceId)
+  getLikesByUserId(userId,resourceId)
     .then(data => {
-      console.log(data)
-      res.json(data);
+      console.log("Server data when liked: ", data);
+      if (data.length !== 0) {
+        return res.json({alreadyLiked: true});
+      } else {
+        addLike(userId, resourceId)
+          .then(data => {
+            console.log("Server like data: ", data);
+            res.json(data);
+          });
+      }
+
     })
     .catch(err => {
       res
@@ -33,10 +37,12 @@ router.post('/:resourceId', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
-  const likesId = req.params.id;
-  deleteLikesById(likesId)
+router.delete('/:resourceId', (req, res) => {
+  const resourceId = req.params.resourceId;
+  const userId = req.session.user_id;
+  deleteLikesByUserId(userId, resourceId)
     .then(data => {
+      console.log(data);
       res.json(data);
     })
     .catch(err => {
