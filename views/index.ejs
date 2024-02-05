@@ -4,12 +4,20 @@
 <head>
   <title>Home Page</title>
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
+  <!-- External Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <!-- Main styles -->
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/homepage.css" />
@@ -24,20 +32,24 @@
 
 </head>
 
-  <body>
-    <%- include('partials/_header') %>
+<body>
+  <%- include('partials/_header') %>
     <main>
       <h1>Resource Wall</h1>
       <div id="resources">
         <% for (let resource of resources) { %>
           <div class="resource" id="<%= resource.id %>">
-            <h3><%= resource.title %></h3>
+            <h3>
+              <%= resource.title %>
+            </h3>
             <div class="image-container">
               <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
-              <p class="description"><%= resource.description %></p>
+              <p class="description">
+                <%= resource.description %>
+              </p>
             </div>
           </div>
-        <% } %>
+          <% } %>
       </div>
 
       <div id="myModal" class="modal-container">
@@ -48,5 +60,6 @@
         </div>
       </div>
     </main>
-  </body>
+</body>
+
 </html>

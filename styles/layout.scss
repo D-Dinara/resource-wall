@@ -1,10 +1,15 @@
 // See: https://sass-lang.com/
-body,
-html {
-  margin: 0;
-}
+@use './variables.scss' as *;
 
-*
-{
-  padding: 0;
-}
+@use './partials/typography';
+// body,
+// html {
+//   margin: 0;
+//   font-family: $font;
+//   font-size: 62.5%;
+// }
+
+// *
+// {
+//   padding: 0;
+// }

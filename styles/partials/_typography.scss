@@ -1,0 +1,25 @@
+@use '../variables.scss' as *;
+
+body{
+  font-family: $font;
+  font-size: 62.5%;
+}
+
+h1{
+  font-family: $font-header;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3{
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+p{
+  font-size: 1.4rem;
+}
