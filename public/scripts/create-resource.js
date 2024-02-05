@@ -56,6 +56,11 @@ $(() => {
     renderCreateResouceModal();
   });
 
+  $("#login-message").on("click", function() {
+    $("#myModal .modal-content").html($(`<h3>You need to login to create a resource</h3>`));
+    $("#myModal").fadeIn();
+  });
+
 
   // Handle form submission
   $("#myModal").on("submit", "#create-resource-form", function(event) {

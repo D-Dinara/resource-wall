@@ -1,27 +1,30 @@
 $(() => {
-  const renderResourceModal = function(resource, comments) {
+  const renderResourceModal = function(resource, comments, isLoggedin) {
+    const disabled = isLoggedin ? null : "disabled";
+
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
       <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
       <form id="rating-form" method="POST" action="/resources/${resource.id}">
-        <select name="rateOption" id="rateOption">
+        <select ${disabled} name="rateOption" id="rateOption">
           <option value="1.00">1</option>
           <option value="2.00">2</option>
           <option value="3.00">3</option>
           <option value="4.00">4</option>
           <option value="5.00">5</option>
         </select>
-        <button type="submit" id="rate-btn">Rate</button>
+        <button ${disabled} type="submit" id="rate-btn">Rate</button>
       </form>
       <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
       <a href=${resource.url}>Resource URL</a>
       <p class="description">${resource.description}</p>
+      <h3>Comments</h3>
       <div class="comments-container"></div>
       <form id="comment-form" method="POST" action="/comments/${resource.id}">
         <label for="comment-text">Leave a comment</label>
-        <textarea name="commentText" id="comment-text"></textarea>
+        <textarea ${disabled} name="commentText" id="comment-text"></textarea>
         <div>
-          <button type="submit">Add comment</button>
+          <button ${disabled} type="submit">Add comment</button>
         </div>
       </form>
     `);
@@ -38,26 +41,25 @@ $(() => {
       }
     });
 
-
     $("#myModal").fadeIn();
   };
 
   // Show modal when a resource is clicked
   $(document).on("click", ".resource", function() {
     const resourceId = $(this).attr("id");
-    console.log(resourceId);
     // Fetch resource details and comments
     $.ajax({
       url: "/resources/" + resourceId,
       method: "GET",
-      success: function(data) {
-        const resource = data[0];
-        const comments = data.map(comment => ({
+      success: function(responseData) {
+        const resource = responseData.resource;
+        const comments = resource.map(comment => ({
           text: comment.text,
           commentor: comment.username
         }));
 
-        renderResourceModal(resource, comments);
+        const isLoggedin = responseData.userId;
+        renderResourceModal(resource[0], comments, isLoggedin);
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);
