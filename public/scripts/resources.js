@@ -45,8 +45,9 @@ $(() => {
   };
 
   // Show modal when a resource is clicked
-  $(".resource").on("click", function() {
+  $(document).on("click", ".resource", function() {
     const resourceId = $(this).attr("id");
+    console.log(resourceId);
     // Fetch resource details and comments
     $.ajax({
       url: "/resources/" + resourceId,
