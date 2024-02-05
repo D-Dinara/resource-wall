@@ -1,9 +1,7 @@
 $(document).ready(() => {
   const populateViewModal = (resource) => {
     $('#resource_modal-container').removeClass('hidden');
-    const useResource = resource[0];
-
-    console.log(resource[0]);
+    const useResource = resource.resource[0];
     $('#resource_modal-container').append(`
       <div class="modal_profile--inner modal_container--inner flex">
         <button id="modal_close">X</button>
@@ -32,7 +30,9 @@ $(document).ready(() => {
     // get the resource by id
     $.ajax(`/resources/${resourceId}`, { method: "GET" })
       // then create a form to edit it
-      .then(result => populateViewModal(result))
+      .then(result => {
+        populateViewModal(result);
+      })
       .catch(error => console.log("edit resource error", error));
   });
 });

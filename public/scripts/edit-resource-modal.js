@@ -11,7 +11,7 @@ $(document).ready(() => {
 
   const populateEditModal = (resource) => {
     $('#resource_modal-container').removeClass('hidden');
-    const useResource = resource[0];
+    const useResource = resource.resource[0];
     $('#resource_modal-container').append(`
       <div class="modal_profile--inner modal_container--inner flex">
         <button id="modal_close">X</button>
