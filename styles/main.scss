@@ -3,3 +3,13 @@
 body {
   background: $light;
 }
+
+a, button{
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
