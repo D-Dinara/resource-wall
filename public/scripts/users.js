@@ -18,7 +18,7 @@ $(document).ready(() => {
 
   $('#user-category-select').on('change', function (e) {
     const categoryId = $(e.target).val();
-    const allResources = $('#user-resources_display').find('.user-resource');
+    const allResources = $('#user-resources_display').find('.resource-item');
     if (categoryId === "0") {
       $.each(allResources, function () {
         $(this).show();
