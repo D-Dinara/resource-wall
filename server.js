@@ -27,6 +27,10 @@ app.use(
 );
 app.use(express.static('public'));
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ["somelongsecretkey987654321"],
+}));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
@@ -57,10 +61,7 @@ app.use('/likes', likesRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ["somelongsecretkey987654321"],
-}));
+
 
 app.get('/', (req, res) => {
   const userId = req.session.user_id;
