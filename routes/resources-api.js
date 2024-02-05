@@ -12,9 +12,15 @@ router.use(cookieSession({
 
 router.get('/:id', (req, res) => {
   const resourceId = req.params.id;
+  const userId = req.session.user_id;
   getResourceById(resourceId)
     .then(data => {
-      res.json(data);
+      const responseData = {
+        resource: data,
+        userId: userId,
+      };
+
+      res.json(responseData);
     })
     .catch(err => {
       res
