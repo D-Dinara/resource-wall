@@ -5,7 +5,8 @@ const { findUserById } = require('../db/queries/findUserById');
 
 router.get('/:id?', (req, res) => {
   const userId = req.session.user_id;
-  if (userId) {
+  const pageId = req.params.id;
+  if (userId === pageId) {
     Promise.all([
       findUserById(userId),
       getResourcesByUserId(userId)
