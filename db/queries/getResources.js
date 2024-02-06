@@ -27,8 +27,8 @@ const getResources = (options) => {
       values.push(`${options.category}`);
       query += ` topic = $${values.length}`;
     }
-
   }
+  query += `ORDER BY id DESC `;
   return db.query(query, values)
     .then(data => {
       return data.rows;

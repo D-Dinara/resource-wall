@@ -1,6 +1,6 @@
 $(() => {
 
-  const renderCreateResouceModal = function() {
+  const renderCreateResourceModal = function() {
     const $createResourceModal = $(`
       <h3>Create a resource</h3>
       <form id="create-resource-form" method="POST" action="/resources">
@@ -31,50 +31,63 @@ $(() => {
         <label for="newThumbnail">Thumbnail image URL</label>
           <input id="newThumbnail" name="newThumbnail" placeholder="Enter the resource thumbnail URL" type="text">
         </div>
+        <p class="hidden-err-msg">Please, fill all the required fields</p>
         <button type="submit">Submit</button>
       </form>
     `);
-
-    $("#myModal .modal-content").html($createResourceModal);
-
-    $("#myModal").fadeIn();
-  };
-
-  const renderResource = function(resource) {
-    const $resource = $(`
-    <div class="resource" id="${resource.id}">
-      <h3>${resource.title}</h3>
-      <div class="image-container">
-        <img src=${resource.thumbnail_url} alt="Resource thumbnail image" class="thumbnail" width="200px"/>
-        <p class="description">${resource.description}</p>
-      </div>
-    </div>`);
-    $("#resources").prepend($resource);
+    $("#resource_modal-container").empty();
+    $("#resource_modal-container").removeClass('hidden');
+    $("#resource_modal-container").append($createResourceModal);
   };
 
   $("#create-btn").on("click", function(event) {
-    event.stopPropagation();
-    renderCreateResouceModal();
+    event.preventDefault();
+    $(this).siblings('.modal').removeClass('hidden');
+    renderCreateResourceModal();
   });
 
-  $("#login-message").on("click", function() {
-    $("#myModal .modal-content").html($(`<h3>You need to login to create a resource</h3>`));
-    $("#myModal").fadeIn();
+  $('#modal_close').on('click', function (e) {
+    e.preventDefault();
+    $(this).parent().parent().addClass('hidden');
+  });
+
+  $('.modal').on('click', function (e) {
+    if (e.target === e.currentTarget) {
+      $(this).addClass('hidden');
+    }
+  });
+
+  $("#login-message").on("click", function(event) {
+    event.preventDefault();
+    $(this).siblings('.modal').removeClass('hidden');
+    $("#resource_modal-container").empty();
+    $("#resource_modal-container").removeClass('hidden');
+    $("#resource_modal-container").append(`<h3>You need to login to create a resource</h3>`);
   });
 
 
   // Handle form submission
-  $("#myModal").on("submit", "#create-resource-form", function(event) {
+  $("#resource_modal-container").on("submit", "#create-resource-form", function (event) {
     event.preventDefault();
+    const $modal = $(this).closest('.modal');
     const resourceData = $(this).serialize();
     $.ajax({
       url: "/resources",
       method: "POST",
       data: resourceData
     })
-      .then(function(data) {
-        renderResource(data);
-        $("#myModal").fadeOut();
-      });
+      .then(function(resource) {
+        console.log(resource);
+        if (resource.isFilled) {
+          $modal.addClass('hidden');
+          window.location.reload();
+        } else {
+          $("#newTitle").addClass("red-required");
+          $("#newDescription").addClass("red-required");
+          $("#newUrl").addClass("red-required");
+          $(".hidden-err-msg").slideDown();
+        }
+      })
+      .catch(error => console.log("rendering resource error", error));
   });
 });

@@ -13,16 +13,13 @@ router.post('/:resourceId', (req, res) => {
   const userRating = req.body.rateOption;
   getRatingByUserId(userId,resourceId)
     .then(data => {
-      console.log("Server data when rated: ", data);
       if (data.length !== 0) {
         return res.json({alreadyRated: true});
       } else {
         addRating(userId, resourceId, userRating)
           .then(data => {
-            console.log("Server rating data: ", data)
             getAvgRatingById(resourceId)
               .then(data => {
-                console.log("Avg rateing server ", data)
                 res.json(data);
               });
           });
