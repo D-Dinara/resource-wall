@@ -26,31 +26,6 @@ $(() => {
     });
   });
 
-  // Handle form submission for rating
-  $("#myModal").on("submit", "#rating-form", function (event) {
-    event.preventDefault();
-    const rateOption = $(this).serialize();
-    const $rateBtn = $(this).find("#rate-btn");
-    const isAlreadyRated = $rateBtn.text() === "Rated";
-
-    $.ajax({
-      url: $(this).attr("action"),
-      method: "POST",
-      data: rateOption
-    })
-      .then(function (data) {
-        if (isAlreadyRated) {
-          $rateBtn.text("Rate");
-        } else {
-          $rateBtn.text("Rated");
-          $rateBtn.prop("disabled", true);
-          $("#rateOption").prop("disabled", true);
-        }
-        const avgRating = parseFloat(data.avgrating);
-        // Update the displayed rating
-        $("#rating-display").text(`Rating: ${avgRating.toFixed(2)} / 5.00`);
-      });
-  });
 
   // Handle form submission for likes
   $("#myModal").on("submit", "#likes-form", function (event) {
@@ -72,24 +47,6 @@ $(() => {
       })
       .catch(function (error) {
         console.error("Error:", error);
-      });
-  });
-
-
-  // Handle form submission for adding comments
-  $("#myModal").on("submit", "#comment-form", function (event) {
-    event.preventDefault();
-    const commentText = $(this).serialize();
-    $.ajax({
-      url: $(this).attr("action"),
-      method: "POST",
-      data: commentText
-    })
-      .then(function ([user, newComment]) {
-        const $comment = $(`
-          <p class="comment">${user.username}: ${newComment.text}</p>
-        `);
-        $(".comments-container").append($comment);
       });
   });
 });

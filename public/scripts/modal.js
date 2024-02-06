@@ -1,7 +1,5 @@
-const renderComments = (comments) => {
-  return comments.map(comment => {
-    return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
-  });
+const renderComment = (comment) => {
+  return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
 }
 
 const closeModal = () => {
@@ -29,12 +27,10 @@ const closeModal = () => {
 
 
 const populateResourceModal = (appendingContainer, resource, comments, isLoggedin, isLiked, isRated, avgRating) => {
-  const disabled = isLoggedin ? null : "disabled";
+  const disabled = isLoggedin ? "" : "disabled";
   const likeBtnText = isLiked ? "Unlike" : "Like";
   const disabledIfRated = isRated ? "disabled" : null;
   const rateBtnText = isRated ? "Rated" : "Rate";
-
-  const commentsText = renderComments(comments);
 
   $(appendingContainer).removeClass('hidden');
 
@@ -48,9 +44,9 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <header class="modal_profile--title">
         <a href=${resource.url}> Visit Page </a>
           <h2>${resource.title}</h2>
-          <span class="modal_profile--rating">Rating: ${avgRating} / 5</span>
-          <div class="modal_rating-form>
-            <form id="rating-form" method="POST" action="/resources/${resource.id}">
+          <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5</span>
+          <div class="modal_rating-form">
+            <form id="rating-form" method="POST" action="/ratings/${resource.id}">
               <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
                 <option value="1.00">1</option>
                 <option value="2.00">2</option>
@@ -72,12 +68,12 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
             <p>${resource.description}</p>
           </section>
           <section class="modal_comments">
-            <div class="modal_comments--list>
+            <div class="modal_comments--list">
               <ul>
-                ${commentsText}
+                ${comments.map(comment => renderComment(comment))}
               </ul>
             </div>
-            <div class="modal_comments--form>
+            <div class="modal_comments--form">
               <form id="comment-form" method="POST" action="/comments/${resource.id}">
                 <label for="comment-text">Leave a comment</label>
                 <textarea ${disabled} name="commentText" id="comment-text"></textarea>
@@ -85,12 +81,57 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
                   <button ${disabled} type="submit">Add comment</button>
                 </div>
               </form>
+              </div>
             </div>
           </section>
         </body>
       </div>
     </div>
   `);
+
+  // Handle form submission for rating
+  $("#rating-form").on("submit", function (event) {
+    event.preventDefault();
+    const rateOption = $(this).serialize();
+    const $rateBtn = $(this).find("#rate-btn");
+    const isAlreadyRated = $rateBtn.text() === "Rated";
+
+    $.ajax({
+      url: $(this).attr("action"),
+      method: "POST",
+      data: rateOption
+    })
+      .then(function (data) {
+        if (isAlreadyRated) {
+          $rateBtn.text("Rate");
+        } else {
+          $rateBtn.text("Rated");
+          $rateBtn.prop("disabled", true);
+          $("#rateOption").prop("disabled", true);
+        }
+        const avgRating = parseFloat(data.avgrating);
+        // Update the displayed rating
+        $("#rating-display").text(`Rating: ${avgRating.toFixed(2)} / 5.00`);
+      });
+  });
+
+  // Handle form submission for adding comments
+  $('#comment-form').on('submit', function (e) {
+    e.preventDefault();
+    const commentText = $(this).serialize();
+    $.ajax({
+      url: $(this).attr("action"),
+      method: "POST",
+      data: commentText
+    })
+      .then(function ([user, newComment]) {
+        const $comment = $(`
+          <li class="comment">${user.username}: ${newComment.text}</li>
+        `)
+
+        $(".modal_comments--list ul").append($comment);
+      });
+  });
 
   closeModal();
 };
