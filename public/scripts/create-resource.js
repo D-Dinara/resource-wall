@@ -52,7 +52,8 @@ $(() => {
     $("#resources").prepend($resource);
   };
 
-  $("#create-btn").on("click", function() {
+  $("#create-btn").on("click", function(event) {
+    event.stopPropagation();
     renderCreateResouceModal();
   });
 
@@ -75,10 +76,5 @@ $(() => {
         renderResource(data);
         $("#myModal").fadeOut();
       });
-  });
-
-  // Close modal when the close button is clicked
-  $(".close").click(function() {
-    $("#myModal").fadeOut();
   });
 });
