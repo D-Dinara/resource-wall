@@ -1,4 +1,5 @@
 import { populateResourceModal } from "./modal.js";
+
 $(() => {
   // Show modal when a resource is clicked
   $('.resource-item img').on("click", function () {
@@ -17,7 +18,7 @@ $(() => {
         const isLoggedin = responseData.userId;
         const ratingObj = responseData.rating;
         const avgRating = ratingObj.avgrating ? parseFloat(ratingObj.avgrating).toFixed(2) : "0.00";
-        populateResourceModal("#resource_modal-container", resource[0], comments, isLoggedin);
+        populateResourceModal("#resource_modal-container", resource[0], comments, isLoggedin, isLiked, isRated, avgRating);
       },
       error: function (error) {
         console.error("Error fetching resource details:", error);
@@ -37,7 +38,7 @@ $(() => {
       method: "POST",
       data: rateOption
     })
-      .then(function(data) {
+      .then(function (data) {
         if (isAlreadyRated) {
           $rateBtn.text("Rate");
         } else {
@@ -52,7 +53,7 @@ $(() => {
   });
 
   // Handle form submission for likes
-  $("#myModal").on("submit", "#likes-form", function(event) {
+  $("#myModal").on("submit", "#likes-form", function (event) {
     event.preventDefault();
     const $likeBtn = $(this).find("#like-btn");
     const isAlreadyLiked = $likeBtn.text() === "Unlike";
@@ -60,7 +61,7 @@ $(() => {
       url: $(this).attr("action"),
       method: isAlreadyLiked ? "DELETE" : "POST",
     })
-      .then(function() {
+      .then(function () {
         if (isAlreadyLiked) {
           console.log("Unliked");
           $likeBtn.text("Like");
@@ -69,7 +70,7 @@ $(() => {
           $likeBtn.text("Unlike");
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error:", error);
       });
   });
