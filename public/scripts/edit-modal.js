@@ -69,9 +69,22 @@ $(document).ready(() => {
     $.ajax(`/resources/${resourceId}`, { method: "GET" })
       // then create a form to edit it
       .then(result => {
-        populateEditModal('#resource_modal-container', result);
+        populateEditModal('#resource_modal-container', result.resource[0]);
       })
       .catch(error => console.log("edit resource error", error));
   });
+
+  // $('.btn_user').on('click', function (e) {
+  //   e.preventDefault();
+  //   const userId = $(this).attr('id').replace("user_", "");
+  //   // get the resource by id
+  //   console.log('user id');
+  //   $.ajax(`/users/${userId}`, { method: "GET" })
+  //     // then create a form to edit it
+  //     .then(result => {
+  //       populateEditModal('#resource_modal-container', result);
+  //     })
+  //     .catch(error => console.log("edit resource error", error));
+  // });
 
 });

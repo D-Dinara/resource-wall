@@ -1,6 +1,6 @@
 $(document).ready(() => {
   // display edit user modal on button click
-  $('#edit').on('click', function (e) {
+  $('#edit_user').on('click', function (e) {
     e.preventDefault();
     $(this).siblings('.modal').removeClass('hidden');
   });
