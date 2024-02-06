@@ -51,10 +51,11 @@ router.post('/', (req, res) => {
   if (!newTitle || !newDescription || !newUrl) {
     return res.json({isFilled: false});
   }
+  let thumbnail = newThumbnail === "" ? '../assets/no-image.png' : newThumbnail;
 
   getCategoryByTopic(newResourceCategory)
     .then(data => {
-      addResource(req.body, userId, data.category_id)
+      addResource(newTitle, newDescription, newUrl, thumbnail, userId, data.category_id)
         .then(data => {
           res.json({data, isFilled: true});
         });

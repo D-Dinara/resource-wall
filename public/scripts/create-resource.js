@@ -1,6 +1,6 @@
 $(() => {
 
-  const renderCreateResouceModal = function() {
+  const renderCreateResourceModal = function() {
     const $createResourceModal = $(`
       <h3>Create a resource</h3>
       <form id="create-resource-form" method="POST" action="/resources">
@@ -31,6 +31,7 @@ $(() => {
         <label for="newThumbnail">Thumbnail image URL</label>
           <input id="newThumbnail" name="newThumbnail" placeholder="Enter the resource thumbnail URL" type="text">
         </div>
+        <p class="hidden-err-msg">Please, fill all the required fields</p>
         <button type="submit">Submit</button>
       </form>
     `);
@@ -54,7 +55,7 @@ $(() => {
   $("#create-btn").on("click", function(event) {
     event.preventDefault();
     $(this).siblings('.modal').removeClass('hidden');
-    renderCreateResouceModal();
+    renderCreateResourceModal();
   });
 
   $('#modal_close').on('click', function (e) {
@@ -78,16 +79,26 @@ $(() => {
 
 
   // Handle form submission
-  $("#create-resource-form").on("submit", function(event) {
+  $("#resource_modal-container").on("submit", "#create-resource-form", function (event) {
     event.preventDefault();
     const resourceData = $(this).serialize();
+    console.log(resourceData)
     $.ajax({
       url: "/resources",
       method: "POST",
       data: resourceData
     })
-      .then(function(data) {
-        renderResource(data);
+      .then(function(resource) {
+        console.log(resource);
+        if (resource.isFilled) {
+          console.log(resource.data)
+          renderResource(resource.data);
+        } else {
+          $("#newTitle").addClass("red-required");
+          $("#newDescription").addClass("red-required");
+          $("#newUrl").addClass("red-required");
+          $(".hidden-err-msg").slideDown();
+        }
       });
   });
 });
