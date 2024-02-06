@@ -13,8 +13,8 @@ $(document).ready(() => {
     $('#resource_modal-container').removeClass('hidden');
     const useResource = resource.resource[0];
     $('#resource_modal-container').append(`
-      <div class="modal_profile--inner modal_container--inner flex">
-        <button id="modal_close">X</button>
+      <div class="modal--inner flex">
+        <button id="modal_close" class="modal_close">X</button>
         <div class="modal_thumbnail">
           <img src="${useResource.thumbnail_url}" />
         </div>
