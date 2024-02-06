@@ -144,9 +144,22 @@ $(() => {
   });
 
   // Close modal when the close button is clicked
-  $(".close").click(function() {
+  $(".close").on("click", function() {
     $("#myModal").fadeOut();
   });
+
+  const isClickedOutsideModal = (event) => {
+    const modal = $("#myModal .modal");
+    return !modal.is(event.target) && modal.has(event.target).length === 0;
+  };
+
+  // Close the modal when a click occurs outside of it
+  $(document).on("click", function(event) {
+    if ($("#myModal").is(":visible") && isClickedOutsideModal(event)) {
+      $("#myModal").fadeOut();
+    }
+  });
+
 });
 
 
