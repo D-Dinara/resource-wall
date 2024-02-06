@@ -31,3 +31,12 @@ a, button{
     cursor: pointer;
   }
 }
+
+.hidden-err-msg {
+  display: none;
+  color: red;
+}
+
+.red-required {
+  outline: 1px solid red;
+}
