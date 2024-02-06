@@ -35,58 +35,57 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
   $(appendingContainer).removeClass('hidden');
 
   $(appendingContainer).append(`
-    <div class="modal_profile--inner modal_container--inner flex">
-      <button id="modal_close">X</button>
-      <div class="modal_thumbnail">
-        <img src="${resource.thumbnail_url}" />
-      </div>
-      <div class="modal_profile--rendered">
-        <header class="modal_profile--title">
-        <a href=${resource.url}> Visit Page </a>
-          <h2>${resource.title}</h2>
-          <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5</span>
-          <div class="modal_rating-form">
-            <form id="rating-form" method="POST" action="/ratings/${resource.id}">
-              <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
-                <option value="1.00">1</option>
-                <option value="2.00">2</option>
-                <option value="3.00">3</option>
-                <option value="4.00">4</option>
-                <option value="5.00">5</option>
-              </select>
-              <button ${disabled} ${disabledIfRated} type="submit" id="rate-btn">${rateBtnText}</button>
-            </form>
-          </div>
-          <div class="modal_likes-form>
-            <form id="likes-form" method="POST" action="/likes/${resource.id}">
-              <button ${disabled} type="submit" id="like-btn">${likeBtnText}</button>
-            </form>
-          </div>
-        </header>
-        <body class="modal_body">
-          <section class="modal_description">
-            <p>${resource.description}</p>
-          </section>
-          <section class="modal_comments">
-            <div class="modal_comments--list">
-              <ul>
-                ${comments.map(comment => renderComment(comment))}
-              </ul>
-            </div>
-            <div class="modal_comments--form">
-              <form id="comment-form" method="POST" action="/comments/${resource.id}">
-                <label for="comment-text">Leave a comment</label>
-                <textarea ${disabled} name="commentText" id="comment-text"></textarea>
-                <div>
-                  <button ${disabled} type="submit">Add comment</button>
-                </div>
-              </form>
-              </div>
-            </div>
-          </section>
-        </body>
-      </div>
+  <div class="modal_profile--inner modal_container--inner flex">
+    <button id="modal_close">X</button>
+    <div class="modal_thumbnail">
+      <img src="${resource.thumbnail_url}" />
     </div>
+    <div class="modal_profile--rendered">
+      <header class="modal_profile--title">
+      <a href=${resource.url}> Visit Page </a>
+        <h2>${resource.title}</h2>
+        <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5</span>
+        <div class="modal_rating-form">
+          <form id="rating-form" method="POST" action="/ratings/${resource.id}">
+            <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
+              <option value="1.00">1</option>
+              <option value="2.00">2</option>
+              <option value="3.00">3</option>
+              <option value="4.00">4</option>
+              <option value="5.00">5</option>
+            </select>
+            <button ${disabled} ${disabledIfRated} type="submit" id="rate-btn">${rateBtnText}</button>
+          </form>
+        </div>
+        <div class="modal_likes-form">
+          <form id="likes-form" method="POST" action="/likes/${resource.id}">
+            <button ${disabled} type="submit" id="like-btn">${likeBtnText}</button>
+          </form>
+        </div>
+      </header>
+      <body class="modal_body">
+        <section class="modal_description">
+          <p>${resource.description}</p>
+        </section>
+        <section class="modal_comments">
+          <div class="modal_comments--list">
+            <ul>
+              ${comments.map(comment => renderComment(comment))}
+            </ul>
+          </div>
+          <div class="modal_comments--form">
+            <form id="comment-form" method="POST" action="/comments/${resource.id}">
+              <label for="comment-text">Leave a comment</label>
+              <textarea ${disabled} name="commentText" id="comment-text"></textarea>
+              <div>
+                <button ${disabled} type="submit">Add comment</button>
+              </div>
+            </form>
+            </div>
+        </section>
+      </body>
+    </div>
+  </div>
   `);
 
   // Handle form submission for rating
@@ -112,6 +111,28 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         const avgRating = parseFloat(data.avgrating);
         // Update the displayed rating
         $("#rating-display").text(`Rating: ${avgRating.toFixed(2)} / 5.00`);
+      });
+  });
+
+
+  // Handle form submission for likes
+  $("#likes-form").on("submit", function (event) {
+    event.preventDefault();
+    const $likeBtn = $(this).find("#like-btn");
+    const isAlreadyLiked = $likeBtn.text() === "Unlike";
+    $.ajax({
+      url: $(this).attr("action"),
+      method: isAlreadyLiked ? "DELETE" : "POST",
+    })
+      .then(function () {
+        if (isAlreadyLiked) {
+          $likeBtn.text("Like");
+        } else {
+          $likeBtn.text("Unlike");
+        }
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
       });
   });
 

@@ -25,32 +25,4 @@ $(() => {
       }
     });
   });
-
-
-  // Handle form submission for likes
-  $("#myModal").on("submit", "#likes-form", function (event) {
-    event.preventDefault();
-    const $likeBtn = $(this).find("#like-btn");
-    const isAlreadyLiked = $likeBtn.text() === "Unlike";
-    $.ajax({
-      url: $(this).attr("action"),
-      method: isAlreadyLiked ? "DELETE" : "POST",
-    })
-      .then(function () {
-        if (isAlreadyLiked) {
-          console.log("Unliked");
-          $likeBtn.text("Like");
-        } else {
-          console.log("Liked");
-          $likeBtn.text("Unlike");
-        }
-      })
-      .catch(function (error) {
-        console.error("Error:", error);
-      });
-  });
 });
-
-
-
-
