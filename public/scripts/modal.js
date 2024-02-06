@@ -1,15 +1,37 @@
 /**
- * @function populateModal
+ * @function @populateResourceModal fills data into the modal on click
  * @argument appendingContainer a container on the page where the modal will append
  * @argument resource the resource that we want populated in the modal
+ *
+ * @function @renderComments populates a list of comments into the resource modal
  */
+
+const renderComments = (comments) => {
+  return comments.map(comment => {
+    return `<p class="comment">${comment.commentor}: ${comment.text}</p>`
+  });
+}
+
+const closeModal = () => {
+  $('#modal_close').on('click', function (e) {
+    e.preventDefault();
+    $(this).parent().parent().addClass('hidden');
+  });
+
+  $('.modal').on('click', function (e) {
+    if (e.target === e.currentTarget) {
+      $(this).addClass('hidden');
+    }
+  });
+};
 
 const populateResourceModal = (appendingContainer, resource, comments, isLoggedin) => {
   const disabled = isLoggedin ? null : "disabled";
+  const commentsText = renderComments(comments);
 
+
+  console.log("commentsText", commentsText);
   $(appendingContainer).removeClass('hidden');
-  console.log("appendingContainer", $(appendingContainer));
-  // resource = resource.resource[0];
 
   $(appendingContainer).append(`
     <div class="modal_profile--inner modal_container--inner flex">
@@ -38,7 +60,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
           </section>
           <section class="modal_comments">
             <div class="modal_comments--list>
-
+              ${commentsText}
             </div>
             <div class="modal_comments--form>
               <form id="comment-form" method="POST" action="/comments/${resource.id}">
@@ -54,6 +76,8 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
       </div>
     </div>
   `);
+
+  closeModal();
 };
 
 /**
@@ -100,6 +124,8 @@ const populateEditModal = (appendingContainer, resource) => {
     </div>
   </div>
     `);
+
+  closeModal();
 };
 
 export { populateResourceModal, populateEditModal };

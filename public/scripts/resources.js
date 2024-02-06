@@ -101,10 +101,7 @@ $(() => {
       });
   });
 
-  // Close modal when the close button is clicked
-  // $(".close").click(function () {
-  //   $("#myModal").fadeOut();
-  // });
+
 });
 
 
