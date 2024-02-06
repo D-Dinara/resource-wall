@@ -1,14 +1,6 @@
-/**
- * @function @populateResourceModal fills data into the modal on click
- * @argument appendingContainer a container on the page where the modal will append
- * @argument resource the resource that we want populated in the modal
- *
- * @function @renderComments populates a list of comments into the resource modal
- */
-
 const renderComments = (comments) => {
   return comments.map(comment => {
-    return `<p class="comment">${comment.commentor}: ${comment.text}</p>`
+    return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
   });
 }
 
@@ -24,6 +16,15 @@ const closeModal = () => {
     }
   });
 };
+
+/**
+ * @function @populateResourceModal fills data into the modal on click
+ * @argument appendingContainer a container on the page where the modal will append
+ * @argument resource the resource that we want populated in the modal
+ * @argument comments the associated comments that need to render inside the modal
+ * @argument isLoggedIn allows certain features to be conditionally available
+ */
+
 
 const populateResourceModal = (appendingContainer, resource, comments, isLoggedin) => {
   const disabled = isLoggedin ? null : "disabled";
@@ -60,7 +61,9 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
           </section>
           <section class="modal_comments">
             <div class="modal_comments--list>
-              ${commentsText}
+              <ul>
+                ${commentsText}
+              </ul>
             </div>
             <div class="modal_comments--form>
               <form id="comment-form" method="POST" action="/comments/${resource.id}">
