@@ -26,6 +26,10 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ["somelongsecretkey987654321"],
+}));
 
 app.use(cookieSession({
   name: 'session',
@@ -40,6 +44,7 @@ const resourcesApiRoutes = require('./routes/resources-api');
 const commentsApiRoutes = require('./routes/comments-api');
 const resourcesPutDelete = require('./routes/resources-put-delete');
 const likesRoutes = require('./routes/likes-api');
+const ratingsRoutes = require('./routes/ratings-api');
 const { getResources } = require('./db/queries/getResources');
 const { findUserById } = require('./db/queries/findUserById');
 // const profileRoutes = require('./routes/profile');
@@ -54,6 +59,7 @@ app.use('/comments', commentsApiRoutes);
 // app.use('/profile', profileRoutes);
 app.use('/resources', resourcesPutDelete);
 app.use('/likes', likesRoutes);
+app.use('/ratings', ratingsRoutes);
 
 // Note: mount other resources here, using the same pattern above
 

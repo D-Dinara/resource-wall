@@ -45,14 +45,15 @@ $(() => {
     <div class="resource" id="${resource.id}">
       <h3>${resource.title}</h3>
       <div class="image-container">
-        <img src=${resource.thumbnail_url} alt="Resource thumbnail image" class="thumbnail" />
+        <img src=${resource.thumbnail_url} alt="Resource thumbnail image" class="thumbnail" width="200px"/>
         <p class="description">${resource.description}</p>
       </div>
     </div>`);
     $("#resources").prepend($resource);
   };
 
-  $("#create-btn").on("click", function() {
+  $("#create-btn").on("click", function(event) {
+    event.stopPropagation();
     renderCreateResouceModal();
   });
 
@@ -75,10 +76,5 @@ $(() => {
         renderResource(data);
         $("#myModal").fadeOut();
       });
-  });
-
-  // Close modal when the close button is clicked
-  $(".close").click(function() {
-    $("#myModal").fadeOut();
   });
 });

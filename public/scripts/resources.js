@@ -1,5 +1,4 @@
 import { populateResourceModal } from "./modal.js";
-
 $(() => {
   // Show modal when a resource is clicked
   $('.resource-item img').on("click", function () {
@@ -13,8 +12,11 @@ $(() => {
           text: comment.text,
           commentor: comment.username
         }));
-
+        const isLiked = responseData.isLiked;
+        const isRated = responseData.isRated;
         const isLoggedin = responseData.userId;
+        const ratingObj = responseData.rating;
+        const avgRating = ratingObj.avgrating ? parseFloat(ratingObj.avgrating).toFixed(2) : "0.00";
         populateResourceModal("#resource_modal-container", resource[0], comments, isLoggedin);
       },
       error: function (error) {
@@ -27,15 +29,49 @@ $(() => {
   $("#myModal").on("submit", "#rating-form", function (event) {
     event.preventDefault();
     const rateOption = $(this).serialize();
+    const $rateBtn = $(this).find("#rate-btn");
+    const isAlreadyRated = $rateBtn.text() === "Rated";
+
     $.ajax({
       url: $(this).attr("action"),
-      method: "PATCH",
+      method: "POST",
       data: rateOption
     })
-      .then(function (updatedResource) {
+      .then(function(data) {
+        if (isAlreadyRated) {
+          $rateBtn.text("Rate");
+        } else {
+          $rateBtn.text("Rated");
+          $rateBtn.prop("disabled", true);
+          $("#rateOption").prop("disabled", true);
+        }
+        const avgRating = parseFloat(data.avgrating);
         // Update the displayed rating
-        $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
+        $("#rating-display").text(`Rating: ${avgRating.toFixed(2)} / 5.00`);
+      });
+  });
+
+  // Handle form submission for likes
+  $("#myModal").on("submit", "#likes-form", function(event) {
+    event.preventDefault();
+    const $likeBtn = $(this).find("#like-btn");
+    const isAlreadyLiked = $likeBtn.text() === "Unlike";
+    $.ajax({
+      url: $(this).attr("action"),
+      method: isAlreadyLiked ? "DELETE" : "POST",
+    })
+      .then(function() {
+        if (isAlreadyLiked) {
+          console.log("Unliked");
+          $likeBtn.text("Like");
+        } else {
+          console.log("Liked");
+          $likeBtn.text("Unlike");
+        }
       })
+      .catch(function(error) {
+        console.error("Error:", error);
+      });
   });
 
 
@@ -44,7 +80,7 @@ $(() => {
     event.preventDefault();
     const commentText = $(this).serialize();
     $.ajax({
-      url: "/comments/" + $(this).attr("action").split("/").pop(),
+      url: $(this).attr("action"),
       method: "POST",
       data: commentText
     })
@@ -55,8 +91,6 @@ $(() => {
         $(".comments-container").append($comment);
       });
   });
-
-
 });
 
 
