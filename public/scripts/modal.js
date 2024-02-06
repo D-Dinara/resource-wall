@@ -26,12 +26,14 @@ const closeModal = () => {
  */
 
 
-const populateResourceModal = (appendingContainer, resource, comments, isLoggedin) => {
+const populateResourceModal = (appendingContainer, resource, comments, isLoggedin, isLiked, isRated, avgRating) => {
   const disabled = isLoggedin ? null : "disabled";
+  const likeBtnText = isLiked ? "Unlike" : "Like";
+  const disabledIfRated = isRated ? "disabled" : null;
+  const rateBtnText = isRated ? "Rated" : "Rate";
+
   const commentsText = renderComments(comments);
 
-
-  console.log("commentsText", commentsText);
   $(appendingContainer).removeClass('hidden');
 
   $(appendingContainer).append(`
@@ -42,18 +44,26 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
       </div>
       <div class="modal_profile--rendered">
         <header class="modal_profile--title">
+        <a href=${resource.url}> Visit Page </a>
           <h2>${resource.title}</h2>
-          <span class="modal_profile--rating">Rating: ${resource.rating} / 5</span>
-          <form id="rating-form" method="POST" action="/resources/${resource.id}">
-            <select ${disabled} name="rateOption" id="rateOption">
-              <option value="1.00">1</option>
-              <option value="2.00">2</option>
-              <option value="3.00">3</option>
-              <option value="4.00">4</option>
-              <option value="5.00">5</option>
-            </select>
-            <button ${disabled} type="submit" id="rate-btn">Rate</button>
-          </form>
+          <span class="modal_profile--rating">Rating: ${avgRating} / 5</span>
+          <div class="modal_rating-form>
+            <form id="rating-form" method="POST" action="/resources/${resource.id}">
+              <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
+                <option value="1.00">1</option>
+                <option value="2.00">2</option>
+                <option value="3.00">3</option>
+                <option value="4.00">4</option>
+                <option value="5.00">5</option>
+              </select>
+              <button ${disabled} ${disabledIfRated} type="submit" id="rate-btn">${rateBtnText}</button>
+            </form>
+          </div>
+          <div class="modal_likes-form>
+            <form id="likes-form" method="POST" action="/likes/${resource.id}">
+              <button ${disabled} type="submit" id="like-btn">${likeBtnText}</button>
+            </form>
+          </div>
         </header>
         <body class="modal_body">
           <section class="modal_description">

@@ -1,51 +1,6 @@
 import { populateResourceModal } from "./modal.js";
 
 $(() => {
-  // const renderResourceModal = function (resource, comments, isLoggedin) {
-  //   const disabled = isLoggedin ? null : "disabled";
-
-  //   const $resourceModal = $(`
-  //     <h3>${resource.title}</h3>
-  //     <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
-  //     <form id="rating-form" method="POST" action="/resources/${resource.id}">
-  //       <select ${disabled} name="rateOption" id="rateOption">
-  //         <option value="1.00">1</option>
-  //         <option value="2.00">2</option>
-  //         <option value="3.00">3</option>
-  //         <option value="4.00">4</option>
-  //         <option value="5.00">5</option>
-  //       </select>
-  //       <button ${disabled} type="submit" id="rate-btn">Rate</button>
-  //     </form>
-  //     <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
-  //     <a href=${resource.url}>Resource URL</a>
-  //     <p class="description">${resource.description}</p>
-  //     <h3>Comments</h3>
-  //     <div class="comments-container"></div>
-  //     <form id="comment-form" method="POST" action="/comments/${resource.id}">
-  //       <label for="comment-text">Leave a comment</label>
-  //       <textarea ${disabled} name="commentText" id="comment-text"></textarea>
-  //       <div>
-  //         <button ${disabled} type="submit">Add comment</button>
-  //       </div>
-  //     </form>
-  //   `);
-
-  //   $("#myModal .modal-content").html($resourceModal);
-
-  //   // Render comments in the modal
-  //   comments.forEach(comment => {
-  //     if (comment.commentor && comment.text) {
-  //       const $comment = $(`
-  //         <p class="comment">${comment.commentor}: ${comment.text}</p>
-  //       `);
-  //       $(".comments-container").append($comment);
-  //     }
-  //   });
-
-  //   $("#myModal").fadeIn();
-  // };
-
   // Show modal when a resource is clicked
   $('.resource-item img').on("click", function () {
     const resourceId = $(this).parent().parent().attr("id");
