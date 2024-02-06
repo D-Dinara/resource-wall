@@ -5,7 +5,7 @@ $(document).ready(() => {
     $('#resource_modal-container').append(`
       <div class="modal--inner flex">
         <button id="modal_close" class="modal_close">X</button>
-        <div class="modal_thumbnail">
+        <div class="modal_thumbnail flex">
           <img src="${useResource.thumbnail_url}" />
         </div>
         <div class="modal_profile--rendered">

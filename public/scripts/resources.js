@@ -1,35 +1,37 @@
 $(() => {
-  const renderResourceModal = function(resource, comments, isLoggedin) {
+  const renderResourceModal = function (resource, comments, isLoggedin) {
     const disabled = isLoggedin ? null : "disabled";
 
     const $resourceModal = $(`
-      <h3>${resource.title}</h3>
-      <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
-      <form id="rating-form" method="POST" action="/resources/${resource.id}">
-        <select ${disabled} name="rateOption" id="rateOption">
-          <option value="1.00">1</option>
-          <option value="2.00">2</option>
-          <option value="3.00">3</option>
-          <option value="4.00">4</option>
-          <option value="5.00">5</option>
-        </select>
-        <button ${disabled} type="submit" id="rate-btn">Rate</button>
-      </form>
-      <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
-      <a href=${resource.url}>Resource URL</a>
-      <p class="description">${resource.description}</p>
-      <h3>Comments</h3>
-      <div class="comments-container"></div>
-      <form id="comment-form" method="POST" action="/comments/${resource.id}">
-        <label for="comment-text">Leave a comment</label>
-        <textarea ${disabled} name="commentText" id="comment-text"></textarea>
-        <div>
-          <button ${disabled} type="submit">Add comment</button>
-        </div>
-      </form>
+      <div class="modal--inner">
+        <h3>${resource.title}</h3>
+        <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
+        <form id="rating-form" method="POST" action="/resources/${resource.id}">
+          <select ${disabled} name="rateOption" id="rateOption">
+            <option value="1.00">1</option>
+            <option value="2.00">2</option>
+            <option value="3.00">3</option>
+            <option value="4.00">4</option>
+            <option value="5.00">5</option>
+          </select>
+          <button ${disabled} type="submit" id="rate-btn">Rate</button>
+        </form>
+        <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
+        <a href=${resource.url}>Resource URL</a>
+        <p class="description">${resource.description}</p>
+        <h3>Comments</h3>
+        <div class="comments-container"></div>
+        <form id="comment-form" method="POST" action="/comments/${resource.id}">
+          <label for="comment-text">Leave a comment</label>
+          <textarea ${disabled} name="commentText" id="comment-text"></textarea>
+          <div>
+            <button ${disabled} type="submit">Add comment</button>
+          </div>
+        </form>
+      </div>
     `);
 
-    $("#myModal .modal-content").html($resourceModal);
+    $("#myModal .modal").append($resourceModal);
 
     // Render comments in the modal
     comments.forEach(comment => {
@@ -45,13 +47,13 @@ $(() => {
   };
 
   // Show modal when a resource is clicked
-  $(document).on("click", ".resource", function() {
+  $(document).on("click", ".resource", function () {
     const resourceId = $(this).attr("id");
     // Fetch resource details and comments
     $.ajax({
       url: "/resources/" + resourceId,
       method: "GET",
-      success: function(responseData) {
+      success: function (responseData) {
         const resource = responseData.resource;
         const comments = resource.map(comment => ({
           text: comment.text,
@@ -61,14 +63,14 @@ $(() => {
         const isLoggedin = responseData.userId;
         renderResourceModal(resource[0], comments, isLoggedin);
       },
-      error: function(error) {
+      error: function (error) {
         console.error("Error fetching resource details:", error);
       }
     });
   });
 
   // Handle form submission for rating
-  $("#myModal").on("submit", "#rating-form", function(event) {
+  $("#myModal").on("submit", "#rating-form", function (event) {
     event.preventDefault();
     const rateOption = $(this).serialize();
     $.ajax({
@@ -76,7 +78,7 @@ $(() => {
       method: "PATCH",
       data: rateOption
     })
-      .then(function(updatedResource) {
+      .then(function (updatedResource) {
         // Update the displayed rating
         $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
       })
@@ -84,7 +86,7 @@ $(() => {
 
 
   // Handle form submission for adding comments
-  $("#myModal").on("submit", "#comment-form", function(event) {
+  $("#myModal").on("submit", "#comment-form", function (event) {
     event.preventDefault();
     const commentText = $(this).serialize();
     $.ajax({
@@ -92,7 +94,7 @@ $(() => {
       method: "POST",
       data: commentText
     })
-      .then(function([user, newComment]) {
+      .then(function ([user, newComment]) {
         const $comment = $(`
           <p class="comment">${user.username}: ${newComment.text}</p>
         `);
@@ -101,7 +103,7 @@ $(() => {
   });
 
   // Close modal when the close button is clicked
-  $(".close").click(function() {
+  $(".close").click(function () {
     $("#myModal").fadeOut();
   });
 });
