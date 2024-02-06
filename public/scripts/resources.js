@@ -2,7 +2,7 @@ import { populateResourceModal } from "./modal.js";
 
 $(() => {
   // Show modal when a resource is clicked
-  $('.resource-item img').on("click", function () {
+  $('.resource-item--inner').on("click", function () {
     const resourceId = $(this).parent().parent().attr("id");
     // Fetch resource details and comments
     $.ajax(`/resources/${resourceId}`, {
