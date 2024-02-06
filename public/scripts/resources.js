@@ -1,19 +1,25 @@
 $(() => {
-  const renderResourceModal = function(resource, comments, isLoggedin) {
+  const renderResourceModal = function(resource, comments, isLoggedin, isLiked, isRated, avgRating) {
     const disabled = isLoggedin ? null : "disabled";
+    const likeBtnText = isLiked ? "Unlike" : "Like";
+    const disableIfRated = isRated ? "disabled" : null;
+    const rateBtnText = isRated ? "Rated" : "Rate";
 
     const $resourceModal = $(`
       <h3>${resource.title}</h3>
-      <p id="rating-display">Rating: ${resource.rating} / 5.00</p>
-      <form id="rating-form" method="POST" action="/resources/${resource.id}">
-        <select ${disabled} name="rateOption" id="rateOption">
-          <option value="1.00">1</option>
-          <option value="2.00">2</option>
-          <option value="3.00">3</option>
-          <option value="4.00">4</option>
-          <option value="5.00">5</option>
+      <p id="rating-display">Rating: ${avgRating} / 5.00</p>
+      <form id="rating-form" method="POST" action="/ratings/${resource.id}">
+        <select ${disabled} ${disableIfRated} name="rateOption" id="rateOption">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
         </select>
-        <button ${disabled} type="submit" id="rate-btn">Rate</button>
+        <button ${disabled} ${disableIfRated} type="submit" id="rate-btn">${rateBtnText}</button>
+      </form>
+      <form id="likes-form" method="POST" action="/likes/${resource.id}">
+        <button ${disabled} type="submit" id="like-btn">${likeBtnText}</button>
       </form>
       <img src="${resource.thumbnail_url}" alt="Resource thumbnail image" class="thumbnail" width="200px" />
       <a href=${resource.url}>Resource URL</a>
@@ -57,9 +63,12 @@ $(() => {
           text: comment.text,
           commentor: comment.username
         }));
-
+        const isLiked = responseData.isLiked;
+        const isRated = responseData.isRated;
         const isLoggedin = responseData.userId;
-        renderResourceModal(resource[0], comments, isLoggedin);
+        const ratingObj = responseData.rating;
+        const avgRating = ratingObj.avgrating ? parseFloat(ratingObj.avgrating).toFixed(2) : "0.00";
+        renderResourceModal(resource[0], comments, isLoggedin, isLiked, isRated, avgRating);
       },
       error: function(error) {
         console.error("Error fetching resource details:", error);
@@ -71,15 +80,49 @@ $(() => {
   $("#myModal").on("submit", "#rating-form", function(event) {
     event.preventDefault();
     const rateOption = $(this).serialize();
+    const $rateBtn = $(this).find("#rate-btn");
+    const isAlreadyRated = $rateBtn.text() === "Rated";
+
     $.ajax({
       url: $(this).attr("action"),
-      method: "PATCH",
+      method: "POST",
       data: rateOption
     })
-      .then(function(updatedResource) {
+      .then(function(data) {
+        if (isAlreadyRated) {
+          $rateBtn.text("Rate");
+        } else {
+          $rateBtn.text("Rated");
+          $rateBtn.prop("disabled", true);
+          $("#rateOption").prop("disabled", true);
+        }
+        const avgRating = parseFloat(data.avgrating);
         // Update the displayed rating
-        $("#rating-display").text(`Rating: ${updatedResource.rating} / 5.00`);
+        $("#rating-display").text(`Rating: ${avgRating.toFixed(2)} / 5.00`);
+      });
+  });
+
+  // Handle form submission for likes
+  $("#myModal").on("submit", "#likes-form", function(event) {
+    event.preventDefault();
+    const $likeBtn = $(this).find("#like-btn");
+    const isAlreadyLiked = $likeBtn.text() === "Unlike";
+    $.ajax({
+      url: $(this).attr("action"),
+      method: isAlreadyLiked ? "DELETE" : "POST",
+    })
+      .then(function() {
+        if (isAlreadyLiked) {
+          console.log("Unliked");
+          $likeBtn.text("Like");
+        } else {
+          console.log("Liked");
+          $likeBtn.text("Unlike");
+        }
       })
+      .catch(function(error) {
+        console.error("Error:", error);
+      });
   });
 
 
@@ -88,7 +131,7 @@ $(() => {
     event.preventDefault();
     const commentText = $(this).serialize();
     $.ajax({
-      url: "/comments/" + $(this).attr("action").split("/").pop(),
+      url: $(this).attr("action"),
       method: "POST",
       data: commentText
     })
@@ -101,9 +144,22 @@ $(() => {
   });
 
   // Close modal when the close button is clicked
-  $(".close").click(function() {
+  $(".close").on("click", function() {
     $("#myModal").fadeOut();
   });
+
+  const isClickedOutsideModal = (event) => {
+    const modal = $("#myModal .modal");
+    return !modal.is(event.target) && modal.has(event.target).length === 0;
+  };
+
+  // Close the modal when a click occurs outside of it
+  $(document).on("click", function(event) {
+    if ($("#myModal").is(":visible") && isClickedOutsideModal(event)) {
+      $("#myModal").fadeOut();
+    }
+  });
+
 });
 
 
