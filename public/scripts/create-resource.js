@@ -34,10 +34,9 @@ $(() => {
         <button type="submit">Submit</button>
       </form>
     `);
-
-    $("#myModal .modal-content").html($createResourceModal);
-
-    $("#myModal").fadeIn();
+    $("#resource_modal-container").empty();
+    $("#resource_modal-container").removeClass('hidden');
+    $("#resource_modal-container").append($createResourceModal);
   };
 
   const renderResource = function(resource) {
@@ -53,18 +52,33 @@ $(() => {
   };
 
   $("#create-btn").on("click", function(event) {
-    event.stopPropagation();
+    event.preventDefault();
+    $(this).siblings('.modal').removeClass('hidden');
     renderCreateResouceModal();
   });
 
-  $("#login-message").on("click", function() {
-    $("#myModal .modal-content").html($(`<h3>You need to login to create a resource</h3>`));
-    $("#myModal").fadeIn();
+  $('#modal_close').on('click', function (e) {
+    e.preventDefault();
+    $(this).parent().parent().addClass('hidden');
+  });
+
+  $('.modal').on('click', function (e) {
+    if (e.target === e.currentTarget) {
+      $(this).addClass('hidden');
+    }
+  });
+
+  $("#login-message").on("click", function(event) {
+    event.preventDefault();
+    $(this).siblings('.modal').removeClass('hidden');
+    $("#resource_modal-container").empty();
+    $("#resource_modal-container").removeClass('hidden');
+    $("#resource_modal-container").append(`<h3>You need to login to create a resource</h3>`);
   });
 
 
   // Handle form submission
-  $("#myModal").on("submit", "#create-resource-form", function(event) {
+  $("#create-resource-form").on("submit", function(event) {
     event.preventDefault();
     const resourceData = $(this).serialize();
     $.ajax({
@@ -74,7 +88,6 @@ $(() => {
     })
       .then(function(data) {
         renderResource(data);
-        $("#myModal").fadeOut();
       });
   });
 });

@@ -47,11 +47,16 @@ router.post('/', (req, res) => {
   if (!userId) {
     return res.status(403).send("You need to be logged in to perform this action\n");
   }
-  getCategoryByTopic(req.body.newResourceCategory)
+  const {newTitle, newDescription, newUrl, newResourceCategory, newThumbnail} = req.body;
+  if (!newTitle || !newDescription || !newUrl) {
+    return res.json({isFilled: false});
+  }
+
+  getCategoryByTopic(newResourceCategory)
     .then(data => {
       addResource(req.body, userId, data.category_id)
         .then(data => {
-          res.json(data);
+          res.json({data, isFilled: true});
         });
     })
     .catch(err => {
@@ -60,32 +65,5 @@ router.post('/', (req, res) => {
         .json({ error: err.message });
     });
 });
-
-// router.patch('/:id', (req, res) => {
-//   const userId = req.session.user_id;
-//   if (!userId) {
-//     return res.status(403).send("You need to be logged in to perform this action\n");
-//   }
-//   const resourceId = req.params.id;
-//   const userRating = parseFloat(req.body.rateOption);
-//   if (userRating) {
-//     getResourceById(resourceId)
-//       .then(data => {
-//         const currentRating = parseFloat(data[0].rating);
-//         const avgRating = currentRating === 0 ? userRating : (currentRating + userRating) / 2;
-//         rateResourceById(resourceId, avgRating)
-//           .then(data => {
-//             res.json(data);
-//           });
-//       })
-//       .catch(err => {
-//         res
-//           .status(500)
-//           .json({ error: err.message });
-//       });
-//   }
-// });
-
-
 
 module.exports = router;
