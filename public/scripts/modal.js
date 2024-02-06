@@ -37,41 +37,44 @@ const populateResourceModal = (appendingContainer, resource) => {
  */
 
 const populateEditModal = (appendingContainer, resource) => {
-  //   $(appendingContainer).append(`
-  //   <div class="modal_profile--inner modal_container--inner flex">
-  //   <button id="modal_close">X</button>
-  //   <div class="modal_thumbnail">
-  //     <img src="${resource.thumbnail_url}" />
-  //   </div>
-  //   <div class="modal_form">
-  //     <form id="modal_form-edit">
-  //       <div class="hidden">
-  //         <label for="resource_id"></label>
-  //         <input id="resource_id" type="number" value="${resource.id}" disabled>
-  //       </div>
-  //       <div>
-  //         <label for="title">${resource.title}</label>
-  //         <input id="title" placeholder="Enter a new title" type="text">
-  //       </div>
-  //       <div>
-  //         <label for="description">${resource.description}</label>
-  //         <input id="description" placeholder="Enter a new description" type="textarea">
-  //       </div>
-  //       <div>
-  //         <label for="url">${resource.url}</label>
-  //         <input id="url" placeholder="Enter a new URL" type="text">
-  //       </div>
-  //       <div>
-  //         <label for="category">Placeholder</label>
-  //         <input id="category" placeholder="category edit" type="select" disabled>
-  //       </div>
-  //       <div class="form_button--container">
-  //         <button type="submit">Submit</button>
-  //       </div>
-  //     </form>
-  //   </div>
-  // </div>
-  //   `);
+  $(appendingContainer).removeClass('hidden');
+  resource = resource.resource[0];
+
+  $(appendingContainer).append(`
+    <div class="modal_profile--inner modal_container--inner flex">
+    <button id="modal_close">X</button>
+    <div class="modal_thumbnail">
+      <img src="${resource.thumbnail_url}" />
+    </div>
+    <div class="modal_form">
+      <form id="modal_form-edit">
+        <div class="hidden">
+          <label for="resource_id"></label>
+          <input id="resource_id" type="number" value="${resource.id}" disabled>
+        </div>
+        <div>
+          <label for="title">${resource.title}</label>
+          <input id="title" placeholder="Enter a new title" type="text">
+        </div>
+        <div>
+          <label for="description">${resource.description}</label>
+          <input id="description" placeholder="Enter a new description" type="textarea">
+        </div>
+        <div>
+          <label for="url">${resource.url}</label>
+          <input id="url" placeholder="Enter a new URL" type="text">
+        </div>
+        <div>
+          <label for="category">Placeholder</label>
+          <input id="category" placeholder="category edit" type="select" disabled>
+        </div>
+        <div class="form_button--container">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    `);
 };
 
 export { populateResourceModal, populateEditModal };

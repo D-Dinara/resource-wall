@@ -1,4 +1,4 @@
-// const { populateEditModal } = require('./modal');
+import { populateEditModal } from "./modal.js";
 
 $(document).ready(() => {
   const submitFormRequest = (id, formData) => {
@@ -69,7 +69,7 @@ $(document).ready(() => {
     $.ajax(`/resources/${resourceId}`, { method: "GET" })
       // then create a form to edit it
       .then(result => {
-        console.log("edit resource on click res:", result);
+        populateEditModal('#resource_modal-container', result);
       })
       .catch(error => console.log("edit resource error", error));
   });
