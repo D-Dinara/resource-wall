@@ -8,11 +8,13 @@ const closeModal = () => {
   $('#modal_close').on('click', function (e) {
     e.preventDefault();
     $(this).parent().parent().addClass('hidden');
+    $(this).parent().parent().empty();
   });
 
   $('.modal').on('click', function (e) {
     if (e.target === e.currentTarget) {
       $(this).addClass('hidden');
+      $(this).empty();
     }
   });
 };
