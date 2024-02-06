@@ -1,7 +1,6 @@
-const renderComments = (comments) => {
-  return comments.map(comment => {
-    return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
-  });
+const renderComment = (comment) => {
+  console.log("inside renderComment", comment);
+  return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
 }
 
 const closeModal = () => {
@@ -29,12 +28,10 @@ const closeModal = () => {
 
 
 const populateResourceModal = (appendingContainer, resource, comments, isLoggedin, isLiked, isRated, avgRating) => {
-  const disabled = isLoggedin ? null : "disabled";
+  const disabled = isLoggedin ? "" : "disabled";
   const likeBtnText = isLiked ? "Unlike" : "Like";
   const disabledIfRated = isRated ? "disabled" : null;
   const rateBtnText = isRated ? "Rated" : "Rate";
-
-  const commentsText = renderComments(comments);
 
   $(appendingContainer).removeClass('hidden');
 
@@ -72,12 +69,12 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
             <p>${resource.description}</p>
           </section>
           <section class="modal_comments">
-            <div class="modal_comments--list>
+            <div class="modal_comments--list">
               <ul>
-                ${commentsText}
+                ${comments.map(comment => renderComment(comment))}
               </ul>
             </div>
-            <div class="modal_comments--form>
+            <div class="modal_comments--form">
               <form id="comment-form" method="POST" action="/comments/${resource.id}">
                 <label for="comment-text">Leave a comment</label>
                 <textarea ${disabled} name="commentText" id="comment-text"></textarea>
@@ -85,12 +82,31 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
                   <button ${disabled} type="submit">Add comment</button>
                 </div>
               </form>
+              </div>
             </div>
           </section>
         </body>
       </div>
     </div>
   `);
+
+
+  $('#comment-form').on('submit', function (e) {
+    e.preventDefault();
+    const commentText = $(this).serialize();
+    $.ajax({
+      url: $(this).attr("action"),
+      method: "POST",
+      data: commentText
+    })
+      .then(function ([user, newComment]) {
+        const $comment = $(`
+          <li class="comment">${user.username}: ${newComment.text}</li>
+        `)
+
+        $(".modal_comments--list ul").append($comment);
+      });
+  });
 
   closeModal();
 };

@@ -74,24 +74,6 @@ $(() => {
         console.error("Error:", error);
       });
   });
-
-
-  // Handle form submission for adding comments
-  $("#myModal").on("submit", "#comment-form", function (event) {
-    event.preventDefault();
-    const commentText = $(this).serialize();
-    $.ajax({
-      url: $(this).attr("action"),
-      method: "POST",
-      data: commentText
-    })
-      .then(function ([user, newComment]) {
-        const $comment = $(`
-          <p class="comment">${user.username}: ${newComment.text}</p>
-        `);
-        $(".comments-container").append($comment);
-      });
-  });
 });
 
 
