@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/utility.css" />
   <link rel="stylesheet" href="/styles/edit-user-modal.css" />
-  <link rel="stylesheet" href="/styles/profile-page.css" />
+  <!-- <link rel="stylesheet" href="/styles/profile-page.css" /> -->
 
 
 
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div id="user-resources" class="user-resources flex">
-      <h1>My Saved Resources</h1>
+      <!-- <h1>My Saved Resources</h1>
       <select name="category" id="user-category-select">
         <option value="0">Select All</option>
         <option value="1">Javascript</option>
@@ -83,23 +83,25 @@
         <option value="4">SQL</option>
         <option value="5">Express</option>
         <option value="6">Ruby</option>
-      </select>
-      <div id="user-resources_display" class="user-resources_display flex">
+      </select> -->
+      <div id="user-resources_display" class="gallery user-resources_display flex">
         <div id="resource_modal-container" class="modal modal_profile flex hidden">
           <!-- Append edit or view resource modals here -->
         </div>
         <% for (let resource of resources) { %>
           <% let owned=resource.creator_id===user.id ? true : false %>
             <% let resourceId=resource.resource_id%>
-              <div id="<%= resourceId %>" class="resource-item category_id-<%=resource.category_id%>">
-                <h3>
-                  <%= resource.title %>
-                </h3>
-                <div class="image-container">
-                  <img src="<%= resource.thumbnail_url %>" />
-                  <p class="description">
-                    <%= resource.description %>
-                  </p>
+              <div id="<%= resourceId %>" class="flex resource-item category_id-<%=resource.category_id%>">
+                <div class="resource-item--inner flex">
+                  <h3>
+                    <%= resource.title %>
+                  </h3>
+                  <div class="image-container">
+                    <img src="<%= resource.thumbnail_url %>" />
+                    <p class="description">
+                      <%= resource.description %>
+                    </p>
+                  </div>
                 </div>
                 <div class="resource-buttons">
                   <!--

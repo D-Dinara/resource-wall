@@ -1,0 +1,72 @@
+@use '../variables.scss' as *;
+
+.gallery{
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+
+  .resource-item{
+    width: calc((100% / 5) - 40px);
+    margin: 20px;
+    max-height: 100%;
+    height: auto;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &--inner{
+      flex-direction: column;
+      height: 100%;
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .image-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s ease-in;
+
+    .description{
+      position: absolute;
+      top: 20%;
+      left: 0;
+      width: 100%;
+      color: $light;
+      padding: 10px;
+      font-size: 1.2rem;
+      opacity: 0;
+      z-index: 10;
+      transition: opacity 0.2s ease-in;
+    }
+
+    &::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 0;
+      width: 0;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 100%, transparent 100%);
+    }
+
+    &:hover{
+      .description{
+        opacity: 1;
+      }
+      &::after{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

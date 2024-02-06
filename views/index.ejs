@@ -20,7 +20,7 @@
   <!-- Main styles -->
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/homepage.css" />
+  <!-- <link rel="stylesheet" href="/styles/homepage.css" /> -->
   <link rel="stylesheet" href="/styles/edit-user-modal.css" />
 
   <!-- <link rel="stylesheet" href="/styles/resource_modal.css" /> -->
@@ -36,17 +36,19 @@
   <%- include('partials/_header') %>
     <main>
       <h1>Resource Wall</h1>
-      <div id="resources">
+      <div id="resources" class="gallery flex">
         <% for (let resource of resources) { %>
-          <div class="resource-item resource" id="<%= resource.id %>">
-            <h3>
-              <%= resource.title %>
-            </h3>
-            <div class="image-container">
-              <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
-              <p class="description">
-                <%= resource.description %>
-              </p>
+          <div class="resource-item resource flex" id="<%= resource.id %>">
+            <div class="resource-item--inner flex">
+              <h3>
+                <%= resource.title %>
+              </h3>
+              <div class="image-container">
+                <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
+                <p class="description">
+                  <%= resource.description %>
+                </p>
+              </div>
             </div>
           </div>
           <% } %>
