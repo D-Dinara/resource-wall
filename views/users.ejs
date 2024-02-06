@@ -23,9 +23,9 @@
   <script defer src="/scripts/users.js"></script>
   <script defer src="/scripts/delete-resources.js"></script>
   <script defer src="/scripts/unlike-resources.js"></script>
-  <script defer src="/scripts/edit-resource-modal.js"></script>
-  <script defer src="/scripts/profile-view-resource-modal.js"></script>
-  <script defer src="/scripts/create-resource.js"></script>
+  <script defer type="module" src="/scripts/modal.js"></script>
+  <script defer type="module" src="/scripts/resources.js"></script>
+  <script defer type="module" src="/scripts/edit-modal.js"></script>
 
 </head>
 
@@ -36,7 +36,7 @@
       <span>
         <%= user.username %>
       </span>
-      <button id="edit">Edit Profile</button>
+      <button id="edit_user" class="btn_user">Edit Profile</button>
       <div id="<%= user.id %>" class="modal modal_profile flex hidden">
         <div class="modal_inner modal_profile--inner flex">
           <button id="modal_close">X</button>
@@ -95,7 +95,12 @@
                 <h3>
                   <%= resource.title %>
                 </h3>
-                <img src="<%= resource.thumbnail_url %>" />
+                <div class="image-container">
+                  <img src="<%= resource.thumbnail_url %>" />
+                  <p class="description">
+                    <%= resource.description %>
+                  </p>
+                </div>
                 <div class="resource-buttons">
                   <!--
                   If the resource is owned, the id should be for the resources table

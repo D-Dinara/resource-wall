@@ -21,11 +21,13 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/homepage.css" />
-  <link rel="stylesheet" href="/styles/resource_modal.css" />
+  <link rel="stylesheet" href="/styles/edit-user-modal.css" />
+
+  <!-- <link rel="stylesheet" href="/styles/resource_modal.css" /> -->
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
-  <script defer src="/scripts/resources.js"></script>
+  <script defer type="module" src="/scripts/resources.js"></script>
   <script defer src="/scripts/create-resource.js"></script>
 
 </head>
@@ -36,7 +38,7 @@
       <h1>Resource Wall</h1>
       <div id="resources">
         <% for (let resource of resources) { %>
-          <div class="resource" id="<%= resource.id %>">
+          <div class="resource-item resource" id="<%= resource.id %>">
             <h3>
               <%= resource.title %>
             </h3>
@@ -49,9 +51,9 @@
           </div>
           <% } %>
       </div>
-
+      <div id="resource_modal-container" class="hidden modal modal_profile flex"></div>
       <div id="myModal" class="modal-container">
-        <div class="modal">
+        <div class="modalll">
           <span class="close">&times;</span>
           <div class="modal-content">
           </div>
