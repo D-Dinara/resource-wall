@@ -7,8 +7,10 @@ body{
 
 h1{
   font-family: $font-header;
-  font-size: 3rem;
+  font-size: 4rem;
   letter-spacing: 2px;
+  text-align: center;
+  margin: 0;
 }
 
 h2 {
@@ -16,8 +18,10 @@ h2 {
 }
 
 h3{
-  font-size: 1.4rem;
-  letter-spacing: 0.5px;
+  font-size: 17px;
+  text-wrap: pretty;
+  line-height: 20px;
+  min-height: 40px;
 }
 
 p{
