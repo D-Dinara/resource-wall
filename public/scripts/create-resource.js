@@ -81,8 +81,8 @@ $(() => {
   // Handle form submission
   $("#resource_modal-container").on("submit", "#create-resource-form", function (event) {
     event.preventDefault();
+    const $modal = $(this).closest('.modal');
     const resourceData = $(this).serialize();
-    console.log(resourceData)
     $.ajax({
       url: "/resources",
       method: "POST",
@@ -91,8 +91,8 @@ $(() => {
       .then(function(resource) {
         console.log(resource);
         if (resource.isFilled) {
-          console.log(resource.data)
           renderResource(resource.data);
+          $modal.addClass('hidden');
         } else {
           $("#newTitle").addClass("red-required");
           $("#newDescription").addClass("red-required");
