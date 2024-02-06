@@ -9,6 +9,7 @@
   height: 100%;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
 
   &--inner{
     position: fixed;
@@ -18,6 +19,7 @@
     height: auto;
     padding: 50px;
     border-radius: 30px;
+    z-index: 20;
   }
 
   &_close{
@@ -27,6 +29,7 @@
     width: 30px;
     height: 30px;
     font-size: 18px;
+    z-index: 30;
   }
   &_thumbnail{
     align-items: center;

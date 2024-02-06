@@ -3,7 +3,7 @@ const renderComment = (comment) => {
 }
 
 const closeModal = () => {
-  $('#modal_close').on('click', function (e) {
+  $('.modal_close').on('click', function (e) {
     e.preventDefault();
     $(this).parent().parent().addClass('hidden');
     $(this).parent().parent().empty();
@@ -36,7 +36,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
 
   $(appendingContainer).append(`
   <div class="modal_profile--inner modal_container--inner flex">
-    <button id="modal_close">X</button>
+    <button id="modal_close" class="modal_close">X</button>
     <div class="modal_thumbnail">
       <img src="${resource.thumbnail_url}" />
     </div>
@@ -168,7 +168,7 @@ const populateEditModal = (appendingContainer, resource) => {
 
   $(appendingContainer).append(`
     <div class="modal_profile--inner modal_container--inner flex">
-    <button id="modal_close">X</button>
+    <button id="modal_close" class="modal_close">X</button>
     <div class="modal_thumbnail">
       <img src="${resource.thumbnail_url}" />
     </div>
