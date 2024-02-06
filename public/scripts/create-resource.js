@@ -40,18 +40,6 @@ $(() => {
     $("#resource_modal-container").append($createResourceModal);
   };
 
-  const renderResource = function(resource) {
-    const $resource = $(`
-    <div class="resource" id="${resource.id}">
-      <h3>${resource.title}</h3>
-      <div class="image-container">
-        <img src=${resource.thumbnail_url} alt="Resource thumbnail image" class="thumbnail" width="200px"/>
-        <p class="description">${resource.description}</p>
-      </div>
-    </div>`);
-    $("#resources").prepend($resource);
-  };
-
   $("#create-btn").on("click", function(event) {
     event.preventDefault();
     $(this).siblings('.modal').removeClass('hidden');
@@ -91,14 +79,15 @@ $(() => {
       .then(function(resource) {
         console.log(resource);
         if (resource.isFilled) {
-          renderResource(resource.data);
           $modal.addClass('hidden');
+          window.location.reload();
         } else {
           $("#newTitle").addClass("red-required");
           $("#newDescription").addClass("red-required");
           $("#newUrl").addClass("red-required");
           $(".hidden-err-msg").slideDown();
         }
-      });
+      })
+      .catch(error => console.log("rendering resource error", error));
   });
 });
