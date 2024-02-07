@@ -21,6 +21,10 @@ router.post('/:resourceId', (req, res) => {
     text: commentText,
   };
 
+  const trimmedComment = commentText.trim();
+  if (trimmedComment === "") {
+    return res.status(403).send("The comment text can not be empty\n");
+  }
   Promise.all([
     findUserById(userId),
     addComment(newComment)
