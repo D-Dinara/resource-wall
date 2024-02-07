@@ -9,7 +9,6 @@ const deleteLikesByUserId = (userId, resourceId) => {
 
   return db.query(query, values)
     .then(data => {
-      console.log(data.rows[0]);
       return data.rows[0];
     })
     .catch(err => console.error('deleteLikesById error', err));

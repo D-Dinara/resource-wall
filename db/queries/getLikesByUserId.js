@@ -9,7 +9,6 @@ const getLikesByUserId = (userId, resourceId) => {
 
   return db.query(query, values)
     .then(data => {
-      console.log("DB response to like ", data.rows);
       return data.rows;
     })
     .catch(err => console.error('Error executing query', err));

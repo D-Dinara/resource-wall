@@ -2,6 +2,7 @@ const express = require('express');
 const { getRatingByUserId } = require('../db/queries/getRatingByUserId');
 const { addRating } = require('../db/queries/addRating');
 const { getAvgRatingById } = require('../db/queries/getAvgRatingById');
+const { deleteRatingByUserId } = require('../db/queries/deleteRatingByUserId');
 const router  = express.Router();
 
 router.post('/:resourceId', (req, res) => {
@@ -24,6 +25,23 @@ router.post('/:resourceId', (req, res) => {
               });
           });
       }
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+router.delete('/:resourceId', (req, res) => {
+  const resourceId = req.params.resourceId;
+  const userId = req.session.user_id;
+  deleteRatingByUserId(userId, resourceId)
+    .then(data => {
+      getAvgRatingById(resourceId)
+        .then(data => {
+          res.json(data);
+        });
     })
     .catch(err => {
       res
