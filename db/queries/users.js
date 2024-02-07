@@ -10,19 +10,29 @@ const getUsers = () => {
 const getResourcesByUserId = (id) => {
   const values = [id];
   const queryText = `
-  SELECT resources.id as resources_id, creator_id, category_id, url, title, description, rating, thumbnail_url,
-  likes.id as likes_id, owner_id, resource_id
-  FROM likes
-  FULL OUTER JOIN resources ON resources.id = resource_id
-  JOIN users ON users.id = creator_id
-  WHERE owner_id = $1 OR creator_id = $1
-  ORDER BY resources.title
+  SELECT *
+  FROM resources
+  WHERE creator_id = $1
   `;
   return db.query(queryText, values)
     .then(results => {
       return results.rows;
     })
-    .catch(error => console.log("getUserById error", error));
+    .catch(error => console.log("getResourceByUserId error", error));
+};
+
+const getLikesByUserId = (id) => {
+  const values = [id];
+  const queryText = `
+    SELECT *
+    FROM likes
+    WHERE owner_id = $1
+  `;
+  return db.query(queryText, values)
+    .then(results => {
+      return results.rows;
+    })
+    .catch(error => console.log("getLikesByUserId error", error));
 };
 
 const editUser = (id, formData) => {
