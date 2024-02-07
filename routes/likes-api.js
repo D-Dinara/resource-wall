@@ -17,13 +17,11 @@ router.post('/:resourceId', (req, res) => {
   const resourceId = req.params.resourceId;
   getLikesByUserId(userId,resourceId)
     .then(data => {
-      console.log("Server data when liked: ", data);
       if (data.length !== 0) {
         return res.json({alreadyLiked: true});
       } else {
         addLike(userId, resourceId)
           .then(data => {
-            console.log("Server like data: ", data);
             res.json(data);
           });
       }
@@ -41,7 +39,6 @@ router.delete('/:resourceId', (req, res) => {
   const userId = req.session.user_id;
   deleteLikesByUserId(userId, resourceId)
     .then(data => {
-      console.log(data);
       res.json(data);
     })
     .catch(err => {

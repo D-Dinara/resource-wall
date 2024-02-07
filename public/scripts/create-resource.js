@@ -19,6 +19,7 @@ $(() => {
         <div>
         <label for="newResourceCategory">Select a category</label>
         <select name="newResourceCategory" id="newResourceCategory">
+          <option value="Uncategorized">Uncategorized</option>
           <option value="Javascript">Javascript</option>
           <option value="CSS">CSS</option>
           <option value="React">React</option>
@@ -77,7 +78,6 @@ $(() => {
       data: resourceData
     })
       .then(function(resource) {
-        console.log(resource);
         if (resource.isFilled) {
           $modal.addClass('hidden');
           window.location.reload();
