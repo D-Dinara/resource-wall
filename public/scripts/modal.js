@@ -1,4 +1,5 @@
 const renderComment = (comment) => {
+  if (!comment.commentor || !comment.text) return;
   return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
 }
 
@@ -48,11 +49,11 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <div class="modal_rating-form">
           <form id="rating-form" method="POST" action="/ratings/${resource.id}">
             <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
-              <option value="1.00">1</option>
-              <option value="2.00">2</option>
-              <option value="3.00">3</option>
-              <option value="4.00">4</option>
-              <option value="5.00">5</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
             </select>
             <button ${disabled} ${disabledIfRated} type="submit" id="rate-btn">${rateBtnText}</button>
           </form>
@@ -152,7 +153,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
 
         $(".modal_comments--list ul").append($comment);
       });
-  });
+    });
 
   closeModal();
 };
