@@ -44,7 +44,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
       <header class="modal_profile--title">
       <a href=${resource.url}> Visit Page </a>
         <h2>${resource.title}</h2>
-        <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5</span>
+        <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5.00</span>
         <div class="modal_rating-form">
           <form id="rating-form" method="POST" action="/ratings/${resource.id}">
             <select ${disabled} name="rateOption" id="rateOption">
@@ -108,9 +108,10 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
           $rateBtn.text("Change my rating");
           $("#rateOption").prop("disabled", true);
         }
-        const avgRating = parseFloat(data.avgrating);
+        const avgRating = data.avgrating ? parseFloat(data.avgrating).toFixed(2) : "0.00";
+
         // Update the displayed rating
-        $("#rating-display").text(`Rating: ${avgRating.toFixed(2)} / 5.00`);
+        $("#rating-display").text(`Rating: ${avgRating} / 5.00`);
       });
   });
 
