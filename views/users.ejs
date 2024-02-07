@@ -14,8 +14,6 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/utility.css" />
   <link rel="stylesheet" href="/styles/edit-user-modal.css" />
-  <!-- <link rel="stylesheet" href="/styles/profile-page.css" /> -->
-
 
 
   <script src="/vendor/jquery-3.0.0.js"></script>
@@ -74,16 +72,22 @@
       </div>
     </div>
     <div id="user-resources" class="user-resources flex">
-      <!-- <h1>My Saved Resources</h1>
-      <select name="category" id="user-category-select">
-        <option value="0">Select All</option>
-        <option value="1">Javascript</option>
-        <option value="2">CSS</option>
-        <option value="3">React</option>
-        <option value="4">SQL</option>
-        <option value="5">Express</option>
-        <option value="6">Ruby</option>
-      </select> -->
+      <div class="user-resources-tabs flex">
+        <button id="user-resources_saved"><span class="user-resources-button-text">My Saved Resources</span></button>
+        <button id="user-resources_liked"><span class="user-resources-button-text">Liked Resources</span></button>
+      </div>
+      <div class="flex user-resources-category">
+        <label for="category">Select a category to sort:</label>
+        <select id="category" name="category" id="user-category-select">
+          <option value="0">Select All</option>
+          <option value="1">Javascript</option>
+          <option value="2">CSS</option>
+          <option value="3">React</option>
+          <option value="4">SQL</option>
+          <option value="5">Express</option>
+          <option value="6">Ruby</option>
+        </select>
+      </div>
       <div id="user-resources_display" class="gallery user-resources_display flex">
         <div id="resource_modal-container" class="modal modal_profile flex hidden">
           <!-- Append edit or view resource modals here -->
