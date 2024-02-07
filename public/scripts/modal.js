@@ -30,8 +30,7 @@ const closeModal = () => {
 const populateResourceModal = (appendingContainer, resource, comments, isLoggedin, isLiked, isRated, avgRating) => {
   const disabled = isLoggedin ? "" : "disabled";
   const likeBtnText = isLiked ? "Unlike" : "Like";
-  const disabledIfRated = isRated ? "disabled" : null;
-  const rateBtnText = isRated ? "Rated" : "Rate";
+  const rateBtnText = isRated ? "Change my rating" : "Rate";
 
   $(appendingContainer).removeClass('hidden');
 
@@ -48,14 +47,14 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5</span>
         <div class="modal_rating-form">
           <form id="rating-form" method="POST" action="/ratings/${resource.id}">
-            <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
+            <select ${disabled} name="rateOption" id="rateOption">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-            <button ${disabled} ${disabledIfRated} type="submit" id="rate-btn">${rateBtnText}</button>
+            <button ${disabled} type="submit" id="rate-btn">${rateBtnText}</button>
           </form>
         </div>
         <div class="modal_likes-form">
@@ -94,19 +93,19 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
     event.preventDefault();
     const rateOption = $(this).serialize();
     const $rateBtn = $(this).find("#rate-btn");
-    const isAlreadyRated = $rateBtn.text() === "Rated";
+    const isAlreadyRated = $rateBtn.text() === "Change my rating";
 
     $.ajax({
       url: $(this).attr("action"),
-      method: "POST",
+      method: isAlreadyRated ? "DELETE" : "POST",
       data: rateOption
     })
       .then(function (data) {
         if (isAlreadyRated) {
           $rateBtn.text("Rate");
+          $("#rateOption").prop("disabled", false);
         } else {
-          $rateBtn.text("Rated");
-          $rateBtn.prop("disabled", true);
+          $rateBtn.text("Change my rating");
           $("#rateOption").prop("disabled", true);
         }
         const avgRating = parseFloat(data.avgrating);
