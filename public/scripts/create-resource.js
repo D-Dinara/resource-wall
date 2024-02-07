@@ -2,6 +2,7 @@ $(() => {
 
   const renderCreateResourceModal = function() {
     const $createResourceModal = $(`
+    <div class="modal_inner modal_profile--inner">
       <h3>Create a resource</h3>
       <form id="create-resource-form" method="POST" action="/resources">
         <div>
@@ -33,8 +34,11 @@ $(() => {
           <input id="newThumbnail" name="newThumbnail" placeholder="Enter the resource thumbnail URL" type="text">
         </div>
         <p class="hidden-err-msg">Please, fill all the required fields</p>
-        <button type="submit">Submit</button>
+        <div class="form_button--container">
+          <button type="submit">Submit</button>
+        </div>
       </form>
+      </div>
     `);
     $("#resource_modal-container").empty();
     $("#resource_modal-container").removeClass('hidden');
