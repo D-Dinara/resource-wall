@@ -4,4 +4,5 @@ VALUES ('Javascript'),
        ('React'),
        ('SQL'),
        ('Express'),
-       ('Ruby');
+       ('Ruby'),
+       ('Uncategorized');
