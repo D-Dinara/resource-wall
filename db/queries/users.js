@@ -50,4 +50,4 @@ const editUser = (id, formData) => {
     .catch(error => console.log("editUser error", error));
 };
 
-module.exports = { getUsers, getResourcesByUserId, editUser };
+module.exports = { getUsers, getResourcesByUserId, editUser, getLikesByUserId };
