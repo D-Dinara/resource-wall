@@ -24,8 +24,9 @@ const getResourcesByUserId = (id) => {
 const getLikesByUserId = (id) => {
   const values = [id];
   const queryText = `
-    SELECT *
+    SELECT likes.id as likes_id, resources.*
     FROM likes
+    JOIN resources ON resources.id = resource_id
     WHERE owner_id = $1
   `;
   return db.query(queryText, values)

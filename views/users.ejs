@@ -113,23 +113,24 @@
           <% } %>
             <!-- Liked resources -->
             <% for (let like of likes) { %>
-              <div id="<%= like.id %>" class="liked flex resource-item category_id-XX">
-                <div class="resource-item--inner flex">
-                  <h3>
-                    XX
-                  </h3>
-                  <div class="image-container">
-                    <img src="XX" />
-                    <p class="description">
+              <% console.log(like) %>
+                <div id="<%= like.id %>" class="liked flex resource-item category_id-XX">
+                  <div class="resource-item--inner flex">
+                    <h3>
                       XX
-                    </p>
+                    </h3>
+                    <div class="image-container">
+                      <img src="XX" />
+                      <p class="description">
+                        XX
+                      </p>
+                    </div>
+                  </div>
+                  <div class="resource-buttons">
+                    <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
                   </div>
                 </div>
-                <div class="resource-buttons">
-                  <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
-                </div>
-              </div>
-              <% } %>
+                <% } %>
       </div>
     </div>
     <!-- Footer partial here -->
