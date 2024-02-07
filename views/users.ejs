@@ -93,31 +93,40 @@
           <!-- Append edit or view resource modals here -->
         </div>
         <% for (let resource of resources) { %>
-          <% let owned=resource.creator_id===user.id ? true : false %>
-            <% let resourceId=resource.resource_id%>
-              <div id="<%= resourceId %>" class="flex resource-item category_id-<%=resource.category_id%>">
+          <div id="<%= resource.id %>" class="owned flex resource-item category_id-<%=resource.category_id%>">
+            <div class="resource-item--inner flex">
+              <h3>
+                <%= resource.title %>
+              </h3>
+              <div class="image-container">
+                <img src="<%= resource.thumbnail_url %>" />
+                <p class="description">
+                  <%= resource.description %>
+                </p>
+              </div>
+            </div>
+            <div class="resource-buttons">
+              <button id="delete_<%= resource.id %>" class="btn_delete">Delete</button>
+              <button id="edit_<%= resource.id %>" class="btn_edit">Edit</button>
+            </div>
+          </div>
+          <% } %>
+            <!-- Liked resources -->
+            <% for (let like of likes) { %>
+              <div id="<%= like.id %>" class="liked flex resource-item category_id-XX">
                 <div class="resource-item--inner flex">
                   <h3>
-                    <%= resource.title %>
+                    XX
                   </h3>
                   <div class="image-container">
-                    <img src="<%= resource.thumbnail_url %>" />
+                    <img src="XX" />
                     <p class="description">
-                      <%= resource.description %>
+                      XX
                     </p>
                   </div>
                 </div>
                 <div class="resource-buttons">
-                  <!--
-                  If the resource is owned, the id should be for the resources table
-                  Otherwise, it should be for the likes table
-                -->
-                  <% if (owned) { %>
-                    <button id="delete_<%= resourceId %>" class="btn_delete">Delete</button>
-                    <button id="edit_<%= resourceId %>" class="btn_edit">Edit</button>
-                    <% } else { %>
-                      <button id="unlike_<%= resource.likes_id %>" class="btn_unlike">Unlike</button>
-                      <% } %>
+                  <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
                 </div>
               </div>
               <% } %>
