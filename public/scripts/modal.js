@@ -31,6 +31,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
   const disabled = isLoggedin ? "" : "disabled";
   const likeBtnText = isLiked ? "Unlike" : "Like";
   const rateBtnText = isRated ? "Change my rating" : "Rate";
+  const disabledIfRated = isRated ? "disabled" : "";
 
   $(appendingContainer).removeClass('hidden');
 
@@ -47,7 +48,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <span id="rating-display" class="modal_profile--rating">Rating: ${avgRating} / 5.00</span>
         <div class="modal_rating-form">
           <form id="rating-form" method="POST" action="/ratings/${resource.id}">
-            <select ${disabled} name="rateOption" id="rateOption">
+            <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
