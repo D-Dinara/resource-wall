@@ -24,6 +24,7 @@
   <script defer type="module" src="/scripts/modal.js"></script>
   <script defer type="module" src="/scripts/resources.js"></script>
   <script defer type="module" src="/scripts/edit-modal.js"></script>
+  <script defer type="module" src="/scripts/create-resource.js"></script>
 
 </head>
 
@@ -113,24 +114,23 @@
           <% } %>
             <!-- Liked resources -->
             <% for (let like of likes) { %>
-              <% console.log(like) %>
-                <div id="<%= like.id %>" class="liked flex resource-item category_id-XX">
-                  <div class="resource-item--inner flex">
-                    <h3>
-                      XX
-                    </h3>
-                    <div class="image-container">
-                      <img src="XX" />
-                      <p class="description">
-                        XX
-                      </p>
-                    </div>
-                  </div>
-                  <div class="resource-buttons">
-                    <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
+              <div id="<%= like.likes_id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
+                <div class="resource-item--inner flex">
+                  <h3>
+                    <%= like.title %>
+                  </h3>
+                  <div class="image-container">
+                    <img src="<%= like.thumbnail_url %>" />
+                    <p class="description">
+                      <%= like.description %>
+                    </p>
                   </div>
                 </div>
-                <% } %>
+                <div class="resource-buttons">
+                  <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
+                </div>
+              </div>
+              <% } %>
       </div>
     </div>
     <!-- Footer partial here -->
