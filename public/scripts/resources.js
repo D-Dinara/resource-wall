@@ -16,9 +16,10 @@ $(() => {
         const isLiked = responseData.isLiked;
         const isRated = responseData.isRated;
         const isLoggedin = responseData.userId;
+        const isOwner = responseData.isOwner;
         const ratingObj = responseData.rating;
         const avgRating = ratingObj.avgrating ? parseFloat(ratingObj.avgrating).toFixed(2) : "0.00";
-        populateResourceModal("#resource_modal-container", resource[0], comments, isLoggedin, isLiked, isRated, avgRating);
+        populateResourceModal("#resource_modal-container", resource[0], comments, isLoggedin, isLiked, isRated, isOwner, avgRating);
       },
       error: function (error) {
         console.error("Error fetching resource details:", error);

@@ -27,12 +27,13 @@ const closeModal = () => {
  */
 
 
-const populateResourceModal = (appendingContainer, resource, comments, isLoggedin, isLiked, isRated, avgRating) => {
+const populateResourceModal = (appendingContainer, resource, comments, isLoggedin, isLiked, isRated, isOwner, avgRating) => {
   const disabled = isLoggedin ? "" : "disabled";
   const likeBtnText = isLiked ? "Unlike" : "Like";
   const rateBtnText = isRated ? "Change my rating" : "Rate";
   const disabledIfRated = isRated ? "disabled" : "";
   const hiddenIfLoggedIn = isLoggedin ? "hidden" : "";
+  const disabledIfOwner = isOwner ? "disabled" : "";
 
   $(appendingContainer).removeClass('hidden');
 
@@ -63,7 +64,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
                 </form>
                 <div class="modal_likes-form">
                   <form id="likes-form" method="POST" action="/likes/${resource.id}">
-                    <button ${disabled} type="submit" id="like-btn" class="btn">${likeBtnText}</button>
+                    <button ${disabled} ${disabledIfOwner} type="submit" id="like-btn" class="btn">${likeBtnText}</button>
                   </form>
                 </div>
                 </div>
