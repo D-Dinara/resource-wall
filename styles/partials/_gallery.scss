@@ -24,12 +24,17 @@
       cursor: pointer;
     }
 
-    &--title,
-    &--buttons{
+    &--title{
       height: 8%;
     }
   }
 
+  .resource-buttons{
+    text-align: center;
+    .btn{
+      width: 75px;
+    }
+  }
   .image-container{
     width: 100%;
     height: 80%;

@@ -103,7 +103,7 @@
                   </p>
                 </div>
               </div>
-              <div class="resource-buttons">
+              <div class="resource-buttons ">
                 <button id="delete_<%= resource.id %>" class="btn_delete btn">Delete</button>
                 <button id="edit_<%= resource.id %>" class="btn_edit btn">Edit</button>
               </div>
@@ -112,7 +112,7 @@
               <!-- Liked resources -->
               <% for (let like of likes) { %>
                 <div id="<%= like.likes_id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
-                  <div class="resource-item--inner flex">
+                  <div class="resource-item--inner ">
                     <h3>
                       <%= like.title %>
                     </h3>
