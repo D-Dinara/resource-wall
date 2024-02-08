@@ -24,7 +24,7 @@ router.get('/:id?', (req, res) => {
         return res.render('users', templateVars);
       });
   } else {
-    res.status(404).send("You must be logged in to access this page");
+    res.render('error');
   }
 });
 
