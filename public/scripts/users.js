@@ -57,8 +57,7 @@ $(document).ready(() => {
   const notSelected = $('.user-resources-tabs').find('.selected').siblings().attr('id').split('_').pop();
   $(`.${notSelected}`).hide();
 
-  $('.user-resources-tabs button').on('click', function (e) {
-    e.preventDefault();
+  $('.user-resources-tabs a').on('click', function (e) {
     $(this).addClass('selected');
     $(this).siblings().removeClass('selected');
   })

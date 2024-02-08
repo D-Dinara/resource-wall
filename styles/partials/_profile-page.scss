@@ -20,26 +20,28 @@
       align-items: center;
       width: 100vw;
       margin-bottom: 0 24px;
-      button{
-        width: 250px;
-        padding: 7px 15px;
-        font-size: 20px;
-        font-weight: 600;
-        margin: 0 20px;
-        }
-
-        .selected,
-        button:hover{
-          background-color: $alt;
-          color: $light;
-          .user-resources-button-text{
-            &::after{
-              display: none;
-            }
-          }
-        }
 
     }
+    &-button{
+      width: 250px;
+      padding: 7px 15px;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 20px;
+      text-align: center;
+      color: $dark;
+      }
+
+      .selected,
+      &-button:hover{
+        background-color: $alt;
+        color: $light;
+        .user-resources-button-text{
+          &::after{
+            display: none;
+          }
+        }
+      }
     &-button-text{
       position: relative;
       &::after{
