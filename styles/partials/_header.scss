@@ -5,6 +5,7 @@ header{
   position: fixed;
   z-index: 90;
   width: 100vw;
+  box-shadow: 2px 2px 5px 1px $dark;
   .nav{
     &bar{
       width: 100%;
