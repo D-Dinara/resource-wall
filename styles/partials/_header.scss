@@ -58,14 +58,32 @@ header{
       &-form{
         width: 100%;
         align-items: center;
-        border: 2px solid $alt;
+        border: 3px solid $dark;
         border-radius: 10px;
+        background-color: $light;
 
         input{
           width: 100%;
-          padding: 10px;
-          border: none;
           border-radius: 10px;
+          &:hover{
+            cursor: text;
+          }
+        }
+
+        select{
+          &:hover{
+            cursor: pointer;
+          }
+        }
+
+        input, select{
+          font-size: 16px;
+          border: none;
+          padding: 10px;
+          &:focus-within{
+            border: none;
+            outline: none;
+          }
         }
       }
 
