@@ -54,7 +54,14 @@ $(document).ready(() => {
       .catch(error => console.log("Form submit error", error));
   });
 
-  $('.liked').hide();
+  const notSelected = $('.user-resources-tabs').find('.selected').siblings().attr('id').split('_').pop();
+  $(`.${notSelected}`).hide();
+
+  $('.user-resources-tabs button').on('click', function (e) {
+    e.preventDefault();
+    $(this).addClass('selected');
+    $(this).siblings().removeClass('selected');
+  })
 
   $('#user-resources_liked').on('click', function (e) {
     e.preventDefault();
