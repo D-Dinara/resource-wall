@@ -6,7 +6,7 @@ $(document).ready(() => {
     console.log(resourceId);
     $.ajax(`/resources/${resourceId}`, { method: "DELETE" })
       .then(results => results)
-      .then(() => window.location.reload())
+      .then(() => $(this).parent().parent().hide())
       .catch(error => console.log("deleting resource error", error));
   });
 });

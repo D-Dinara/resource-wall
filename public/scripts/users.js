@@ -1,4 +1,11 @@
 $(document).ready(() => {
+  const pageAnchor = $(location).attr('href').split('#').pop();
+
+  // $(`#${pageAnchor}`).trigger('click');
+  setTimeout(() => {
+    document.getElementById(pageAnchor).click();
+  }, 100);
+
   // display edit user modal on button click
   $('#edit_user').on('click', function (e) {
     e.preventDefault();
@@ -52,5 +59,26 @@ $(document).ready(() => {
       .then(response => response)
       .then(() => window.location.reload())
       .catch(error => console.log("Form submit error", error));
+  });
+
+  // determine which page elements to hide on page load
+  const notSelected = $('.user-resources-tabs').find('.selected').siblings().attr('id').split('_').pop();
+  $(`.${notSelected}`).hide();
+
+  // toggle tabs
+  $('.user-resources-tabs a').on('click', function (e) {
+    $(this).addClass('selected');
+    $(this).siblings().removeClass('selected');
+  })
+
+  // switch which resources are hidden or shown
+  $('#user-resources_liked').on('click', function (e) {
+    $('.liked').fadeIn(400);
+    $('.owned').hide();
+  });
+
+  $('#user-resources_owned').on('click', function (e) {
+    $('.owned').fadeIn(400);
+    $('.liked').hide();
   });
 });
