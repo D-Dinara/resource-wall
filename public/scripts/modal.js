@@ -32,6 +32,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
   const likeBtnText = isLiked ? "Unlike" : "Like";
   const rateBtnText = isRated ? "Change my rating" : "Rate";
   const disabledIfRated = isRated ? "disabled" : "";
+  const hiddenIfLoggedIn = isLoggedin ? "hidden" : "";
 
   $(appendingContainer).removeClass('hidden');
 
@@ -56,6 +57,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
                 <option value="4">4</option>
                 <option value="5">5</option>
                 </select>
+                <p id="unregistered-user-message" class="${hiddenIfLoggedIn}">Please, login to like, rate and comment</p>
                 <div class="flex modal_buttons">
                 <button ${disabled} type="submit" id="rate-btn" class="btn">${rateBtnText}</button>
                 </form>
