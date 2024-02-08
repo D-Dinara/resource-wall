@@ -54,22 +54,23 @@ $(document).ready(() => {
       .catch(error => console.log("Form submit error", error));
   });
 
+  // determine which page elements to hide on page load
   const notSelected = $('.user-resources-tabs').find('.selected').siblings().attr('id').split('_').pop();
   $(`.${notSelected}`).hide();
 
+  // toggle tabs
   $('.user-resources-tabs a').on('click', function (e) {
     $(this).addClass('selected');
     $(this).siblings().removeClass('selected');
   })
 
+  // switch which resources are hidden or shown
   $('#user-resources_liked').on('click', function (e) {
-    e.preventDefault();
     $('.liked').fadeIn(400);
     $('.owned').hide();
   });
 
   $('#user-resources_owned').on('click', function (e) {
-    e.preventDefault();
     $('.owned').fadeIn(400);
     $('.liked').hide();
   });
