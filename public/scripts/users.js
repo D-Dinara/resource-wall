@@ -54,17 +54,17 @@ $(document).ready(() => {
       .catch(error => console.log("Form submit error", error));
   });
 
-  $('.liked').hide();
+  // $('.liked').hide();
 
-  $('#user-resources_liked').on('click', function (e) {
-    e.preventDefault();
-    $('.liked').fadeIn(400);
-    $('.owned').hide();
-  });
+  // $('#user-resources_liked').on('click', function (e) {
+  //   e.preventDefault();
+  //   $('.liked').fadeIn(400);
+  //   $('.owned').hide();
+  // });
 
-  $('#user-resources_owned').on('click', function (e) {
-    e.preventDefault();
-    $('.owned').fadeIn(400);
-    $('.liked').hide();
-  });
+  // $('#user-resources_owned').on('click', function (e) {
+  //   e.preventDefault();
+  //   $('.owned').fadeIn(400);
+  //   $('.liked').hide();
+  // });
 });
