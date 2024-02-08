@@ -1,8 +1,6 @@
 @use '../variables.scss' as *;
 
 footer {
-  // position: fixed;
-  // bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -11,6 +9,7 @@ footer {
   height: 10vh;
   z-index: 90;
   box-shadow: 3px 3px 6px 2px $dark;
+  margin-top: 40px;
   p{
     font-size: 12px;
     display: inline-block;
