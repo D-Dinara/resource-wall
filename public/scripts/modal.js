@@ -39,11 +39,12 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
 
   $(appendingContainer).append(`
   <div class="modal--inner flex">
-    <button id="modal_close" class="modal_close">X</button>
-    <div class="modal_thumbnail">
-      <img src="${resource.thumbnail_url}" />
-    </div>
-    <div class="modal--rendered">
+  <button id="modal_close" class="modal_close">X</button>
+  <div class="modal_thumbnail">
+  <img src="${resource.thumbnail_url}" />
+  </div>
+  <div class="modal--rendered">
+  <div class="modal--buffer"></div>
       <header class="modal_title">
         <a target="_blank" href=${resource.url} class="modal_url"> Visit Page </a>
         <h2>${resource.title}</h2>
