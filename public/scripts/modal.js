@@ -36,12 +36,12 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
   $(appendingContainer).removeClass('hidden');
 
   $(appendingContainer).append(`
-  <div class="modal_profile--inner modal_container--inner flex">
+  <div class="modal--inner flex">
     <button id="modal_close" class="modal_close">X</button>
     <div class="modal_thumbnail">
       <img src="${resource.thumbnail_url}" />
     </div>
-    <div class="modal_profile--rendered">
+    <div class="modal--rendered">
       <header class="modal_profile--title">
       <a href=${resource.url}> Visit Page </a>
         <h2>${resource.title}</h2>
@@ -155,7 +155,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
 
         $(".modal_comments--list ul").append($comment);
       });
-    });
+  });
 
   closeModal();
 };
