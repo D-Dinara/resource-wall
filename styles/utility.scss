@@ -19,10 +19,12 @@
   margin-top: 15px;
   transition: all 300ms ease-out;
 
-  &:hover{
-    border-color: $alt;
-    color: $light;
-    background: $alt;
+  &:not(:disabled) {
+    &:hover {
+      border-color: $alt;
+      color: $light;
+      background: $alt;
+    }
   }
 }
 
