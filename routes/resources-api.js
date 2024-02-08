@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
       const isRated = ratings.length !== 0 ? true : false;
       const creator_id = resource[0].creator_id;
       const isOwner = creator_id == userId ? true : false;
-     
+
       const responseData = {
         resource: resource,
         userId: userId,
@@ -52,16 +52,14 @@ router.post('/', (req, res) => {
     return res.status(403).send("You need to be logged in to perform this action\n");
   }
   const {newTitle, newDescription, newUrl, newResourceCategory, newThumbnail} = req.body;
-  if (!newTitle || !newDescription || !newUrl) {
-    return res.json({isFilled: false});
-  }
+
   let thumbnail = newThumbnail === "" ? '../assets/no-image.png' : newThumbnail;
 
   getCategoryByTopic(newResourceCategory)
     .then(data => {
       addResource(newTitle, newDescription, newUrl, thumbnail, userId, data.category_id)
         .then(data => {
-          res.json({data, isFilled: true});
+          res.json({data});
         });
     })
     .catch(err => {

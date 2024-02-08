@@ -96,23 +96,26 @@ $(() => {
   $("#resource_modal-container").on("submit", "#create-resource-form", function (event) {
     event.preventDefault();
     const $modal = $(this).closest('.modal');
-    const resourceData = $(this).serialize();
-    $.ajax({
-      url: "/resources",
-      method: "POST",
-      data: resourceData
-    })
-      .then(function (resource) {
-        if (resource.isFilled) {
-          $modal.addClass('hidden');
-          window.location.reload();
-        } else {
-          $("#newTitle").addClass("red-required");
-          $("#newDescription").addClass("red-required");
-          $("#newUrl").addClass("red-required");
-          $(".hidden-err-msg").slideDown();
-        }
+    const newTitle = $("#newTitle").val();
+    const newDescription = $("#newDescription").val();
+    const newUrl = $("#newUrl").val();
+
+    if (!newTitle || !newDescription || !newUrl) {
+      $("#newTitle").addClass("red-required");
+      $("#newDescription").addClass("red-required");
+      $("#newUrl").addClass("red-required");
+      $(".hidden-err-msg").slideDown();
+    } else {
+      const resourceData = $(this).serialize();
+      $.ajax({
+        url: "/resources",
+        method: "POST",
+        data: resourceData
       })
-      .catch(error => console.log("rendering resource error", error));
+        .then(function () {
+          window.location.reload();
+        })
+        .catch(error => console.log("rendering resource error", error));
+    }
   });
 });

@@ -51,6 +51,7 @@ $(document).ready(() => {
                 <option value="6">Ruby</option>
               </select>
             </div>
+          <p class="hidden-err-msg">Please, fill all the required fields</p>
           <div class="form_button--container">
             <button type="submit" class="btn">Submit</button>
           </div>
@@ -72,7 +73,16 @@ $(document).ready(() => {
         category_id: $(e.target).find('#edit_category').val()
       };
 
-      submitFormRequest(id, formData);
+      if (!formData.title || !formData.description || !formData.url) {
+        $(e.target).find('#title').addClass("red-required");
+        $(e.target).find('#description').addClass("red-required");
+        $(e.target).find('#url').addClass("red-required");
+        $(".hidden-err-msg").slideDown();
+
+      } else {
+        submitFormRequest(id, formData);
+      }
+
     })
   };
 
