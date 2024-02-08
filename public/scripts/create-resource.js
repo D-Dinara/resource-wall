@@ -3,7 +3,7 @@ $(() => {
   const renderCreateResourceModal = function () {
     const $createResourceModal = $(`
     <div class="modal--inner modal-create flex">
-      <button id="modal_close" class="modal_close">X</button>
+      <button id="create_modal_close" class="modal_close">X</button>
       <div class="modal_thumbnail">
         <img src="../assets/create-icon.png" />
       </div>
@@ -50,7 +50,7 @@ $(() => {
     $("#resource_modal-container").removeClass('hidden');
     $("#resource_modal-container").append($createResourceModal);
 
-    $('#modal_close').on('click', function (e) {
+    $('#create_modal_close').on('click', function (e) {
       e.preventDefault();
       $(this).parent().parent().addClass('hidden');
       $(this).parent().parent().empty();
@@ -77,14 +77,14 @@ $(() => {
     $("#resource_modal-container").removeClass('hidden');
     $("#resource_modal-container").append(`
     <div class="modal--inner modal-create flex">
-      <button id="modal_close" class="modal_close">X</button>
+      <button id="create_modal_close" class="modal_close">X</button>
       <div class="modal_thumbnail">
         <img src="../assets/create-icon.png" />
       </div>
       <h2>You need to login to create a resource</h2>
     </div>
     `);
-    $('#modal_close').on('click', function (e) {
+    $('#create_modal_close').on('click', function (e) {
       e.preventDefault();
       $(this).parent().parent().addClass('hidden');
       $(this).parent().parent().empty();
@@ -95,7 +95,6 @@ $(() => {
   // Handle form submission
   $("#resource_modal-container").on("submit", "#create-resource-form", function (event) {
     event.preventDefault();
-    const $modal = $(this).closest('.modal');
     const newTitle = $("#newTitle").val();
     const newDescription = $("#newDescription").val();
     const newUrl = $("#newUrl").val();
