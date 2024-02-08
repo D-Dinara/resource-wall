@@ -1,6 +1,10 @@
 @use '../variables.scss' as *;
 
 header{
+  background-color: $main;
+  position: fixed;
+  z-index: 90;
+  width: 100vw;
   .nav{
     &bar{
       width: 100%;
@@ -22,6 +26,29 @@ header{
     &-link,
     &-btn {
       margin: 0 10px;
+      color: $light;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 600;
+      position: relative;
+      text-align: center;
+
+      &::after{
+        content: "";
+        width: 0;
+        height: 3px;
+        background-color: $light;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        transition: width 350ms ease-in-out;
+      }
+
+      &:hover{
+        &::after{
+          width: 100%;
+        }
+      }
     }
 
     &-search{
