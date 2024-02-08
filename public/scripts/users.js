@@ -51,13 +51,19 @@ $(document).ready(() => {
     };
     const userId = $(e.target).find('#user_id').val();
 
-    $.ajax(`/users/${userId}`, {
-      data: formData,
-      method: "PUT"
-    })
-      .then(response => response)
-      .then(() => window.location.reload())
-      .catch(error => console.log("Form submit error", error));
+    if (!formData.username || !formData.email) {
+      $("#username").addClass("red-required");
+      $("#user_email").addClass("red-required");
+      $(".hidden-err-msg").slideDown();
+    } else {
+      $.ajax(`/users/${userId}`, {
+        data: formData,
+        method: "PUT"
+      })
+        .then(response => response)
+        .then(() => window.location.reload())
+        .catch(error => console.log("Form submit error", error));
+    }
   });
 
   // determine which page elements to hide on page load
