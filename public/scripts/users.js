@@ -60,7 +60,8 @@ $(document).ready(() => {
     e.preventDefault();
     $('.liked').fadeIn(400);
     $('.owned').hide();
-  })
+  });
+
   $('#user-resources_owned').on('click', function (e) {
     e.preventDefault();
     $('.owned').fadeIn(400);
