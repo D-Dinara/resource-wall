@@ -17,6 +17,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+  console.log("inside put route", req.body);
   const resourceId = req.params.id;
   editResourceById(resourceId, req.body);
   res.status(201).send();
