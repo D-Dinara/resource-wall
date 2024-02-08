@@ -25,9 +25,11 @@ $(document).ready(() => {
   $('#user-category-select').on('change', function (e) {
     const categoryId = $(e.target).val();
     const allResources = $('#user-resources_display').find('.resource-item');
+    const hideLikedOrOwned = $('.selected').siblings().attr('id').split('_').pop();
     if (categoryId === "0") {
       $.each(allResources, function () {
         $(this).show();
+        $(`.${hideLikedOrOwned}`).hide();
       })
     } else {
       $.each(allResources, function () {
@@ -35,6 +37,7 @@ $(document).ready(() => {
           $(this).hide();
         } else {
           $(this).show();
+          $(`.${hideLikedOrOwned}`).hide();
         }
       });
     }
@@ -74,6 +77,8 @@ $(document).ready(() => {
   $('.user-resources-tabs a').on('click', function (e) {
     $(this).addClass('selected');
     $(this).siblings().removeClass('selected');
+    // reset category select to default when tab changes
+    $('#user-category-select').val('0');
   })
 
   // switch which resources are hidden or shown
