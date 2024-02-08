@@ -113,7 +113,6 @@ $(() => {
         data: resourceData
       })
         .then(function () {
-          $modal.addClass('hidden');
           window.location.reload();
         })
         .catch(error => console.log("rendering resource error", error));
