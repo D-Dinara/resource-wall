@@ -42,10 +42,10 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
       <img src="${resource.thumbnail_url}" />
     </div>
     <div class="modal--rendered">
-      <header class="modal_profile--title">
-      <a href=${resource.url}> Visit Page </a>
+      <header class="modal_title">
+        <a href=${resource.url} class="modal_url"> Visit Page </a>
         <h2>${resource.title}</h2>
-        <span id="rating-display" class="modal_profile--rating">Average Rating: ${avgRating} / 5.00</span>
+        <span id="rating-display" class="modal_rating">Average Rating: ${avgRating} / 5.00</span>
         <div class="modal_rating-form">
           <form id="rating-form" method="POST" action="/ratings/${resource.id}">
             <span>My rating: </span>
@@ -72,7 +72,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <section class="modal_comments">
           <div class="modal_comments--list">
             <ul>
-              ${comments.map(comment => renderComment(comment))}
+              ${comments.map(comment => renderComment(comment)).join("")}
             </ul>
           </div>
           <div class="modal_comments--form">
