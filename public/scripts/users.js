@@ -53,4 +53,17 @@ $(document).ready(() => {
       .then(() => window.location.reload())
       .catch(error => console.log("Form submit error", error));
   });
+
+  $('.liked').hide();
+
+  $('#user-resources_liked').on('click', function (e) {
+    e.preventDefault();
+    $('.liked').fadeIn(400);
+    $('.owned').hide();
+  })
+  $('#user-resources_owned').on('click', function (e) {
+    e.preventDefault();
+    $('.owned').fadeIn(400);
+    $('.liked').hide();
+  });
 });

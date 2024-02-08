@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getResourcesByUserId, editUser } = require('../db/queries/users');
+const { getResourcesByUserId, editUser, getLikesByUserId } = require('../db/queries/users');
 const { findUserById } = require('../db/queries/findUserById');
 
 router.get('/:id?', (req, res) => {
@@ -9,14 +9,17 @@ router.get('/:id?', (req, res) => {
   if (userId === pageId) {
     Promise.all([
       findUserById(userId),
-      getResourcesByUserId(userId)
+      getResourcesByUserId(userId),
+      getLikesByUserId(userId)
     ])
       .then(results => {
         const user = results[0];
         const resources = results[1];
+        const likes = results[2];
         const templateVars = {
           user: user,
-          resources: resources
+          resources: resources,
+          likes: likes
         };
         return res.render('users', templateVars);
       });

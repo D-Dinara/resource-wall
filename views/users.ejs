@@ -14,8 +14,6 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/utility.css" />
   <link rel="stylesheet" href="/styles/edit-user-modal.css" />
-  <!-- <link rel="stylesheet" href="/styles/profile-page.css" /> -->
-
 
 
   <script src="/vendor/jquery-3.0.0.js"></script>
@@ -27,6 +25,7 @@
   <script defer type="module" src="/scripts/modal.js"></script>
   <script defer type="module" src="/scripts/resources.js"></script>
   <script defer type="module" src="/scripts/edit-modal.js"></script>
+  <script defer type="module" src="/scripts/create-resource.js"></script>
 
 </head>
 
@@ -75,46 +74,61 @@
       </div>
     </div>
     <div id="user-resources" class="user-resources flex">
-      <!-- <h1>My Saved Resources</h1>
-      <select name="category" id="user-category-select">
-        <option value="0">Select All</option>
-        <option value="1">Javascript</option>
-        <option value="2">CSS</option>
-        <option value="3">React</option>
-        <option value="4">SQL</option>
-        <option value="5">Express</option>
-        <option value="6">Ruby</option>
-      </select> -->
+      <div class="user-resources-tabs flex">
+        <button id="user-resources_owned"><span class="user-resources-button-text">My Saved Resources</span></button>
+        <button id="user-resources_liked"><span class="user-resources-button-text">Liked Resources</span></button>
+      </div>
+      <div class="flex user-resources-category">
+        <label for="category">Select a category to sort:</label>
+        <select id="category" name="category" id="user-category-select">
+          <option value="0">Select All</option>
+          <option value="1">Javascript</option>
+          <option value="2">CSS</option>
+          <option value="3">React</option>
+          <option value="4">SQL</option>
+          <option value="5">Express</option>
+          <option value="6">Ruby</option>
+        </select>
+      </div>
       <div id="user-resources_display" class="gallery user-resources_display flex">
         <div id="resource_modal-container" class="modal modal_profile flex hidden">
           <!-- Append edit or view resource modals here -->
         </div>
         <% for (let resource of resources) { %>
-          <% let owned=resource.creator_id===user.id ? true : false %>
-            <% let resourceId=resource.resource_id%>
-              <div id="<%= resourceId %>" class="flex resource-item category_id-<%=resource.category_id%>">
+          <div id="<%= resource.id %>" class="owned flex resource-item category_id-<%=resource.category_id%>">
+            <div class="resource-item--inner flex">
+              <h3>
+                <%= resource.title %>
+              </h3>
+              <div class="image-container">
+                <img src="<%= resource.thumbnail_url %>" />
+                <p class="description">
+                  <%= resource.description %>
+                </p>
+              </div>
+            </div>
+            <div class="resource-buttons">
+              <button id="delete_<%= resource.id %>" class="btn_delete">Delete</button>
+              <button id="edit_<%= resource.id %>" class="btn_edit">Edit</button>
+            </div>
+          </div>
+          <% } %>
+            <!-- Liked resources -->
+            <% for (let like of likes) { %>
+              <div id="<%= like.likes_id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
                 <div class="resource-item--inner flex">
                   <h3>
-                    <%= resource.title %>
+                    <%= like.title %>
                   </h3>
                   <div class="image-container">
-                    <img src="<%= resource.thumbnail_url %>" />
+                    <img src="<%= like.thumbnail_url %>" />
                     <p class="description">
-                      <%= resource.description %>
+                      <%= like.description %>
                     </p>
                   </div>
                 </div>
                 <div class="resource-buttons">
-                  <!--
-                  If the resource is owned, the id should be for the resources table
-                  Otherwise, it should be for the likes table
-                -->
-                  <% if (owned) { %>
-                    <button id="delete_<%= resourceId %>" class="btn_delete">Delete</button>
-                    <button id="edit_<%= resourceId %>" class="btn_edit">Edit</button>
-                    <% } else { %>
-                      <button id="unlike_<%= resource.likes_id %>" class="btn_unlike">Unlike</button>
-                      <% } %>
+                  <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
                 </div>
               </div>
               <% } %>
