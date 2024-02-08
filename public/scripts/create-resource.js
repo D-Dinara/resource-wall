@@ -105,6 +105,7 @@ $(() => {
       .then(function (resource) {
         if (resource.isFilled) {
           $modal.addClass('hidden');
+          window.location.reload();
         } else {
           $("#newTitle").addClass("red-required");
           $("#newDescription").addClass("red-required");
@@ -112,7 +113,6 @@ $(() => {
           $(".hidden-err-msg").slideDown();
         }
       })
-      .then(() => window.location.reload())
       .catch(error => console.log("rendering resource error", error));
   });
 });
