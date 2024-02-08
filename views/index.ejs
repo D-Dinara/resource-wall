@@ -37,23 +37,26 @@
     <main>
       <h1>Resource Wall</h1>
       <div id="resources" class="gallery flex">
-        <% for (let resource of resources) { %>
-          <div class="resource-item resource flex" id="<%= resource.id %>">
-            <div class="resource-item--inner flex">
-              <div class="resource-item--title">
-                <h3>
-                  <%= resource.title %>
-                </h3>
-              </div>
-              <div class="image-container">
-                <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
-                <p class="description">
-                  <%= resource.description %>
-                </p>
-              </div>
-            </div>
-          </div>
+        <% if (!resources.length){ %>
+          <p class="error">No results found, please try again.</p>
           <% } %>
+            <% for (let resource of resources) { %>
+              <div class="resource-item resource flex" id="<%= resource.id %>">
+                <div class="resource-item--inner flex">
+                  <div class="resource-item--title">
+                    <h3>
+                      <%= resource.title %>
+                    </h3>
+                  </div>
+                  <div class="image-container">
+                    <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
+                    <p class="description">
+                      <%= resource.description %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <% } %>
       </div>
       <div id="resource_modal-container" class="hidden modal flex"></div>
       <!-- <div id="myModal" class="modal-container">

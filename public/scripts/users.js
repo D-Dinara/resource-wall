@@ -1,7 +1,6 @@
 $(document).ready(() => {
   const pageAnchor = $(location).attr('href').split('#').pop();
 
-  // $(`#${pageAnchor}`).trigger('click');
   setTimeout(() => {
     document.getElementById(pageAnchor).click();
   }, 100);
