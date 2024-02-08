@@ -36,7 +36,7 @@
       <h4>
         <%= user.username %>
       </h4>
-      <button id="edit_user" class="btn_user">Edit Profile</button>
+      <button id="edit_user" class="btn_user btn">Edit Profile</button>
       <div id="<%= user.id %>" class="modal modal_profile flex hidden">
         <div class="modal_inner modal_profile--inner flex">
           <button id="modal_close">X</button>
@@ -108,8 +108,8 @@
               </div>
             </div>
             <div class="resource-buttons">
-              <button id="delete_<%= resource.id %>" class="btn_delete">Delete</button>
-              <button id="edit_<%= resource.id %>" class="btn_edit">Edit</button>
+              <button id="delete_<%= resource.id %>" class="btn_delete btn">Delete</button>
+              <button id="edit_<%= resource.id %>" class="btn_edi btn">Edit</button>
             </div>
           </div>
           <% } %>
@@ -128,7 +128,7 @@
                   </div>
                 </div>
                 <div class="resource-buttons">
-                  <button id="unlike_<%= like.id %>" class="btn_delete">Unlike</button>
+                  <button id="unlike_<%= like.id %>" class="btn_delete btn">Unlike</button>
                 </div>
               </div>
               <% } %>
