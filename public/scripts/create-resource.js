@@ -1,13 +1,18 @@
 $(() => {
 
-  const renderCreateResourceModal = function() {
+  const renderCreateResourceModal = function () {
     const $createResourceModal = $(`
-    <div class="modal_inner modal_profile--inner">
-      <h3>Create a resource</h3>
+    <div class="modal--inner modal-create flex">
+      <button id="modal_close" class="modal_close">X</button>
+      <div class="modal_thumbnail">
+        <img src="../assets/create-icon.png" />
+      </div>
+      <div class="modal-form">
+      <h2>Create a resource</h2>
       <form id="create-resource-form" method="POST" action="/resources">
         <div>
           <label for="newTitle">Title</label>
-          <input id="newTitle" name="newTitle" type="text" placeholder="Enter the resource title">
+          <input id="newTitle" name="newTitle" type="text" placeholder="Title">
         </div>
         <div>
           <label for="newDescription">Description</label>
@@ -35,26 +40,28 @@ $(() => {
         </div>
         <p class="hidden-err-msg">Please, fill all the required fields</p>
         <div class="form_button--container">
-          <button type="submit">Submit</button>
+          <button type="submit" class="btn">Submit</button>
         </div>
       </form>
+      </div>
       </div>
     `);
     $("#resource_modal-container").empty();
     $("#resource_modal-container").removeClass('hidden');
     $("#resource_modal-container").append($createResourceModal);
+
+    $('#modal_close').on('click', function (e) {
+      e.preventDefault();
+      $(this).parent().parent().addClass('hidden');
+    });
   };
 
-  $("#create-btn").on("click", function(event) {
+  $("#create-btn").on("click", function (event) {
     event.preventDefault();
     $(this).siblings('.modal').removeClass('hidden');
     renderCreateResourceModal();
   });
 
-  $('#modal_close').on('click', function (e) {
-    e.preventDefault();
-    $(this).parent().parent().addClass('hidden');
-  });
 
   $('.modal').on('click', function (e) {
     if (e.target === e.currentTarget) {
@@ -62,7 +69,7 @@ $(() => {
     }
   });
 
-  $("#login-message").on("click", function(event) {
+  $("#login-message").on("click", function (event) {
     event.preventDefault();
     $(this).siblings('.modal').removeClass('hidden');
     $("#resource_modal-container").empty();
@@ -81,7 +88,7 @@ $(() => {
       method: "POST",
       data: resourceData
     })
-      .then(function(resource) {
+      .then(function (resource) {
         if (resource.isFilled) {
           $modal.addClass('hidden');
           window.location.reload();
