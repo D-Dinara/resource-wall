@@ -40,9 +40,11 @@
         <% for (let resource of resources) { %>
           <div class="resource-item resource flex" id="<%= resource.id %>">
             <div class="resource-item--inner flex">
-              <h3>
-                <%= resource.title %>
-              </h3>
+              <div class="resource-item--title">
+                <h3>
+                  <%= resource.title %>
+                </h3>
+              </div>
               <div class="image-container">
                 <img src="<%= resource.thumbnail_url %>" alt="Resource thumbnail image" class="thumbnail" />
                 <p class="description">
