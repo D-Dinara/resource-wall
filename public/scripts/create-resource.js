@@ -75,7 +75,20 @@ $(() => {
     $(this).siblings('.modal').removeClass('hidden');
     $("#resource_modal-container").empty();
     $("#resource_modal-container").removeClass('hidden');
-    $("#resource_modal-container").append(`<h3>You need to login to create a resource</h3>`);
+    $("#resource_modal-container").append(`
+    <div class="modal--inner modal-create flex">
+      <button id="modal_close" class="modal_close">X</button>
+      <div class="modal_thumbnail">
+        <img src="../assets/create-icon.png" />
+      </div>
+      <h2>You need to login to create a resource</h2>
+    </div>
+    `);
+    $('#modal_close').on('click', function (e) {
+      e.preventDefault();
+      $(this).parent().parent().addClass('hidden');
+      $(this).parent().parent().empty();
+    });
   });
 
 
