@@ -5,7 +5,10 @@ $(document).ready(() => {
     const likesId = $(this).attr('id').replace("unlike_", "");
     $.ajax(`/likes/${likesId}`, { method: "DELETE" })
       .then(results => results)
-      .then(() => window.location.reload())
+      .then(() => {
+        // window.location.reload();
+
+      })
       .catch(error => console.log("deleting resource error", error));
   });
 });
