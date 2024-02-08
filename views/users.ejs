@@ -31,11 +31,11 @@
 
 <body>
   <%- include('partials/_header') %>
-    <div id="user-profile" class="user-profile">
-      <img src="https://placekitten.com/200/200" alt="user's avatar" />
-      <span>
+    <div id="user-profile" class="user-profile flex">
+      <img src="../assets/user-avatar.png" alt="user's avatar" />
+      <h4>
         <%= user.username %>
-      </span>
+      </h4>
       <button id="edit_user" class="btn_user">Edit Profile</button>
       <div id="<%= user.id %>" class="modal modal_profile flex hidden">
         <div class="modal_inner modal_profile--inner flex">
