@@ -2,7 +2,9 @@ $(document).ready(() => {
   const pageAnchor = $(location).attr('href').split('#').pop();
 
   // $(`#${pageAnchor}`).trigger('click');
-
+  setTimeout(() => {
+    document.getElementById(pageAnchor).click();
+  }, 100);
 
   // display edit user modal on button click
   $('#edit_user').on('click', function (e) {
