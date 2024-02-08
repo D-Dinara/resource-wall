@@ -15,6 +15,7 @@ h1{
 
 h2 {
   font-size: 2rem;
+  margin: 0;
 }
 
 h3{
@@ -22,6 +23,7 @@ h3{
   text-wrap: pretty;
   line-height: 20px;
   min-height: 40px;
+  margin: 0;
 }
 
 h4{
@@ -31,5 +33,11 @@ h4{
 }
 
 p{
-  font-size: 1.4rem;
+  font-size: 16px;
+}
+
+ul, ol{
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

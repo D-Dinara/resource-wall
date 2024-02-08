@@ -1,6 +1,6 @@
 const renderComment = (comment) => {
   if (!comment.commentor || !comment.text) return;
-  return `<li class="comment">${comment.commentor}: ${comment.text}</li>`
+  return `<li class="comment"><span class="bold">${comment.commentor}:</span> ${comment.text}</li>`
 }
 
 const closeModal = () => {
@@ -43,33 +43,37 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
     </div>
     <div class="modal--rendered">
       <header class="modal_title">
-        <a href=${resource.url} class="modal_url"> Visit Page </a>
+        <a target="_blank" href=${resource.url} class="modal_url"> Visit Page </a>
         <h2>${resource.title}</h2>
         <span id="rating-display" class="modal_rating">Average Rating: ${avgRating} / 5.00</span>
         <div class="modal_rating-form">
-          <form id="rating-form" method="POST" action="/ratings/${resource.id}">
-            <span>My rating: </span>
-            <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <button ${disabled} type="submit" id="rate-btn">${rateBtnText}</button>
-          </form>
-        </div>
-        <div class="modal_likes-form">
-          <form id="likes-form" method="POST" action="/likes/${resource.id}">
-            <button ${disabled} type="submit" id="like-btn">${likeBtnText}</button>
-          </form>
-        </div>
+        <form id="rating-form" method="POST" action="/ratings/${resource.id}">
+        <span>My rating: </span>
+        <select ${disabled} ${disabledIfRated} name="rateOption" id="rateOption">
+        <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                </select>
+                <div class="flex modal_buttons">
+                <button ${disabled} type="submit" id="rate-btn" class="btn">${rateBtnText}</button>
+                </form>
+                <div class="modal_likes-form">
+                  <form id="likes-form" method="POST" action="/likes/${resource.id}">
+                    <button ${disabled} type="submit" id="like-btn" class="btn">${likeBtnText}</button>
+                  </form>
+                </div>
+                </div>
+                </div>
       </header>
       <body class="modal_body">
+      <h3> Description </h3>
         <section class="modal_description">
           <p>${resource.description}</p>
         </section>
         <section class="modal_comments">
+        <h3>Comments</h3>
           <div class="modal_comments--list">
             <ul>
               ${comments.map(comment => renderComment(comment)).join("")}
@@ -77,10 +81,10 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
           </div>
           <div class="modal_comments--form">
             <form id="comment-form" method="POST" action="/comments/${resource.id}">
-              <label for="comment-text">Leave a comment</label>
+              <label for="comment-text"><span class="bold">Leave a comment</span></label>
               <textarea ${disabled} name="commentText" id="comment-text"></textarea>
               <div>
-                <button ${disabled} type="submit">Add comment</button>
+                <button ${disabled} type="submit" class="btn">Add comment</button>
               </div>
             </form>
             </div>
