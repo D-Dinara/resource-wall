@@ -158,7 +158,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
     })
       .then(function ([user, newComment]) {
         const $comment = $(`
-          <li class="comment">${user.username}: ${newComment.text}</li>
+          <li class="comment"><span class="bold">${user.username}:</span> ${newComment.text}</li>
         `)
 
         $(".modal_comments--list ul").append($comment);
