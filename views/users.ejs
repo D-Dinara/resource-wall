@@ -31,112 +31,113 @@
 
 <body>
   <%- include('partials/_header') %>
-    <div id="user-profile" class="user-profile flex">
-      <img src="../assets/user-avatar.png" alt="user's avatar" />
-      <h4>
-        <%= user.username %>
-      </h4>
-      <button id="edit_user" class="btn_user btn">Edit Profile</button>
-      <div id="<%= user.id %>" class="modal flex hidden">
-        <div class="modal--inner flex">
-          <button id="modal_close" class="modal_close">X</button>
-          <div class="modal_thumbnail">
-            <img src="../assets/user-avatar.png" alt="user's avatar" />
-          </div>
-          <div class="user_form">
-            <h2>Edit Profile</h2>
-            <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
-              <div class="hidden">
-                <label for="user_id"></label>
-                <input id="user_id" type="number" placeholder="<%= user.id %>" disabled>
-              </div>
-              <div>
-                <label for="username">Username</label>
-                <input id="username" placeholder="<%= user.username %>" type="text">
-              </div>
-              <div>
-                <label for="first_name">First Name</label>
-                <input id="first_name" placeholder="<%= user.first_name %>" type="text">
-              </div>
-              <div>
-                <label for="last_name">Last Name</label>
-                <input id="last_name" placeholder="<%= user.last_name %>" type="text">
-              </div>
-              <div>
-                <label for="user_email">Email</label>
-                <input id="user_email" placeholder="<%= user.email %>" type="email">
-              </div>
-              <div class="form_button--container">
-                <button type="submit" class="btn">Submit</button>
-              </div>
-            </form>
+    <main>
+      <div id="user-profile" class="user-profile flex">
+        <img src="../assets/user-avatar.png" alt="user's avatar" />
+        <h4>
+          <%= user.username %>
+        </h4>
+        <button id="edit_user" class="btn_user btn">Edit Profile</button>
+        <div id="<%= user.id %>" class="modal flex hidden">
+          <div class="modal--inner flex">
+            <button id="modal_close" class="modal_close">X</button>
+            <div class="modal_thumbnail">
+              <img src="../assets/user-avatar.png" alt="user's avatar" />
+            </div>
+            <div class="user_form">
+              <h2>Edit Profile</h2>
+              <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
+                <div class="hidden">
+                  <label for="user_id"></label>
+                  <input id="user_id" type="number" placeholder="<%= user.id %>" disabled>
+                </div>
+                <div>
+                  <label for="username">Username</label>
+                  <input id="username" placeholder="<%= user.username %>" type="text">
+                </div>
+                <div>
+                  <label for="first_name">First Name</label>
+                  <input id="first_name" placeholder="<%= user.first_name %>" type="text">
+                </div>
+                <div>
+                  <label for="last_name">Last Name</label>
+                  <input id="last_name" placeholder="<%= user.last_name %>" type="text">
+                </div>
+                <div>
+                  <label for="user_email">Email</label>
+                  <input id="user_email" placeholder="<%= user.email %>" type="email">
+                </div>
+                <div class="form_button--container">
+                  <button type="submit" class="btn">Submit</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="user-resources" class="user-resources flex">
-      <div class="user-resources-tabs flex">
-        <button id="user-resources_owned"><span class="user-resources-button-text">My Saved Resources</span></button>
-        <button id="user-resources_liked"><span class="user-resources-button-text">Liked Resources</span></button>
-      </div>
-      <div class="flex user-resources-category">
-        <label for="category">Select a category to sort:</label>
-        <select id="category" name="category" id="user-category-select">
-          <option value="0">Select All</option>
-          <option value="1">Javascript</option>
-          <option value="2">CSS</option>
-          <option value="3">React</option>
-          <option value="4">SQL</option>
-          <option value="5">Express</option>
-          <option value="6">Ruby</option>
-        </select>
-      </div>
-      <div id="user-resources_display" class="gallery user-resources_display flex">
-        <div id="resource_modal-container" class="modal modal_profile flex hidden">
-          <!-- Append edit or view resource modals here -->
+      <div id="user-resources" class="user-resources flex">
+        <div class="user-resources-tabs flex">
+          <button id="user-resources_owned"><span class="user-resources-button-text">My Saved Resources</span></button>
+          <button id="user-resources_liked"><span class="user-resources-button-text">Liked Resources</span></button>
         </div>
-        <% for (let resource of resources) { %>
-          <div id="<%= resource.id %>" class="owned flex resource-item category_id-<%=resource.category_id%>">
-            <div class="resource-item--inner flex">
-              <h3>
-                <%= resource.title %>
-              </h3>
-              <div class="image-container">
-                <img src="<%= resource.thumbnail_url %>" />
-                <p class="description">
-                  <%= resource.description %>
-                </p>
+        <div class="flex user-resources-category">
+          <label for="category">Select a category to sort:</label>
+          <select id="category" name="category" id="user-category-select">
+            <option value="0">Select All</option>
+            <option value="1">Javascript</option>
+            <option value="2">CSS</option>
+            <option value="3">React</option>
+            <option value="4">SQL</option>
+            <option value="5">Express</option>
+            <option value="6">Ruby</option>
+          </select>
+        </div>
+        <div id="user-resources_display" class="gallery user-resources_display flex">
+          <div id="resource_modal-container" class="modal modal_profile flex hidden">
+            <!-- Append edit or view resource modals here -->
+          </div>
+          <% for (let resource of resources) { %>
+            <div id="<%= resource.id %>" class="owned flex resource-item category_id-<%=resource.category_id%>">
+              <div class="resource-item--inner flex">
+                <h3>
+                  <%= resource.title %>
+                </h3>
+                <div class="image-container">
+                  <img src="<%= resource.thumbnail_url %>" />
+                  <p class="description">
+                    <%= resource.description %>
+                  </p>
+                </div>
+              </div>
+              <div class="resource-buttons">
+                <button id="delete_<%= resource.id %>" class="btn_delete btn">Delete</button>
+                <button id="edit_<%= resource.id %>" class="btn_edi btn">Edit</button>
               </div>
             </div>
-            <div class="resource-buttons">
-              <button id="delete_<%= resource.id %>" class="btn_delete btn">Delete</button>
-              <button id="edit_<%= resource.id %>" class="btn_edi btn">Edit</button>
-            </div>
-          </div>
-          <% } %>
-            <!-- Liked resources -->
-            <% for (let like of likes) { %>
-              <div id="<%= like.likes_id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
-                <div class="resource-item--inner flex">
-                  <h3>
-                    <%= like.title %>
-                  </h3>
-                  <div class="image-container">
-                    <img src="<%= like.thumbnail_url %>" />
-                    <p class="description">
-                      <%= like.description %>
-                    </p>
+            <% } %>
+              <!-- Liked resources -->
+              <% for (let like of likes) { %>
+                <div id="<%= like.likes_id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
+                  <div class="resource-item--inner flex">
+                    <h3>
+                      <%= like.title %>
+                    </h3>
+                    <div class="image-container">
+                      <img src="<%= like.thumbnail_url %>" />
+                      <p class="description">
+                        <%= like.description %>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="resource-buttons">
+                    <button id="unlike_<%= like.id %>" class="btn_delete btn">Unlike</button>
                   </div>
                 </div>
-                <div class="resource-buttons">
-                  <button id="unlike_<%= like.id %>" class="btn_delete btn">Unlike</button>
-                </div>
-              </div>
-              <% } %>
+                <% } %>
+        </div>
       </div>
-    </div>
-    <!-- Footer partial here -->
-    <%- include('partials/_footer') %>
+      <%- include('partials/_footer') %>
+    </main>
 </body>
 
 </html>
