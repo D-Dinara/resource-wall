@@ -13,9 +13,10 @@
 
   &--inner{
     position: fixed;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
     background-color: $light;
-    width: 66%;
+    width: auto;
     height: auto;
     padding: 50px;
     border-radius: 30px;
@@ -51,10 +52,13 @@
   input{
     padding: 3px 5px;
     border-radius: 3px;
-    border: 1px $alt solid;
-
+    border: 2px $alt solid;
+    font-size: 16px;
+    &:not([type="email"]){
+      text-transform: capitalize;
+    }
     &:hover{
-      cursor: pointer;
+      cursor: text;
     }
   }
 
