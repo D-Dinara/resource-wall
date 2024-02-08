@@ -21,6 +21,9 @@ html {
     calc((var(--s) - var(--t))/2) calc((var(--s) - var(--t))/2)/var(--s) calc(5*var(--s)/4);
 }
 
+main{
+  padding-top: 150px;
+}
 
 a, button{
   text-decoration: none;
