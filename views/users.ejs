@@ -37,36 +37,37 @@
         <%= user.username %>
       </h4>
       <button id="edit_user" class="btn_user btn">Edit Profile</button>
-      <div id="<%= user.id %>" class="modal modal_profile flex hidden">
-        <div class="modal_inner modal_profile--inner flex">
-          <button id="modal_close">X</button>
-          <div class="user_image">
-            <img src="https://placekitten.com/200/200" alt="user's avatar" />
+      <div id="<%= user.id %>" class="modal flex hidden">
+        <div class="modal--inner flex">
+          <button id="modal_close" class="modal_close">X</button>
+          <div class="modal_thumbnail">
+            <img src="../assets/user-avatar.png" alt="user's avatar" />
           </div>
           <div class="user_form">
+            <h2>Edit Profile</h2>
             <form id="user_form-edit" method="PUT" action="/users/<%= user.id %>">
               <div class="hidden">
                 <label for="user_id"></label>
-                <input id="user_id" type="number" value="<%= user.id %>" disabled>
+                <input id="user_id" type="number" placeholder="<%= user.id %>" disabled>
               </div>
               <div>
                 <label for="username">Username</label>
-                <input id="username" value="<%= user.username %>" type="text">
+                <input id="username" placeholder="<%= user.username %>" type="text">
               </div>
               <div>
                 <label for="first_name">First Name</label>
-                <input id="first_name" value="<%= user.first_name %>" type="text">
+                <input id="first_name" placeholder="<%= user.first_name %>" type="text">
               </div>
               <div>
                 <label for="last_name">Last Name</label>
-                <input id="last_name" value="<%= user.last_name %>" type="text">
+                <input id="last_name" placeholder="<%= user.last_name %>" type="text">
               </div>
               <div>
                 <label for="user_email">Email</label>
-                <input id="user_email" value="<%= user.email %>" type="email">
+                <input id="user_email" placeholder="<%= user.email %>" type="email">
               </div>
               <div class="form_button--container">
-                <button type="submit">Submit</button>
+                <button type="submit" class="btn">Submit</button>
               </div>
             </form>
           </div>
