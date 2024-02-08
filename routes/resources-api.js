@@ -25,11 +25,15 @@ router.get('/:id', (req, res) => {
     .then(([resource, likes, ratings, rating]) => {
       const isLiked = likes.length !== 0 ? true : false;
       const isRated = ratings.length !== 0 ? true : false;
+      const creator_id = resource[0].creator_id;
+      const isOwner = creator_id == userId ? true : false;
+     
       const responseData = {
         resource: resource,
         userId: userId,
         isLiked: isLiked,
         isRated: isRated,
+        isOwner: isOwner,
         rating: rating
       };
 
