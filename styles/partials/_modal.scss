@@ -132,6 +132,9 @@
   &_comments--list{
     overflow-y: scroll;
     overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+
     text-wrap: pretty;
     margin: 12px 0;
     border-bottom: 1px solid $grey;
