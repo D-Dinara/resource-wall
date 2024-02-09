@@ -119,7 +119,7 @@
           <% } %>
             <!-- Liked resources -->
             <% for (let like of likes) { %>
-              <div id="<%= like.likes_id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
+              <div id="<%= like.id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
                 <div class="resource-item--inner ">
                   <h3>
                     <%= like.title %>
