@@ -11,7 +11,8 @@ $(() => {
         const resource = responseData.resource;
         const comments = resource.map(comment => ({
           text: comment.text,
-          commentor: comment.username
+          commentor: comment.username,
+          date: comment.date_posted
         }));
         const isLiked = responseData.isLiked;
         const isRated = responseData.isRated;

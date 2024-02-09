@@ -2,7 +2,7 @@ const db = require('../connection');
 
 const getResourceById = (id) => {
   let query = `
-  SELECT title, description, thumbnail_url, resources.id AS id, comments.id as commentId, text, username, url, rating, creator_id
+  SELECT title, description, thumbnail_url, resources.id AS id, comments.id as commentId, text, username, url, rating, creator_id, date_posted
   FROM resources
   LEFT JOIN comments
   ON resources.id = resource_id
