@@ -1,6 +1,19 @@
+const getDate = (timestamp) => {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
+}
+
 const renderComment = (comment) => {
   if (!comment.commentor || !comment.text) return;
-  return `<li class="comment"><span class="bold">${comment.commentor}:</span> ${comment.text}</li>`
+  return `
+  <li class="comment"><span class="bold">
+  ${comment.commentor}:</span> ${comment.text}
+  <p class="timestamp">Date posted: ${getDate(comment.date)}</p>
+  </li>`
 }
 
 const closeModal = () => {
@@ -158,10 +171,13 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
     })
       .then(function ([user, newComment]) {
         const $comment = $(`
-          <li class="comment"><span class="bold">${user.username}:</span> ${newComment.text}</li>
+          <li class="comment">
+          <span class="bold">${user.username}:</span> ${newComment.text}
+          <p class="timestamp">Date posted: ${getDate(newComment.date_posted)}</p>
+          </li>
         `)
-
         $(".modal_comments--list ul").append($comment);
+        $("#comment-text").val("");
       });
   });
 
