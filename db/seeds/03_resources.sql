@@ -11,14 +11,14 @@ VALUES(4, 1, 'https://auth.udacity.com/sign-up?next=https%3A%2F%2Flearn.udacity.
 -- should have no image
 (1, 1, 'https://dev.to/devsmitra/28-javascript-array-hacks-a-cheat-sheet-for-developer-5769', 'Array Hacks Cheat Sheet', 'Personalized coding learning paths tailored to individual goals and skill levels, with adaptive quizzes and assessments.', 5, '../../assets/no-image.jpg'),
 (5, 1, 'https://logicmag.io', 'Logic Magazine', 'Coding challenges and competitions to sharpen skills and showcase talent, with opportunities for recognition and rewards.', 2, '../../assets/resource-thumbs/100-days.jpg'),
-(2, 1, 'https://webdesign.tutsplus.com/top-15-best-practices-for-writing-super-readable-code--net-8118t', 'Coding Best Practices', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/javascript.jpg'),
+(8, 1, 'https://webdesign.tutsplus.com/top-15-best-practices-for-writing-super-readable-code--net-8118t', 'Coding Best Practices', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/javascript.jpg'),
 (7, 1, 'https://www.digitalocean.com/community/tutorials/for-loops-for-of-loops-and-for-in-loops-in-javascript', 'For Loops', 'Interactive coding playground for experimenting with code snippets, APIs, and libraries in a sandbox environment.', 1, '../../assets/resource-thumbs/javascript.jpg');
 
 -- CSS Category
 INSERT INTO resources(creator_id, category_id, url, title, description, rating, thumbnail_url)
 VALUES(4, 2, 'https://coolors.co', 'Colour Palette Generator', 'Interactive coding challenges for all levels, with instant feedback and progress tracking.', 5, '../../assets/resource-thumbs/books.jpg'),
 (7, 2, 'https://unsplash.com', 'Stock Image Resource', 'Comprehensive coding tutorials covering languages, frameworks, and tools, with practical examples and exercises.', 5, '../../assets/resource-thumbs/no-bad-days.jpg'),
-(2, 2, 'https://www.toptal.com/designers/subtlepatterns', 'Design Patterns', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 3, '../../assets/resource-thumbs/comfort-zone.jpg'),
+(8, 2, 'https://www.toptal.com/designers/subtlepatterns', 'Design Patterns', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 3, '../../assets/resource-thumbs/comfort-zone.jpg'),
 -- should have no image
 (6, 2, 'https://cssgridgarden.com', 'CSS Grid Garden', 'Platform providing coding courses, projects, and assessments, with a focus on real-world applications and industry relevance.', 5, '../../assets/no-image.jpg'),
 (3, 2, 'http://www.flexboxdefense.com', 'Flexbox Defense', 'Community-driven platform for coding enthusiasts, featuring tutorials, forums, and collaborative coding projects.', 4, '../../assets/resource-thumbs/working-hard.jpg'),
@@ -41,14 +41,14 @@ VALUES(4, 3, 'https://legacy.reactjs.org/community/courses.html', 'Learn React',
 -- should have no image
 (1, 3, 'https://www.codinn.dev', 'React Portfolio Projects', 'Personalized coding learning paths tailored to individual goals and skill levels, with adaptive quizzes and assessments.', 5, '../../assets/no-image.jpg'),
 (5, 3, 'https://www.coursera.org/specializations/front-end-development-using-react-specialization?ref=browsee.io', 'Coursera: React on the Frontend', 'Coding challenges and competitions to sharpen skills and showcase talent, with opportunities for recognition and rewards.', 3, '../../assets/resource-thumbs/gitlab.jpg'),
-(2, 3, 'https://www.classcentral.com/course/full-stack-react-18915?ref=browsee.io', 'Full Stack React', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/react.jpg');
+(1, 3, 'https://www.classcentral.com/course/full-stack-react-18915?ref=browsee.io', 'Full Stack React', 'Mobile app offering bite-sized coding lessons and challenges, designed for learning on the go.', 4, '../../assets/resource-thumbs/react.jpg');
 
 
 -- SQL Category
 INSERT INTO resources(creator_id, category_id, url, title, description, rating, thumbnail_url)
 VALUES(4, 4, 'https://www.postgresql.org', 'Postgres Docs', 'Interactive coding challenges for all levels, with instant feedback and progress tracking.', 5, '../../assets/resource-thumbs/no-bad-days.jpg'),
 (7, 4, 'https://blog.codinghorror.com/a-visual-explanation-of-sql-joins', 'SQL Joins', 'Comprehensive coding tutorials covering languages, frameworks, and tools, with practical examples and exercises.', 5, '../../assets/resource-thumbs/gitlab.jpg'),
-(2, 4, 'https://en.wikipedia.org/wiki/Database_design', 'Wikipedia: Databse Design', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 4, '../../assets/resource-thumbs/javascript.jpg'),
+(8, 4, 'https://en.wikipedia.org/wiki/Database_design', 'Wikipedia: Databse Design', 'Online coding bootcamp offering immersive, mentor-led programs in web development, data science, and more.', 4, '../../assets/resource-thumbs/javascript.jpg'),
 -- should have no image
 (6, 4, 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types', 'PostgreSQL Data types', 'Platform providing coding courses, projects, and assessments, with a focus on real-world applications and industry relevance.', 5, '../../assets/no-image.jpg'),
 (3, 4, 'https://www.tutorialspoint.com/sql/sql-insert-query.htm', 'SQL Insert Into', 'Community-driven platform for coding enthusiasts, featuring tutorials, forums, and collaborative coding projects.', 4, '../../assets/resource-thumbs/working-hard.jpg'),
