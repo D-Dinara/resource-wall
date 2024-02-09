@@ -8,7 +8,6 @@
   .resource-item{
     width: calc((100% / 5) - 40px);
     margin: 20px;
-    // max-height: 100%;
     height: 60vh;
     position: relative;
     text-align: center;
@@ -48,7 +47,7 @@
 
     .description{
       position: absolute;
-      top: 20%;
+      top: 30%;
       left: 0;
       width: 100%;
       color: $light;
