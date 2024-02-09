@@ -13,6 +13,7 @@ const getResourcesByUserId = (id) => {
   SELECT *
   FROM resources
   WHERE creator_id = $1
+  ORDER BY id DESC
   `;
   return db.query(queryText, values)
     .then(results => {
@@ -28,6 +29,7 @@ const getLikesByUserId = (id) => {
     FROM likes
     JOIN resources ON resources.id = resource_id
     WHERE owner_id = $1
+    ORDER BY likes_id DESC
   `;
   return db.query(queryText, values)
     .then(results => {
