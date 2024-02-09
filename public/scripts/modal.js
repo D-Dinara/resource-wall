@@ -97,7 +97,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <h3>Comments</h3>
           <div class="modal_comments--list">
             <ul>
-              ${comments.reverse().map(comment => renderComment(comment)).join("")}
+               ${!comments[0].text ? `<li class="grey-text">Be the first to comment</li>` : comments.reverse().map(comment => renderComment(comment)).join("")}
             </ul>
           </div>
           <div class="modal_comments--form">
@@ -174,6 +174,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
       data: commentText
     })
       .then(function ([user, newComment]) {
+        $('.grey-text').remove();
         const $comment = $(`
           <li class="comment">
             <div class="comment_user-date flex">
