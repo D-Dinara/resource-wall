@@ -10,13 +10,14 @@ const getDate = (timestamp) => {
 const renderComment = (comment) => {
   if (!comment.commentor || !comment.text) return;
   return `
-  <li class="comment">
-    <div class="comment_user-date flex">
-      <span class="bold">${comment.commentor}</span>
-      <span class="timestamp">${getDate(comment.date)}</span>
-    </div>
-    <p>${comment.text}</p>
-  </li>`
+    <li class="comment">
+      <div class="comment_user-date flex">
+        <span class="bold">${comment.commentor}</span>
+        <span class="timestamp">${getDate(comment.date)}</span>
+      </div>
+      <p>${comment.text}</p>
+    </li>
+  `;
 }
 
 const closeModal = () => {
@@ -96,7 +97,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
         <h3>Comments</h3>
           <div class="modal_comments--list">
             <ul>
-              ${comments.map(comment => renderComment(comment)).join("")}
+              ${comments.reverse().map(comment => renderComment(comment)).join("")}
             </ul>
           </div>
           <div class="modal_comments--form">
@@ -175,8 +176,11 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
       .then(function ([user, newComment]) {
         const $comment = $(`
           <li class="comment">
-          <span class="bold">${user.username}:</span> ${newComment.text}
-          <p class="timestamp">Date posted: ${getDate(newComment.date_posted)}</p>
+            <div class="comment_user-date flex">
+              <span class="bold">${user.username}</span>
+              <span class="timestamp">${getDate(newComment.date_posted)}</span>
+            </div>
+            <p>${newComment.text}</p>
           </li>
         `)
         $(".modal_comments--list ul").prepend($comment);
