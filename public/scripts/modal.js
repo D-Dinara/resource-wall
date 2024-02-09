@@ -10,9 +10,12 @@ const getDate = (timestamp) => {
 const renderComment = (comment) => {
   if (!comment.commentor || !comment.text) return;
   return `
-  <li class="comment"><span class="bold">
-  ${comment.commentor}:</span> ${comment.text}
-  <p class="timestamp">Date posted: ${getDate(comment.date)}</p>
+  <li class="comment">
+    <div class="comment_user-date flex">
+      <span class="bold">${comment.commentor}</span>
+      <span class="timestamp">${getDate(comment.date)}</span>
+    </div>
+    <p>${comment.text}</p>
   </li>`
 }
 
@@ -176,7 +179,7 @@ const populateResourceModal = (appendingContainer, resource, comments, isLoggedi
           <p class="timestamp">Date posted: ${getDate(newComment.date_posted)}</p>
           </li>
         `)
-        $(".modal_comments--list ul").append($comment);
+        $(".modal_comments--list ul").prepend($comment);
         $("#comment-text").val("");
       });
   });

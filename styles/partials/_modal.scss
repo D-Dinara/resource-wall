@@ -141,6 +141,15 @@
   .comment{
     font-size: 16px;
     margin-bottom: 12px;
+    padding-bottom: 12px;
+
+    &:not(:last-child){
+      border-bottom: 1px solid #e9e9e9;
+    }
+    &_user-date{
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
   }
 
 
