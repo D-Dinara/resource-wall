@@ -16,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: $light;
-    width: 66%;
+    width: 70%;
     height: 90%;
     padding: 60px 50px;
     border-radius: 30px;
@@ -24,14 +24,10 @@
     overflow: scroll;
   }
 
-  &--rendered{
-    padding-top: 100px;
-  }
-
   &--buffer{
     height: 10vh;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 5em;
   }
   &_title{
     padding-top: 10px;
@@ -52,7 +48,8 @@
     line-height: 16px;
 
     &-form{
-      margin: 24px 0;
+      margin-top: 12px;
+      margin-bottom: 24px;
 
       select{
         max-width: max-content;
@@ -73,7 +70,7 @@
   }
   &_thumbnail{
     align-items: center;
-    margin: 0 40px;
+    margin-right: 40px;
     width: 40%;
     img{
       border-radius: 50px;
@@ -128,14 +125,17 @@
 
   &_buttons{
     justify-content: space-between;
+    margin-top: 15px;
+    .btn{
+      margin-top: unset;
+    }
   }
 
   &_description,
   &_comments--list{
     overflow: scroll;
     height: 75px;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
+    margin: 12px 0;
     border-bottom: 1px solid $grey;
   }
   .comment{
