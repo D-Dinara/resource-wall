@@ -165,12 +165,12 @@
       justify-content: space-between;
       margin-bottom: 7px;
     }
-    &-form{
-      textarea{
-        height: 30px;
-      }
-    }
   }
 
+  &_comments--form{
+    textarea{
+      max-height: 30px;
+    }
+  }
 
 }
