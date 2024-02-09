@@ -130,10 +130,20 @@
 
   &_description,
   &_comments--list{
-    overflow: scroll;
-    height: 75px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-wrap: pretty;
     margin: 12px 0;
     border-bottom: 1px solid $grey;
+  }
+  &_comments--list{
+    height: 150px;
+  }
+  &_description{
+    height: 60px;
+    p{
+      padding: 0 3px;
+    }
   }
   .comment{
     font-size: 16px;
@@ -146,6 +156,11 @@
     &_user-date{
       justify-content: space-between;
       margin-bottom: 7px;
+    }
+    &-form{
+      textarea{
+        height: 30px;
+      }
     }
   }
 
