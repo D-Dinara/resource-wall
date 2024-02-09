@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const cookieSession = require('cookie-session');
 const { getResourceById } = require('../db/queries/getResourceById');
 // const { rateResourceById } = require('../db/queries/rateResourceById');
@@ -51,15 +51,15 @@ router.post('/', (req, res) => {
   if (!userId) {
     return res.status(403).send("You need to be logged in to perform this action\n");
   }
-  const {newTitle, newDescription, newUrl, newResourceCategory, newThumbnail} = req.body;
+  const { newTitle, newDescription, newUrl, newResourceCategory, newThumbnail } = req.body;
 
-  let thumbnail = newThumbnail === "" ? '../assets/no-image.png' : newThumbnail;
+  let thumbnail = newThumbnail === "" ? '../assets/no-image.jpg' : newThumbnail;
 
   getCategoryByTopic(newResourceCategory)
     .then(data => {
       addResource(newTitle, newDescription, newUrl, thumbnail, userId, data.category_id)
         .then(data => {
-          res.json({data});
+          res.json({ data });
         });
     })
     .catch(err => {
