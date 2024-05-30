@@ -101,38 +101,43 @@
         <% for (let resource of resources) { %>
           <div id="<%= resource.id %>" class="owned flex resource-item category_id-<%=resource.category_id%>">
             <div class="resource-item--inner flex">
-              <h3>
-                <%= resource.title %>
-              </h3>
+              <div class="resource-item--title">
+                <h3>
+                  <%= resource.title %>
+                </h3>
+              </div>
               <div class="image-container">
                 <img src="<%= resource.thumbnail_url %>" />
                 <p class="description">
                   <%= resource.description %>
                 </p>
               </div>
+              <div class="resource-buttons ">
+                <button id="delete_<%= resource.id %>" class="btn_delete btn">Delete</button>
+                <button id="edit_<%= resource.id %>" class="btn_edit btn">Edit</button>
+              </div>
             </div>
-            <div class="resource-buttons ">
-              <button id="delete_<%= resource.id %>" class="btn_delete btn">Delete</button>
-              <button id="edit_<%= resource.id %>" class="btn_edit btn">Edit</button>
-            </div>
+
           </div>
           <% } %>
             <!-- Liked resources -->
             <% for (let like of likes) { %>
               <div id="<%= like.id %>" class="liked flex resource-item category_id-<%= like.category_id %>">
                 <div class="resource-item--inner ">
+                  <div class="resource-item--title">
                   <h3>
                     <%= like.title %>
                   </h3>
+                  </div>
                   <div class="image-container">
                     <img src="<%= like.thumbnail_url %>" />
                     <p class="description">
                       <%= like.description %>
                     </p>
                   </div>
-                </div>
-                <div class="resource-buttons">
-                  <button id="unlike_<%= like.id %>" class="btn_unlike btn">Unlike</button>
+                  <div class="resource-buttons">
+                    <button id="unlike_<%= like.id %>" class="btn_unlike btn">Unlike</button>
+                  </div>
                 </div>
               </div>
               <% } %>
